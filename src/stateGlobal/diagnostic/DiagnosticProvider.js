@@ -21,7 +21,11 @@ const DiagnosticProvider = ({ children }) => {
     },
 
     /* Selected tab */
-    selectedTab: 0
+    selectedTab: 0,
+    /* add question */
+    createQuestion:false,
+    /* type question */
+    typeQuestionSelected: "InputText" 
   }
 
   const [state, dispatch] = useReducer(diagnosticReducer, initialState);
@@ -49,10 +53,24 @@ const DiagnosticProvider = ({ children }) => {
     })
   }
 
-  const chageSelectedTab_Fn = (index) => {
+  const chageSelectedTab_Fn = (tab) => {
     dispatch({
       type: 'CHANGE_SELECTED_TAB',
-      payload: index
+      payload: tab
+    })
+  }
+
+  const actionCreateQuestion_Fn = (status) => {
+    dispatch({
+      type: 'CHANGE_STATUS_CREATE_QUESTION',
+      payload: status
+    })
+  }
+
+  const changeTypeQuestion_FN = (typeQuestion) => {
+    dispatch({
+      type: 'CHANGE_TYPE_QUESTION_SELECTED',
+      payload: typeQuestion
     })
   }
 
@@ -62,14 +80,18 @@ const DiagnosticProvider = ({ children }) => {
     
       value={{
        
-        test            : state.test,
-        introductionObj : state.introductionObj,
-        selectedTab     : state.selectedTab,
+        test                : state.test,
+        introductionObj     : state.introductionObj,
+        selectedTab         : state.selectedTab,
+        createQuestion      : state.createQuestion,
+        typeQuestionSelected: state.typeQuestionSelected,
 
         increseamFn,
         decreseamFn,
         handleChangeState_Fn,
-        chageSelectedTab_Fn
+        chageSelectedTab_Fn,
+        actionCreateQuestion_Fn,
+        changeTypeQuestion_FN
       }}
     >
 

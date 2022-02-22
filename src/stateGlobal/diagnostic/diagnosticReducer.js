@@ -29,6 +29,18 @@ const diagnosticReducer = (state , action) => {
         selectedTab: action.payload
       }
 
+    case 'CHANGE_STATUS_CREATE_QUESTION':
+      return {
+        ...state,
+        createQuestion: action.payload
+      }
+
+    case 'CHANGE_TYPE_QUESTION_SELECTED':
+      return {
+        ...state,
+        typeQuestionSelected: action.payload
+      }
+
       default:
         return state;
   }
