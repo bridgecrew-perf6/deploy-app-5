@@ -9,8 +9,6 @@ export const contextDiagnostic = () => {
   return context;
 }
 
-
-
 const DiagnosticProvider = ({ children }) => {
   const initialState = {
     test: 0,
