@@ -1,6 +1,6 @@
 import React from 'react'
 
-const stateReducer = (state , action) => {
+const diagnosticReducer = (state , action) => {
   
   switch (action.type) {
 
@@ -34,4 +34,4 @@ const stateReducer = (state , action) => {
   }
 }
 
-export default stateReducer
+export default diagnosticReducer

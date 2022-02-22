@@ -8,7 +8,7 @@ import { Redirect } from "@shopify/app-bridge/actions";
 import "@shopify/polaris/dist/styles.css";
 import translations from "@shopify/polaris/locales/en.json";
 import '../public/css/styles.css';
-import StateProvider from "../src/stateGlobal/StateProvider";
+import DiagnosticProvider from "../src/stateGlobal/diagnostic/DiagnosticProvider";
 
 function userLoggedInFetch(app) {
   const fetchFunction = authenticatedFetch(app);
@@ -46,9 +46,9 @@ function MyProvider(props) {
 
   return (
     <ApolloProvider client={client}>
-      <StateProvider>
+      <DiagnosticProvider>
         <Component {...props} />
-      </StateProvider>
+      </DiagnosticProvider>
     </ApolloProvider>
   );
 }

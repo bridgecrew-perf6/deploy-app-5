@@ -8,10 +8,8 @@ export default function Index() {
       <div className="container">
         <Page title="Home">
           <Heading>
-              {/* COMPONENT */}
-            
+              {/* COMPONENT */}          
               Home
-    
           </Heading>
         </Page>
       </div>

@@ -1,17 +1,17 @@
 import React, { createContext, useContext, useReducer } from 'react'
-import stateReducer from './stateReducer';
+import diagnosticReducer from './diagnosticReducer';
 
 
 const stateContext = createContext();
 
-export const contextState = () => {
+export const contextDiagnostic = () => {
   const context = useContext(stateContext);
   return context;
 }
 
 
 
-const StateProvider = ({ children }) => {
+const DiagnosticProvider = ({ children }) => {
   const initialState = {
     test: 0,
     /* tab introduction */
@@ -19,14 +19,14 @@ const StateProvider = ({ children }) => {
       heading   : "Welcome to your diagnostic",
       subheading: "Discovery your hair condition",
       buttomText: "Start",
-      class     : "introduction"  
+      classCustom     : "introduction"  
     },
 
     /* Selected tab */
     selectedTab: 0
   }
 
-  const [state, dispatch] = useReducer(stateReducer, initialState);
+  const [state, dispatch] = useReducer(diagnosticReducer, initialState);
 
   /* TEST  */
   const increseamFn = () => {
@@ -80,4 +80,4 @@ const StateProvider = ({ children }) => {
   )
 }
 
-export default StateProvider;
+export default DiagnosticProvider;

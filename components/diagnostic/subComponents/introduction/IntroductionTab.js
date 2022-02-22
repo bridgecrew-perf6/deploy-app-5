@@ -6,7 +6,7 @@ import {
   TextField,
   Button
 } from '@shopify/polaris';
-import { contextState } from '../../../src/stateGlobal/StateProvider';
+import { contextDiagnostic } from '../../../../src/stateGlobal/diagnostic/DiagnosticProvider';
 
 const IntroductionTab = () => {
 
@@ -18,7 +18,7 @@ const IntroductionTab = () => {
                       subheading, 
                       buttomText 
                     } 
-      } = contextState();
+      } = contextDiagnostic();
   
   console.log(heading);
   return (

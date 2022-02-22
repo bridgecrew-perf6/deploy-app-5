@@ -4,16 +4,16 @@ import {
         Page, 
 } from '@shopify/polaris';
 import NavBar from '../components/NavBar';
-import DiagnosticTabs from '../components/DiagnosticTabs';
-import IntroductionCustomize from '../components/subComponents/introduction/IntroductionCustomize';
-import { contextState } from '../src/stateGlobal/StateProvider';
-import QuestionCustomize from '../components/subComponents/questions/QuestionCustomize';
-import ResultCustomize from '../components/subComponents/result/ResultCustomize';
+import DiagnosticTabs from '../components/diagnostic/DiagnosticTabs';
+import IntroductionCustomize from '../components/diagnostic/subComponents/introduction/IntroductionCustomize';
+import { contextDiagnostic } from '../src/stateGlobal/diagnostic/DiagnosticProvider';
+import QuestionCustomize from '../components/diagnostic/subComponents/questions/QuestionCustomize';
+import ResultCustomize from '../components/diagnostic/subComponents/result/ResultCustomize';
 
 
 const Diagnostic = () => {
 
-  const { selectedTab } = contextState();
+  const { selectedTab } = contextDiagnostic();
 
 
   return (

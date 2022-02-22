@@ -10,12 +10,12 @@ import {
 import IntroductionTab from './subComponents/introduction/IntroductionTab';
 import QuestionTab from './subComponents/questions/QuestionTab';
 import ResultTab from './subComponents/result/ResultTab';
-import {contextState} from '../src/stateGlobal/StateProvider';
+import {contextDiagnostic} from '../../src/stateGlobal/diagnostic/DiagnosticProvider';
 
 const DiagnosticTabs = () => {
 
   
-  const { selectedTab, chageSelectedTab_Fn } = contextState();
+  const { selectedTab, chageSelectedTab_Fn } = contextDiagnostic();
 
   const handleTabChange = useCallback(
     (selectedTabIndex) => chageSelectedTab_Fn(selectedTabIndex),
