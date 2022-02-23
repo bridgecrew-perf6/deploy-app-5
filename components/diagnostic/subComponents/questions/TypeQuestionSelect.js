@@ -17,10 +17,10 @@ const TypeQuestionSelect = () => {
     {label: 'Text', value: 'InputText'},
     {label: 'Number', value: 'InputNumber'},
     {label: 'Email', value: 'InputEmail'},
-    {label: 'Multiple Option', value: 'MultipleOptionCheck'},
+    {label: 'Multiple Option', value: 'MultipleOptionText'},
     {label: 'Image Option', value: 'MultipleOptionImage'},
     {label: 'Color Option', value: 'MultipleOptionColor'},
-    {label: 'Text Area', value: 'InputTeaxarea'},
+    {label: 'Text Area', value: 'InputTextarea'},
 
   ];
 

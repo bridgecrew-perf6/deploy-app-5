@@ -1,9 +1,9 @@
 import React from 'react'
 
-const MultipleOptionCheck = () => {
+const MultipleOptionText = () => {
   return (
     <div>MultipleOptionCheck</div>
   )
 }
 
-export default MultipleOptionCheck
+export default MultipleOptionText

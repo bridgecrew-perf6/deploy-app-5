@@ -10,7 +10,12 @@ import TypeQuestionSelect from './TypeQuestionSelect';
 
 const QuestionAddNew = () => {
 
-  const { actionCreateQuestion_Fn } = contextDiagnostic();
+  const { actionCreateQuestion_Fn, handleChangeState_Fn, question } = contextDiagnostic();
+
+  const handleChangeText = (e) => {
+    const {name , value} = e.target;
+    handleChangeState_Fn(name , value , 'question')
+  }
 
   return (
 
@@ -20,11 +25,11 @@ const QuestionAddNew = () => {
         <Card.Section>
           <p>Question</p>
           <input
-            //onChange={handleChangeText}
+            onChange={handleChangeText}
             type="text"
             autoComplete="off"
-            name='heading'
-            //value={heading}
+            name='question'
+            value={question.question}
           />
           {/* option type question */}
           <TypeQuestionSelect/>

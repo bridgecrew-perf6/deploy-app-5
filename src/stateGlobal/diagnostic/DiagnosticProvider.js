@@ -14,10 +14,10 @@ const DiagnosticProvider = ({ children }) => {
     test: 0,
     /* tab introduction */
     introductionObj:{
-      heading   : "Welcome to your diagnostic",
-      subheading: "Discovery your hair condition",
-      buttomText: "Start",
-      classCustom     : "introduction"  
+      heading     : "Welcome to your diagnostic",
+      subheading  : "Discovery your hair condition",
+      buttomText  : "Start",
+      classCustom : "introduction"  
     },
 
     /* Selected tab */
@@ -25,7 +25,12 @@ const DiagnosticProvider = ({ children }) => {
     /* add question */
     createQuestion:false,
     /* type question */
-    typeQuestionSelected: "InputText" 
+    typeQuestionSelected: "InputText",
+
+    question:{
+      question: "Cual es tu nombre",
+      type    : [{ text : "value"}],
+    }
   }
 
   const [state, dispatch] = useReducer(diagnosticReducer, initialState);
@@ -85,6 +90,7 @@ const DiagnosticProvider = ({ children }) => {
         selectedTab         : state.selectedTab,
         createQuestion      : state.createQuestion,
         typeQuestionSelected: state.typeQuestionSelected,
+        question            : state.question,
 
         increseamFn,
         decreseamFn,
