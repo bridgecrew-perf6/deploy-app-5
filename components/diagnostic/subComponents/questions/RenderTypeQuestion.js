@@ -24,7 +24,6 @@ const RenderTypeQuestion = () => {
     {label: 'Color Option', value: 'MultipleOptionColor'},
     {label: 'Text Area', value: 'InputTextarea'}, */
  
-    console.log(typeQuestionSelected);
 
     if(typeQuestionSelected === 'InputText') 
     return (<InputText/>)
@@ -36,7 +35,7 @@ const RenderTypeQuestion = () => {
     return (<InputEmail/>)
 
     if(typeQuestionSelected === 'MultipleOptionText') 
-    return (<MultipleOptionText/>)
+    return (<InputText/>)
 
     if(typeQuestionSelected === 'MultipleOptionImage') 
     return (<MultipleOptionImage/>)

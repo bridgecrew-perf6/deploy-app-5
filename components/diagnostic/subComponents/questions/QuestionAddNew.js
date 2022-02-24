@@ -7,6 +7,7 @@ import { contextDiagnostic } from '../../../../src/stateGlobal/diagnostic/Diagno
 import RenderTypeQuestion from './RenderTypeQuestion';
 
 import TypeQuestionSelect from './TypeQuestionSelect';
+import BtnAddOptions from './utils/BtnAddOptions';
 
 const QuestionAddNew = () => {
 
@@ -17,6 +18,7 @@ const QuestionAddNew = () => {
     handleChangeState_Fn(name , value , 'question')
   }
 
+  console.log(question);
   return (
 
     <Card >
@@ -33,6 +35,7 @@ const QuestionAddNew = () => {
           />
           {/* option type question */}
           <TypeQuestionSelect/>
+          <BtnAddOptions/>
           <RenderTypeQuestion/>
         </Card.Section>
     </Card>

@@ -3,14 +3,14 @@ import { contextDiagnostic } from '../../../../src/stateGlobal/diagnostic/Diagno
 
 const QuestionTab = () => {
 
-  const {question} = contextDiagnostic();
+  const {question, typeQuestionSelected} = contextDiagnostic();
 
-  console.log(question.type);
+  // console.log(question.type);
   return (
     <>
     <div>{question.question}</div>
-    { question.type.map((element) => {
-      return <p>{element.text}</p>
+    { question.type.map((element, index) => {
+      return <p key={index}>{element[typeQuestionSelected+index]}</p>
     })}
   </>
   )

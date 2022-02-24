@@ -29,7 +29,7 @@ const DiagnosticProvider = ({ children }) => {
 
     question:{
       question: "Cual es tu nombre",
-      type    : [{ text : "value"}],
+      type    : [{  InputText0 : "value"}],
     }
   }
 
@@ -72,10 +72,33 @@ const DiagnosticProvider = ({ children }) => {
     })
   }
 
-  const changeTypeQuestion_FN = (typeQuestion) => {
+  const changeTypeQuestion_Fn = (typeQuestion) => {
     dispatch({
       type: 'CHANGE_TYPE_QUESTION_SELECTED',
       payload: typeQuestion
+    })
+
+    restarTypeQuestion();
+  }
+
+  const restarTypeQuestion = () => {
+    console.log("pasa");
+    dispatch({
+      type: 'RESTAR_STATE_TYPE_QUESTION'
+    })
+  }
+
+  const addOptionQuestion_Fn = (option) => {
+    dispatch({
+      type: 'ADD_OPTION_QUESTION',
+      payload: option
+    })
+  }
+
+  const handleChangeOption_Fn = (name, value, stateCurrent) => {
+    dispatch({
+      type: 'CHANGE_OPTION_QUESTION_LIST',
+      payload: { name, value, stateCurrent }
     })
   }
 
@@ -97,7 +120,9 @@ const DiagnosticProvider = ({ children }) => {
         handleChangeState_Fn,
         chageSelectedTab_Fn,
         actionCreateQuestion_Fn,
-        changeTypeQuestion_FN
+        changeTypeQuestion_Fn,
+        addOptionQuestion_Fn,
+        handleChangeOption_Fn
       }}
     >
 

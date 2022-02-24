@@ -8,9 +8,9 @@ import { contextDiagnostic } from '../../../../src/stateGlobal/diagnostic/Diagno
 
 const TypeQuestionSelect = () => {
 
-  const { typeQuestionSelected, changeTypeQuestion_FN } = contextDiagnostic()
+  const { typeQuestionSelected, changeTypeQuestion_Fn } = contextDiagnostic()
 
-  const handleSelectChange = useCallback((value) => changeTypeQuestion_FN(value), []);
+  const handleSelectChange = useCallback((value) => changeTypeQuestion_Fn(value), []);
 
 
   const options = [
