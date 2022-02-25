@@ -8,6 +8,7 @@ import RenderTypeQuestion from './RenderTypeQuestion';
 
 import TypeQuestionSelect from './TypeQuestionSelect';
 import BtnAddOptions from './utils/BtnAddOptions';
+import InputCustom from './typeQuestion/InputCustom';
 
 const QuestionAddNew = () => {
 
@@ -18,21 +19,23 @@ const QuestionAddNew = () => {
     handleChangeState_Fn(name , value , 'question')
   }
 
-  console.log(question);
   return (
 
     <Card >
         <Card.Section title="Add questions" actions={[{content: 'List',onAction:() => actionCreateQuestion_Fn(false)}]} >
         </Card.Section>
         <Card.Section>
+        <div className='question-primary'>
           <p>Question</p>
-          <input
-            onChange={handleChangeText}
-            type="text"
-            autoComplete="off"
-            name='question'
-            value={question.question}
-          />
+          <div className='input-question'>
+            <InputCustom
+              nameInput="question"
+              valueInput={question.question}
+              handle={handleChangeText}
+            />
+          </div>
+        </div>
+          
           {/* option type question */}
           <TypeQuestionSelect/>
           <BtnAddOptions/>

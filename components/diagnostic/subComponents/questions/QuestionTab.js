@@ -8,10 +8,21 @@ const QuestionTab = () => {
   // console.log(question.type);
   return (
     <>
-    <div>{question.question}</div>
-    { question.type.map((element, index) => {
-      return <p key={index}>{element[typeQuestionSelected+index]}</p>
-    })}
+    <div className='container-preview-question'>
+      <div className='preview-question'>
+        <div className='preview-title'>{question.question}</div>
+          <div className='options-question-list'>
+              { question.type.map((element, index) => {
+                  return (
+                      <div key={index} className="option">
+                        <p>{element[typeQuestionSelected+index]}</p>
+                      </div>
+                  )
+                })}
+          </div>
+      </div>
+    </div>
+    
   </>
   )
 }

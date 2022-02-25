@@ -10,14 +10,12 @@ const BtnAddOptions = () => {
  
   const sizeOption = question.type.length;
 
-  console.log(question);
-
   if(typeQuestionSelected.includes('Multiple')){
     return (
       <>
           <Card.Section>
           </Card.Section>
-          <Card.Section title="Options" actions={[{content: 'Add', onAction: () => addOptionQuestion_Fn({[typeQuestionSelected+sizeOption]: "value1"}) }]} >
+          <Card.Section title="Options" actions={[{content: 'Add', onAction: () => addOptionQuestion_Fn({id: sizeOption , [typeQuestionSelected+sizeOption]: `Option${sizeOption+1}`}) }]} >
           </Card.Section>
       </>
     )

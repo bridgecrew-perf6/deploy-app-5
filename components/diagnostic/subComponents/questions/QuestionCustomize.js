@@ -27,7 +27,14 @@ const QuestionCustomize = () => {
         <Card.Section >
           <p>List questions</p>
         </Card.Section>
-        <Card.Section title="Add questions" actions={[{content: 'Add',onAction:() => actionCreateQuestion_Fn(!createQuestion)}]} >
+        <Card.Section 
+          title="Add questions" 
+          actions={
+              [
+                {content: 'Add',
+                 onAction:() => actionCreateQuestion_Fn(!createQuestion)
+                }
+              ]} >
         </Card.Section>
       </Card>
     )

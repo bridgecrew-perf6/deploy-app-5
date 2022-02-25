@@ -12,8 +12,7 @@ const TypeQuestionSelect = () => {
 
   const handleSelectChange = useCallback((value) => changeTypeQuestion_Fn(value), []);
 
-
-  const options = [
+/*   const options = [
     {label: 'Text', value: 'InputText'},
     {label: 'Number', value: 'InputNumber'},
     {label: 'Email', value: 'InputEmail'},
@@ -21,6 +20,17 @@ const TypeQuestionSelect = () => {
     {label: 'Image Option', value: 'MultipleOptionImage'},
     {label: 'Color Option', value: 'MultipleOptionColor'},
     {label: 'Text Area', value: 'InputTextarea'},
+
+  ]; */
+
+  const options = [
+    {label: 'Text', value: 'Input_text'},
+    {label: 'Number', value: 'Input_number'},
+    {label: 'Email', value: 'Input_email'},
+    {label: 'Multiple Option', value: 'Multiple_text'},
+    {label: 'Image Option', value: 'Multiple_file'},
+    {label: 'Color Option', value: 'Multiple_color'},
+    {label: 'Text Area', value: 'Input_textarea'},
 
   ];
 

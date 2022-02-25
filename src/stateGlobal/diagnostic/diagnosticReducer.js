@@ -47,29 +47,41 @@ const diagnosticReducer = (state , action) => {
         question: {...state.question , type: [ ...state.question.type ,action.payload]}
       }
 
-    case 'RESTAR_STATE_TYPE_QUESTION':
+    case 'RESTAR_STATE_TYPE_QUESTION': {
+      /* restar state question.type onchange type selected */
+      /* state update -> 
+        question {
+          type: [reinitialize option added]
+      } */
+      let optionDefault = 'Option';
+      if(state.typeQuestionSelected === "Multiple_file"){
+        optionDefault = "https://image.shutterstock.com/image-vector/click-icon-vector-select-press-260nw-1151377079.jpg";
+      }
+      if(state.typeQuestionSelected === "Multiple_color"){
+        optionDefault = "#fff"
+      }
       return {
         ...state,
-        question: {...state.question , type: [{[state.typeQuestionSelected+'0']: 'option1'}]}
+        question: {...state.question , type: [{id: 0, [state.typeQuestionSelected+'0']: optionDefault }]}
       }
+    }
 
       case 'CHANGE_OPTION_QUESTION_LIST': {
+        /* update option added for question  */
+        /* state update -> 
+          question {
+            type: [update]
+        } */
+        console.log(action.payload);
+        console.log(state.question );
 
-        const { name , value } = action.payload;
-
-        const result = state.question.type.map( elemen => elemen[name] ? elemen[name]= {[name] : value} : elemen)
-        
-        console.log("estado", state.question.type);
-        console.log("estado", result);
-
+        const { name , value, id } = action.payload;
         return {
           ...state,
-          question: {...state.question ,  type : result}
+          question: {...state.question ,  type : state.question.type.map( elemen => elemen.id ===  parseInt(id) ?  {...elemen , [name] : value} : elemen)}
         }
       }
       
-       
-
       default:
         return state;
   }
@@ -78,16 +90,16 @@ const diagnosticReducer = (state , action) => {
 export default diagnosticReducer
 
 
-/* 
-const question = [
-  {MultipleOptionText0: 'valueawdawdawd'},
-  {MultipleOptionText1: 'value1awdawd'},
-  {MultipleOptionText2: 'estes'},
-  {MultipleOptionText3: 'value1dawddddaw'}];
 
 
-  const result = question.map( elemen => elemen['MultipleOptionText2'] ? elemen['MultipleOptionText2']= {'MultipleOptionText2' : "holaaa"} : elemen)
+/* const question = [
+  {id : 1 , MultipleOptionText0: 'valueawdawdawd'},
+  {id : 2 ,MultipleOptionText1: 'value1awdawd'},
+  {id : 3 ,MultipleOptionText2: ''},
+  {id : 4 ,MultipleOptionText3: 'value1dawddddaw'}];
 
 
-  console.log(result);
- */
+  const result = question.map( elemen => elemen.id === 3 ? {...elemen ,'MultipleOptionText2' : "holaaa"} : elemen)
+
+
+  console.log(result); */

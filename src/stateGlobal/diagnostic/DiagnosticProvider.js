@@ -25,11 +25,11 @@ const DiagnosticProvider = ({ children }) => {
     /* add question */
     createQuestion:false,
     /* type question */
-    typeQuestionSelected: "InputText",
+    typeQuestionSelected: "Input_text",
 
     question:{
       question: "Cual es tu nombre",
-      type    : [{  InputText0 : "value"}],
+      type    : [{ id: 0,  Input_text0 : "Option"}],
     }
   }
 
@@ -95,10 +95,10 @@ const DiagnosticProvider = ({ children }) => {
     })
   }
 
-  const handleChangeOption_Fn = (name, value, stateCurrent) => {
+  const handleChangeStateSecondKey_Fn = (name, value, id, stateCurrent, stateSub) => {
     dispatch({
       type: 'CHANGE_OPTION_QUESTION_LIST',
-      payload: { name, value, stateCurrent }
+      payload: { name, value, id, stateCurrent, stateSub }
     })
   }
 
@@ -122,7 +122,7 @@ const DiagnosticProvider = ({ children }) => {
         actionCreateQuestion_Fn,
         changeTypeQuestion_Fn,
         addOptionQuestion_Fn,
-        handleChangeOption_Fn
+        handleChangeStateSecondKey_Fn
       }}
     >
 
