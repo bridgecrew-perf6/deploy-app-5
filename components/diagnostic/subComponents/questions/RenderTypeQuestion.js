@@ -1,4 +1,5 @@
 import React from 'react'
+import styleRenderTypeQuestion from '../../../../public/styled/components/styleRenderTypeQuestion';
 import { contextDiagnostic } from '../../../../src/stateGlobal/diagnostic/DiagnosticProvider'
 
 import InputCustom from './typeQuestion/InputCustom';
@@ -25,6 +26,8 @@ const RenderTypeQuestion = () => {
 
   const typeField = typeQuestionSelected.split('_');
 
+
+  
     if(typeQuestionSelected === 'Input_text' || 
        typeQuestionSelected === 'Input_number' || 
        typeQuestionSelected === 'Input_email') 
@@ -83,18 +86,27 @@ const RenderTypeQuestion = () => {
 
     if(typeQuestionSelected === 'Multiple_color') 
       return (
+        
         type.map((elemen, index) => 
-          (      
+          (
+            <>      
             <div key={index} className='input-colors' data-id={index}>
               <InputCustom  
                 typeInput={typeField[1]} 
                 nameInput={[typeQuestionSelected+index]}
                 handle={handleChangeText}
                 valueInput={elemen[typeQuestionSelected+index]}
-              />
-            </div>   
+              /> <p>{elemen[typeQuestionSelected+index]}</p>
+            </div>
+            <style jsx>
+            {styleRenderTypeQuestion}
+            </style>
+            </>   
           )    
         )
+
+        
+      
       )
 
     if(typeQuestionSelected === 'Input_textarea') 
@@ -112,7 +124,8 @@ const RenderTypeQuestion = () => {
         )
       )
     )
-
+    
+ 
 
 }
 

@@ -1,5 +1,6 @@
 import { Card } from '@shopify/polaris';
 import React from 'react'
+import styleInput from '../../../../../public/styled/components/styleInput';
 import { contextDiagnostic } from '../../../../../src/stateGlobal/diagnostic/DiagnosticProvider'
 
 /* Props Component = <InputCustom/>
@@ -15,15 +16,18 @@ const InputText = ({typeInput="text", nameInput, handle, valueInput, hideValue =
   return (
     <>
          
-              <input 
-                type={typeInput} 
-                name={nameInput}
-                onChange={handle}
-                value={ !hideValue ? valueInput : null}
-                autoComplete="off"
-                className='input'
-              />
-  
+        <input 
+          type={typeInput} 
+          name={nameInput}
+          onChange={handle}
+          value={ !hideValue ? valueInput : null}
+          autoComplete="off"
+          className='input'
+        />
+        
+        <style jsx>
+          {styleInput}
+        </style>
     </>
   )
 }

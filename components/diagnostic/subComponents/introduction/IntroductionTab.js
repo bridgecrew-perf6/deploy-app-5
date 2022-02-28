@@ -7,6 +7,7 @@ import {
   Button
 } from '@shopify/polaris';
 import { contextDiagnostic } from '../../../../src/stateGlobal/diagnostic/DiagnosticProvider';
+import styleIntroductionTab from '../../../../public/styled/components/styleIntroductionTab';
 
 const IntroductionTab = () => {
 
@@ -22,7 +23,8 @@ const IntroductionTab = () => {
   
   console.log(heading);
   return (
-    <div className='container-introduction'>
+    <>
+      <div className='container-introduction'>
         <div className='introduction--title'>
           { heading }
         </div>
@@ -31,7 +33,12 @@ const IntroductionTab = () => {
         </p>
         <Button disabled={true}>{ buttomText }</Button>
         <button type="button" onClick={ increseamFn }>{ test }</button>
-    </div>
+      </div>
+
+      <style jsx>
+      {styleIntroductionTab}
+      </style>
+    </>
   )
 }
 

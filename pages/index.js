@@ -4,7 +4,7 @@ import NavBar from "../components/NavBar";
 export default function Index() {
   return (
     <>
-    <NavBar/>
+    
       <div className="container">
         <Page title="Home">
           <Heading>

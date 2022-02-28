@@ -18,7 +18,6 @@ const Diagnostic = () => {
 
   return (
     <>
-    <NavBar />
       <div className='container'>
         <Page 
           title="My diagnostic" 
