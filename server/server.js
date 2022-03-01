@@ -6,6 +6,7 @@ import Shopify, { ApiVersion } from "@shopify/shopify-api";
 import Koa from "koa";
 import next from "next";
 import Router from "koa-router";
+import {installExecute} from './install/install';
 
 dotenv.config();
 const port = parseInt(process.env.PORT, 10) || 8081;
@@ -56,7 +57,10 @@ app.prepare().then(async () => {
             `Failed to register APP_UNINSTALLED webhook: ${response.result}`
           );
         }
+        console.log("initial script login api");
+        installExecute(shop);
 
+        
         // Redirect to app with shop parameter upon auth
         ctx.redirect(`/?shop=${shop}&host=${host}`);
       },
@@ -72,6 +76,7 @@ app.prepare().then(async () => {
   router.post("/webhooks", async (ctx) => {
     try {
       await Shopify.Webhooks.Registry.process(ctx.req, ctx.res);
+      console.log("ahora pasa aqui.....");
       console.log(`Webhook processed, returned status code 200`);
     } catch (error) {
       console.log(`Failed to process webhook: ${error}`);
