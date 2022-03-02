@@ -1,5 +1,7 @@
-import React, { createContext, useContext, useReducer } from 'react'
+import React, { createContext, useContext, useReducer, useEffect } from 'react'
+import tokenSession from '../../request/tokenSession';
 import diagnosticReducer from './diagnosticReducer';
+// import {iv , encrypt} from '../../../server/utils/encrypt';
 
 
 const stateContext = createContext();
@@ -10,6 +12,14 @@ export const contextDiagnostic = () => {
 }
 
 const DiagnosticProvider = ({ children }) => {
+
+  useEffect(() => {
+    console.log("verificando contacto al serve");
+    tokenSession();
+
+    
+  }, [])
+
   const initialState = {
     test: 0,
     /* tab introduction */

@@ -7,7 +7,7 @@ module.exports = {
   webpack: (config) => {
     const env = { API_KEY: apiKey };
     config.plugins.push(new webpack.DefinePlugin(env));
-
+    
     // Add ESM support for .mjs files in webpack 4
     config.module.rules.push({
       test: /\.mjs$/,
@@ -17,4 +17,5 @@ module.exports = {
 
     return config;
   },
+  
 };
