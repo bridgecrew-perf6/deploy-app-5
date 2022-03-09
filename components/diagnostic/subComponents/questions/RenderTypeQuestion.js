@@ -15,9 +15,10 @@ const RenderTypeQuestion = () => {
     typeQuestionSelected
   } = contextDiagnostic();
 
-  console.log(question);
+
   const handleChangeText = (e) => {
     const {name , value} = e.target;
+    console.log(e.target.type);
     let id = e.target.parentElement.dataset.id; 
     console.log(id);
     /* params : (nameInput, valueInput, objecState, subObjectState  */
