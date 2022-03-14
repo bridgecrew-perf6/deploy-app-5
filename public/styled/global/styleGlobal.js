@@ -3,7 +3,10 @@ import css from 'styled-jsx/css'
 import theme from '../theme';
 
 export default css.global`
-  
+
+.mt-10 {
+  margin-top: 10px;
+}
   
 body, .navbar {
   font-family: ${theme.fontFamily.segoe} !important;
@@ -15,13 +18,19 @@ body, .navbar {
   left: 220px;
 }
 
+.Polaris-Tabs__Wrapper {
+  background: #f6f6f7;
+}
+
 .card-diagnostic--tab{
-  width: 60%;
+  position: absolute;
+  width: 55%;
+  top: 145px
 }
 
 .card-diagnostic--customize{
   position: absolute;
-  top: 72px;
+  top: 145px;
   right: 0px;
   width: 40%;
 }
@@ -42,4 +51,23 @@ body, .navbar {
   border: none;
 }
 
+textarea {
+  width: 100%;
+  height: 75px;
+}
+
+.setting-required > .check-custom {
+  width: 20px ;
+}
+
+.setting-multiple > .check-custom {
+  width: 20px ;
+}
+.setting-recommended > .check-custom {
+  width: 20px ;
+}
+
+.setting-score > .check-custom {
+  width: 20px ;
+}
 `

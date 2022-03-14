@@ -9,10 +9,14 @@ import RenderTypeQuestion from './RenderTypeQuestion';
 import TypeQuestionSelect from './TypeQuestionSelect';
 import BtnAddOptions from './utils/BtnAddOptions';
 import InputCustom from './typeQuestion/InputCustom';
+import SettingQuestion from './utils/SettingQuestion';
+import SettingMultiple from './utils/SettingMultiple';
 
 const QuestionAddNew = () => {
 
-  const { actionCreateQuestion_Fn, handleChangeState_Fn, question } = contextDiagnostic();
+  const { actionCreateQuestion_Fn, handleChangeState_Fn, question, selectSelected } = contextDiagnostic();
+
+  const selectMultiple = selectSelected.includes('Multiple');
 
   const handleChangeText = (e) => {
     const {name , value} = e.target;
@@ -25,22 +29,34 @@ const QuestionAddNew = () => {
         <Card.Section title="Add questions" actions={[{content: 'List',onAction:() => actionCreateQuestion_Fn(false)}]} >
         </Card.Section>
         <Card.Section>
-        <div className='question-primary'>
-          <p>Question</p>
-          <div className='input-question'>
-            <InputCustom
-              nameInput="question"
-              valueInput={question.question}
-              handle={handleChangeText}
-            />
+          <div className='question-primary'>
+            <p>Question</p>
+            <div className='input-question'>
+              <InputCustom
+                nameInput="title"
+                valueInput={question.title}
+                handle={handleChangeText}
+              />
+            </div>
           </div>
-        </div>
           
           {/* option type question */}
-          <TypeQuestionSelect/>
-          <BtnAddOptions/>
-          <RenderTypeQuestion/>
+          <TypeQuestionSelect/> {/* select option type question */}
+         {  
+          selectMultiple
+          && <SettingMultiple/> //* setting selected multiple options */
+          }     
         </Card.Section>
+        {
+          selectMultiple
+          && <BtnAddOptions/>  // add more option *
+        }
+              
+        <Card.Section>        
+          <RenderTypeQuestion/> {/* load type question */}
+        </Card.Section>
+          <SettingQuestion/>    {/* setting question */}
+        
     </Card>
   )
 }

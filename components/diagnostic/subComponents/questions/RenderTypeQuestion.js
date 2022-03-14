@@ -9,39 +9,38 @@ import InputTextarea from './typeQuestion/InputTextarea';
 const RenderTypeQuestion = () => {
 
   const {
-    question: {type}, 
+    question: {choices}, 
     question,
     handleChangeStateSecondKey_Fn, 
-    typeQuestionSelected
+    selectSelected,
+    keyChoiceTypeSelected
   } = contextDiagnostic();
 
+  const typeField = selectSelected.split('_');
 
   const handleChangeText = (e) => {
     const {name , value} = e.target;
-    console.log(e.target.type);
     let id = e.target.parentElement.dataset.id; 
-    console.log(id);
     /* params : (nameInput, valueInput, objecState, subObjectState  */
     handleChangeStateSecondKey_Fn(name , value , id, 'question', 'type')
   }
 
-  const typeField = typeQuestionSelected.split('_');
 
 
   
-    if(typeQuestionSelected === 'Input_text' || 
-       typeQuestionSelected === 'Input_number' || 
-       typeQuestionSelected === 'Input_email') 
+    if(selectSelected === 'Input_text' || 
+       selectSelected === 'Input_number' || 
+       selectSelected === 'Input_email') 
         return (
-          type.map((elemen, index) => 
+          choices.map((elemen, index) => 
             (      
               <div key={index} className="input-text" data-id={index}>
                 <p>Placeholders</p>
                 <InputCustom  
                   typeInput={typeField[1]} 
-                  nameInput={[typeQuestionSelected+index]}
+                  nameInput="placeholder"
                   handle={handleChangeText}
-                  valueInput={elemen[typeQuestionSelected+index]}
+                  valueInput={elemen.placeholder}
                   
                 />
               </div>
@@ -50,34 +49,34 @@ const RenderTypeQuestion = () => {
           )
         )
     
-    if(typeQuestionSelected === 'Multiple_text') 
+    if(selectSelected === 'Multiple_choice') 
       return (
-        type.map((elemen, index) => 
+        choices.map((elemen, index) => 
           (      
-            <>
+           
               <div key={index} className="input-multiple-text" data-id={index}>
                 <InputCustom  
-                  typeInput={typeField[1]} 
-                  nameInput={[typeQuestionSelected+index]}
+                  typeInput="text"
+                  nameInput="placeholder"
                   handle={handleChangeText}
-                  valueInput={elemen[typeQuestionSelected+index]}
+                  valueInput={elemen.placeholder}
                 />
               </div>
-            </>   
+              
           )    
         )
       )
     
-    if(typeQuestionSelected === 'Multiple_file') 
+    if(selectSelected === 'Multiple_image') 
       return (
-        type.map((elemen, index) => 
+        choices.map((elemen, index) => 
           (      
             <div key={index} className='input-images' data-id={index}>
               <InputCustom  
-                typeInput={typeField[1]} 
-                nameInput={[typeQuestionSelected+index]}
+                typeInput="file"
+                nameInput={typeField[1]}
                 handle={handleChangeText}
-                valueInput={elemen[typeQuestionSelected+index]}
+                valueInput={elemen.image}
                 hideValue={true}
               />
             </div>  
@@ -85,24 +84,24 @@ const RenderTypeQuestion = () => {
         )
       )
 
-    if(typeQuestionSelected === 'Multiple_color') 
+    if(selectSelected === 'Multiple_color') 
       return (
         
-        type.map((elemen, index) => 
+        choices.map((elemen, index) => 
           (
-            <>      
-            <div key={index} className='input-colors' data-id={index}>
+            <div key={index}>      
+            <div  className='input-colors' data-id={index}>
               <InputCustom  
                 typeInput={typeField[1]} 
-                nameInput={[typeQuestionSelected+index]}
+                nameInput={typeField[1]}
                 handle={handleChangeText}
-                valueInput={elemen[typeQuestionSelected+index]}
-              /> <p>{elemen[typeQuestionSelected+index]}</p>
+                valueInput={elemen.color}
+              /> <p>{elemen.color}</p>
             </div>
             <style jsx>
             {styleRenderTypeQuestion}
             </style>
-            </>   
+            </div>   
           )    
         )
 
@@ -110,16 +109,16 @@ const RenderTypeQuestion = () => {
       
       )
 
-    if(typeQuestionSelected === 'Input_textarea') 
+    if(selectSelected === 'Input_textarea') 
     return (
-      type.map((elemen, index) => 
+      choices.map((elemen, index) => 
         ( 
           <div key={index} className='input-textarea' data-id={index}>
             <InputTextarea 
               typeInput={typeField[1]} 
-              nameInput={[typeQuestionSelected+index]}
+              nameInput="placeholder"
               handle={handleChangeText}
-              valueInput={elemen[typeQuestionSelected+index]}
+              valueInput={elemen[selectSelected]}
             />
           </div>
         )

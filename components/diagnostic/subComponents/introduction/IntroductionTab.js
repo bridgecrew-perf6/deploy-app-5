@@ -23,22 +23,24 @@ const IntroductionTab = () => {
   
   console.log(heading);
   return (
-    <>
-      <div className='container-introduction'>
-        <div className='introduction--title'>
-          { heading }
+    <Card>
+      <Card.Section >
+        <div className='container-introduction'>
+          <div className='introduction--title'>
+            { heading }
+          </div>
+          <p className='introduction--descriptions'>
+            { subheading }
+          </p>
+          <Button disabled={true}>{ buttomText }</Button>
+          <button type="button" onClick={ increseamFn }>{ test }</button>
         </div>
-        <p className='introduction--descriptions'>
-          { subheading }
-        </p>
-        <Button disabled={true}>{ buttomText }</Button>
-        <button type="button" onClick={ increseamFn }>{ test }</button>
-      </div>
 
-      <style jsx>
-      {styleIntroductionTab}
-      </style>
-    </>
+        <style jsx>
+        {styleIntroductionTab}
+        </style>
+      </Card.Section>
+    </Card>
   )
 }
 

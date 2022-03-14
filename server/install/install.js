@@ -5,8 +5,8 @@ import { iv , encrypt} from '../utils/encrypt';
 
 
 export const installExecute = async (shop) => {
- 
-  const shopURL = `https://${shop}`;
+    console.log("install...");
+    const shopURL = `https://${shop}`;
 
     const response = await clientAxios.post('/v1/auth/create-account', {"shop": shopURL});
   

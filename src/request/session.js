@@ -1,7 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 
-const tokenSession = async () => {
+export const tokenSession = async () => {
   const token = localStorage.getItem('tokenAPI');
   if(token) {
     console.log("el token existe");
@@ -14,4 +14,3 @@ const tokenSession = async () => {
   }
 }
 
-export default tokenSession

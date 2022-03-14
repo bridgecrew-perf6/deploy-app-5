@@ -9,6 +9,9 @@ import IntroductionCustomize from '../components/diagnostic/subComponents/introd
 import { contextDiagnostic } from '../src/stateGlobal/diagnostic/DiagnosticProvider';
 import QuestionCustomize from '../components/diagnostic/subComponents/questions/QuestionCustomize';
 import ResultCustomize from '../components/diagnostic/subComponents/result/ResultCustomize';
+import IntroductionTab from '../components/diagnostic/subComponents/introduction/IntroductionTab';
+import QuestionTab from '../components/diagnostic/subComponents/questions/QuestionTab';
+import ResultTab from '../components/diagnostic/subComponents/result/ResultTab';
 
 
 const Diagnostic = () => {
@@ -31,10 +34,18 @@ const Diagnostic = () => {
           <Heading >
 
             {/* tabs */}
-            <div className='card-diagnostic--tab'>
+            <div className='card-diagnostic--nav'>
               <DiagnosticTabs/>
             </div>
             {/* endtabs */}
+
+            <div className='card-diagnostic--tab'>
+                         
+              { selectedTab === 0 && (<IntroductionTab/>) }
+              { selectedTab === 1 && (<QuestionTab/>)}
+              { selectedTab === 2 && (<ResultTab/>)}
+
+            </div>                   
             
             {/* diagnostic customize */}
             <div className='card-diagnostic--customize'>

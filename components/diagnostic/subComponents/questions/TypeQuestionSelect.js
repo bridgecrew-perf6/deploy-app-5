@@ -8,8 +8,9 @@ import { contextDiagnostic } from '../../../../src/stateGlobal/diagnostic/Diagno
 
 const TypeQuestionSelect = () => {
 
-  const { typeQuestionSelected, changeTypeQuestion_Fn } = contextDiagnostic()
+  const { selectSelected, changeTypeQuestion_Fn, question } = contextDiagnostic()
 
+  console.log(question);
   const handleSelectChange = useCallback((value) => changeTypeQuestion_Fn(value), []);
 
 /*   const options = [
@@ -27,8 +28,8 @@ const TypeQuestionSelect = () => {
     {label: 'Text', value: 'Input_text'},
     {label: 'Number', value: 'Input_number'},
     {label: 'Email', value: 'Input_email'},
-    {label: 'Multiple Option', value: 'Multiple_text'},
-    {label: 'Image Option', value: 'Multiple_file'},
+    {label: 'Multiple Option', value: 'Multiple_choice'},
+    {label: 'Image Option', value: 'Multiple_image'},
     {label: 'Color Option', value: 'Multiple_color'},
     {label: 'Text Area', value: 'Input_textarea'},
 
@@ -40,7 +41,7 @@ const TypeQuestionSelect = () => {
           label="Date range"
           options={options}
           onChange={handleSelectChange}
-          value={typeQuestionSelected}
+          value={selectSelected}
         />
     </>
   )

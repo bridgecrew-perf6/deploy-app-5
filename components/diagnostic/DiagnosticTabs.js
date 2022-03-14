@@ -45,13 +45,8 @@ const DiagnosticTabs = () => {
       
         <Card>
           <Tabs tabs={tabs} selected={selectedTab} onSelect={handleTabChange}>
-            <Card.Section >
-                            
-              { selectedTab === 0 ? (<IntroductionTab/>) : ""}
-              { selectedTab === 1 ? (<QuestionTab/>) : ""}
-              { selectedTab === 2 ? (<ResultTab/>) : ""}
-                          
-            </Card.Section>
+  
+           
           </Tabs>
         </Card>
 

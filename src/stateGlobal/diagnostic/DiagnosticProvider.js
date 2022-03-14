@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react'
-import tokenSession from '../../request/tokenSession';
+import {tokenSession} from '../../request/session';
 import diagnosticReducer from './diagnosticReducer';
 // import {iv , encrypt} from '../../../server/utils/encrypt';
 
@@ -16,8 +16,6 @@ const DiagnosticProvider = ({ children }) => {
   useEffect(() => {
     console.log("verificando contacto al serve");
     tokenSession();
-
-    
   }, [])
 
   const initialState = {
@@ -35,11 +33,23 @@ const DiagnosticProvider = ({ children }) => {
     /* add question */
     createQuestion:false,
     /* type question */
-    typeQuestionSelected: "Input_text",
+    selectSelected: "Input_text",
+    keyChoiceTypeSelected: "placeholder",
 
     question:{
-      question: "Cual es tu nombre",
-      type    : [{ id: 0,  Input_text0 : "Option"}],
+      title  : "Cual es tu nombre",
+      type:"",
+      className: "",
+      required: false,
+      recommended: false,
+      multiple: false,
+      score : false,
+      choices   : 
+      [{ 
+          id: 0,
+          label: "",  
+          placeholder : "placeholder"
+        }],
     }
   }
 
@@ -122,7 +132,8 @@ const DiagnosticProvider = ({ children }) => {
         introductionObj     : state.introductionObj,
         selectedTab         : state.selectedTab,
         createQuestion      : state.createQuestion,
-        typeQuestionSelected: state.typeQuestionSelected,
+        selectSelected      : state.selectSelected,
+        keyChoiceTypeSelected: state.keyChoiceTypeSelected,
         question            : state.question,
 
         increseamFn,

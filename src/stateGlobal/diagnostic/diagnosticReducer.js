@@ -1,4 +1,5 @@
 import React from 'react'
+import { getKey_Value_ChoiceSelected } from '../../helpers/helpersReducer';
 
 const diagnosticReducer = (state , action) => {
   
@@ -35,16 +36,22 @@ const diagnosticReducer = (state , action) => {
         createQuestion: action.payload
       }
 
-    case 'CHANGE_TYPE_QUESTION_SELECTED':
+    case 'CHANGE_TYPE_QUESTION_SELECTED': {
+      
+      const {keyChoice} = getKey_Value_ChoiceSelected(action.payload);
+
       return {
         ...state,
-        typeQuestionSelected: action.payload
+        selectSelected: action.payload,
+        keyChoiceTypeSelected: keyChoice
       }
+    }
+      
 
     case 'ADD_OPTION_QUESTION':
       return {
         ...state,
-        question: {...state.question , type: [ ...state.question.type ,action.payload]}
+        question: {...state.question , choices: [ ...state.question.choices ,action.payload]}
       }
 
     case 'RESTAR_STATE_TYPE_QUESTION': {
@@ -53,16 +60,11 @@ const diagnosticReducer = (state , action) => {
         question {
           type: [reinitialize option added]
       } */
-      let optionDefault = 'Option';
-      if(state.typeQuestionSelected === "Multiple_file"){
-        optionDefault = "https://image.shutterstock.com/image-vector/click-icon-vector-select-press-260nw-1151377079.jpg";
-      }
-      if(state.typeQuestionSelected === "Multiple_color"){
-        optionDefault = "#fff"
-      }
+      const {keyChoice, valueChoice} = getKey_Value_ChoiceSelected(state.selectSelected);
+
       return {
         ...state,
-        question: {...state.question , type: [{id: 0, [state.typeQuestionSelected+'0']: optionDefault }]}
+        question: {...state.question , choices: [{id: 0, [keyChoice]: valueChoice }]}
       }
     }
 
@@ -78,7 +80,7 @@ const diagnosticReducer = (state , action) => {
         const { name , value, id } = action.payload;
         return {
           ...state,
-          question: {...state.question ,  type : state.question.type.map( elemen => elemen.id ===  parseInt(id) ?  {...elemen , [name] : value} : elemen)}
+          question: {...state.question ,  choices : state.question.choices.map( elemen => elemen.id ===  parseInt(id) ?  {...elemen , [name] : value} : elemen)}
         }
       }
       

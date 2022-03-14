@@ -1,4 +1,4 @@
-// styles/global.js
+
 import css from 'styled-jsx/css'
 import theme from '../theme';
 
@@ -16,5 +16,6 @@ input {
 input:focus {
   outline: none;
 }
+
 
 `

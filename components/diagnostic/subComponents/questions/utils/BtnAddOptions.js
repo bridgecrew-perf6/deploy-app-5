@@ -6,22 +6,16 @@ import { contextDiagnostic } from '../../../../../src/stateGlobal/diagnostic/Dia
 
 const BtnAddOptions = () => {
 
-  const { typeQuestionSelected, question, addOptionQuestion_Fn } = contextDiagnostic();
+  const { question, addOptionQuestion_Fn, keyChoiceTypeSelected } = contextDiagnostic();
  
-  const sizeOption = question.type.length;
+  const sizeOption = question.choices.length;
 
-  if(typeQuestionSelected.includes('Multiple')){
     return (
       <>
-          <Card.Section>
-          </Card.Section>
-          <Card.Section title="Options" actions={[{content: 'Add', onAction: () => addOptionQuestion_Fn({id: sizeOption , [typeQuestionSelected+sizeOption]: `Option${sizeOption+1}`}) }]} >
+          <Card.Section title="Options" actions={[{content: 'Add', onAction: () => addOptionQuestion_Fn({id: sizeOption , [keyChoiceTypeSelected]: keyChoiceTypeSelected}) }]} >
           </Card.Section>
       </>
     )
-  }else{ return null}
-
- 
 }
 
 export default BtnAddOptions

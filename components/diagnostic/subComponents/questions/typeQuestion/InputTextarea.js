@@ -2,7 +2,7 @@ import React from 'react'
 
 const InputTextarea = ({nameInput, handle, valueInput}) => {
 
-  console.log(nameInput, handle, valueInput);
+
     return (
       <textarea
         type="text"
