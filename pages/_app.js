@@ -9,7 +9,7 @@ import "@shopify/polaris/dist/styles.css";
 import translations from "@shopify/polaris/locales/en.json";
 import '../public/css/styles.css';
 import DiagnosticProvider from "../src/stateGlobal/diagnostic/DiagnosticProvider";
-import NavBar from "../components/NavBar";
+import SideBar from "../components/sideBar/SideBar";
 import Layout from '../components/Layout';
 
 function userLoggedInFetch(app) {
@@ -50,7 +50,7 @@ function MyProvider(props) {
     <ApolloProvider client={client}>
       <DiagnosticProvider>
         <Layout>
-          <NavBar/>
+          <SideBar/>
           <Component {...props} />
         </Layout>
       </DiagnosticProvider>
