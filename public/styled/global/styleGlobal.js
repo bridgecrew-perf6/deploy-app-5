@@ -9,7 +9,6 @@ export default css.global`
   padding: 0;
   box-sizing: border-box;
   font-family: ${theme.fontFamily.segoe} !important;
-
 }
 
 
@@ -204,6 +203,57 @@ path {
 .link-open[aria-current]path {
   fill: #7551DC;
 }
+/* end sdie bar */
 
+/* setting checkbox */
+
+input.slider-check {
+  position: absolute;
+  transform: translateX(-1000vw);
+}
+input.slider-check + label {
+  transition: 300ms ease-in-out;
+  display: block;
+  width: 35px;
+  height: 16px;
+  aspect-ratio: 2 / 1;
+  background-color: #BABEC3;
+  border-radius: 1000vw;
+  padding: 2.5px 0px 3px 3px;
+  cursor: pointer;
+}
+
+/* Use a pseudo element to add the circle */
+input.slider-check + label::before {
+  content: "";
+  transition: 300ms ease-in-out;
+  display: block;
+  width: calc(50px / 4.5);
+  aspect-ratio: 1 / 1;
+  background-color: #FFFFFF;
+  border-radius: 1000vw;
+}
+
+/* Change the background color when the checkbox is checked */
+input.slider-check:checked + label {
+  background-color: #219653;
+}
+
+/* Move and color the circle to the right when the checkbox is checked */
+input.slider-check:checked + label::before {
+  transform: translateX(calc(50px / 2.8));
+  background-color: #FFFFFF;
+}
+
+.btn_add-option {
+  display: flex;
+  align-items: center; 
+  justify-content: space-between;
+
+}
+
+.svg-btn-add {
+  margin-left: 6px;
+}
 
 `

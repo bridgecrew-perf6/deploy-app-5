@@ -23,19 +23,21 @@ const SettingQuestion = () => {
   console.log(question);
   return (
 
-    <>
+    <div>
     <Card.Section title="Setting">
       <div className='setting-required'>
         <p>Required</p>
         <InputCustom
           typeInput='checkbox'
           nameInput='required'
-          classCustom='check-custom'
+          classCustom='check-custom slider-check'
           handle={handleCheckStatus}
           valueInput={question.require}
+          idInput='slider-check'
       />
+      <label for="slider-check"></label>
       </div>
-
+      {/* load setting aditionals for option multiple */}
       {selectMultiple && ( 
         <>
           <div className='setting-recommended'>
@@ -43,10 +45,13 @@ const SettingQuestion = () => {
           <InputCustom
             typeInput='checkbox'
             nameInput='recommended'
-            classCustom='check-custom'
+            classCustom='check-custom slider-check'
             handle={handleCheckStatus}
             valueInput={question.require}
+            idInput='slider-check-re'
+
           />
+           <label for="slider-check-re"></label>
         </div>
 
         <div className='setting-score'>
@@ -54,14 +59,19 @@ const SettingQuestion = () => {
           <InputCustom
             typeInput='checkbox'
             nameInput='score'
-            classCustom='check-custom'
+            classCustom='check-custom slider-check'
             handle={handleCheckStatus}
             valueInput={question.require}
+            idInput='slider-check-sc'
+
           />
+           <label for="slider-check-sc"></label>
         </div>
         </>
         
       )}
+      {/* end setting aditionals for option multiple */}
+
       <div className='question-primary'>
         <p>class</p>
         <div className='input-question'>
@@ -78,7 +88,7 @@ const SettingQuestion = () => {
     <style jsx>
     {settingCheckbox}
     </style>
-  </>
+  </div>
   
   )
 }

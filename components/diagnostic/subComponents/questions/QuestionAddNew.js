@@ -53,9 +53,10 @@ const QuestionAddNew = () => {
         }
               
         <Card.Section>        
-          <RenderTypeQuestion/> {/* load type question */}
+           {/* load type question - option [text, choice, image, etc] */}
+           <RenderTypeQuestion/>
         </Card.Section>
-          <SettingQuestion/>    {/* setting question */}
+          <SettingQuestion/>    {/* setting question [require, class] */}
         
     </Card>
   )

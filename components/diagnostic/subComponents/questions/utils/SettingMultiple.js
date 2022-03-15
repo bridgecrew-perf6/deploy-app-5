@@ -19,10 +19,14 @@ const SettingMultiple = () => {
         <InputCustom
           typeInput='checkbox'
           nameInput='multiple'
-          classCustom='check-custom'
+          classCustom='check-custom slider-check'
           handle={handleCheckStatus}
           valueInput={question.require}
-      />
+          idInput='slider-check-m'
+
+        />
+        <label for="slider-check-m"></label>
+
       </div>
       <style jsx>
       {settingCheckbox}

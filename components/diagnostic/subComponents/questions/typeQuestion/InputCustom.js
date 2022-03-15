@@ -11,7 +11,16 @@ import { contextDiagnostic } from '../../../../../src/stateGlobal/diagnostic/Dia
     hideValue=(true o false, optional-> field not need value)) */
 
   
-const InputCustom = ({typeInput="text", nameInput, handle, valueInput, hideValue = false, classCustom = 'input', checkedCheck = true}) => {
+const InputCustom = (
+    {
+      typeInput="text", 
+      nameInput, 
+      handle, 
+      valueInput, 
+      hideValue = false, 
+      classCustom = 'input',
+      idInput = 'default'
+  }) => {
 
  
   return (
@@ -23,6 +32,7 @@ const InputCustom = ({typeInput="text", nameInput, handle, valueInput, hideValue
           value={ !hideValue ? valueInput : null}
           autoComplete="off"
           className={classCustom}
+          id={idInput}
         /> 
            
         <style jsx>

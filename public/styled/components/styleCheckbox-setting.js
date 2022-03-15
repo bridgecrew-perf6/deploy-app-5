@@ -13,6 +13,4 @@ export default css`
   justify-content: space-between;
   align-items: center;
 }
-
-
 `
