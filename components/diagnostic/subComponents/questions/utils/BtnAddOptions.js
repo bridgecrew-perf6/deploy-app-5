@@ -1,8 +1,5 @@
 import { 
-  Button,
-  Card,
-  Select,
-  Subheading
+  Card
 } from '@shopify/polaris';
 import { contextDiagnostic } from '../../../../../src/stateGlobal/diagnostic/DiagnosticProvider'
 import Action from '../../../../ActionText/Action';
@@ -13,14 +10,18 @@ const BtnAddOptions = () => {
  
   const sizeOption = question.choices.length;
 
+  const handleAction = () => {
+    addOptionQuestion_Fn({id: sizeOption , [keyChoiceTypeSelected]: keyChoiceTypeSelected})
+  }
+
     return (
-      <>
-          <Card.Section 
-             >
-              <Action title='Options' btnText='Add' btnSvg={<AddSvg/>}/>
-              
+          <Card.Section>
+              <Action 
+                title='Options' 
+                btnText='Add' 
+                btnSvg={<AddSvg/>} 
+                eventAction={handleAction}/>    
           </Card.Section>
-      </>
     )
 }
 
