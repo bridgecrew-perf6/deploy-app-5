@@ -42,8 +42,8 @@ const IntroductionCustomize = () => {
           <Card >
             <Card.Section title="Edit Introduction">
             </Card.Section>
-            <Card.Section>
 
+            <Card.Section>
               <p>Heading</p>
               <InputCustom 
                 nameInput="heading" 

@@ -1,9 +1,5 @@
 import React from 'react'
 import { 
-  Card,
-  Form,
-  FormLayout,
-  TextField,
   Button
 } from '@shopify/polaris';
 import { contextDiagnostic } from '../../../../src/stateGlobal/diagnostic/DiagnosticProvider';
@@ -20,27 +16,25 @@ const IntroductionTab = () => {
                       buttomText 
                     } 
       } = contextDiagnostic();
-  
-  console.log(heading);
   return (
-    <Card>
-      <Card.Section >
-        <div className='container-introduction'>
-          <div className='introduction--title'>
-            { heading }
-          </div>
-          <p className='introduction--descriptions'>
-            { subheading }
-          </p>
-          <Button disabled={true}>{ buttomText }</Button>
-          <button type="button" onClick={ increseamFn }>{ test }</button>
-        </div>
 
-        <style jsx>
-        {styleIntroductionTab}
-        </style>
-      </Card.Section>
-    </Card>
+        <>
+          <div className='container-introduction'>
+            <div className='introduction--title'>
+              { heading }
+            </div>
+            <p className='introduction--descriptions'>
+              { subheading }
+            </p>
+            <Button disabled={true}>{ buttomText }</Button>
+            <button type="button" onClick={ increseamFn }>{ test }</button>
+          </div>
+
+          <style jsx>
+            {styleIntroductionTab}
+          </style>
+        </>
+
   )
 }
 

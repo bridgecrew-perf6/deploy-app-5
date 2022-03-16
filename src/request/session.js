@@ -6,11 +6,11 @@ export const tokenSession = async () => {
   if(token) {
     console.log("el token existe");
   }else{
-    console.log("el token no existe");
+    /* console.log("el token no existe");
     const res = await axios.get(`/tokenapi`);
 
     console.log("sera",res.data);
-    localStorage.setItem('tokenAPI', res.data);
+    localStorage.setItem('tokenAPI', res.data); */
   }
 }
 

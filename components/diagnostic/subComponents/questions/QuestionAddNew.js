@@ -11,9 +11,10 @@ import BtnAddOptions from './utils/BtnAddOptions';
 import InputCustom from './typeQuestion/InputCustom';
 import SettingQuestion from './utils/SettingQuestion';
 import SettingMultiple from './utils/SettingMultiple';
+import Action from '../../../ActionText/Action';
 
 const QuestionAddNew = () => {
-
+/* questionDetails */
   const { actionCreateQuestion_Fn, handleChangeState_Fn, question, selectSelected } = contextDiagnostic();
 
   const selectMultiple = selectSelected.includes('Multiple');
@@ -23,11 +24,21 @@ const QuestionAddNew = () => {
     handleChangeState_Fn(name , value , 'question')
   }
 
+  const actionEvent = () => {
+    actionCreateQuestion_Fn(false);
+  }
+
   return (
 
     <Card >
-        <Card.Section title="Add questions" actions={[{content: 'List',onAction:() => actionCreateQuestion_Fn(false)}]} >
-        </Card.Section>
+      <Card.Section>
+        <Action 
+          title='Add a question'  
+          btnText='List' 
+          eventAction={actionEvent}
+          reverse="reverse"
+        />
+      </Card.Section>
         <Card.Section>
           <div className='question-primary'>
             <p>Question</p>

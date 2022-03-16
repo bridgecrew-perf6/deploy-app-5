@@ -29,7 +29,8 @@ export const getTokenAccesAPI = async () => {
 
   const response = await clientAxios.post('/v1/auth/login', data ,{
     headers: {
-      'X-Access-Token': `${publicKey}`
+      'X-Access-Token': `${publicKey}`,
+      "User-Agent": "axios 0.21.1"
     }
     
   });

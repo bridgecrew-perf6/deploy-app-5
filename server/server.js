@@ -93,14 +93,15 @@ app.prepare().then(async () => {
 
 
 /* test request front ------------------------------*/
-  router.get('/tokenapi', async (ctx) => {
+  router.get("/tokenapi", async (ctx) => {
     
+    console.log("esto es una prueba server");
     const token = await getTokenAccesAPI();
-    console.log("esto es una prueba", token);
+    console.log("tokeeeeen", token);
+
     
     ctx.res.statusCode = 200;
     ctx.body = token;
-
 
   })
 /* test request front --------------------------*/

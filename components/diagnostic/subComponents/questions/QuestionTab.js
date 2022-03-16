@@ -9,29 +9,28 @@ const QuestionTab = () => {
 
   // console.log(question.type);
   return (
-    <Card>
-      <Card.Section >
-        <div className='container-preview-question'>
-          <div className='preview-question'>
-            <div className='preview-title'>{question.title}</div>
-              <div className='options-question-list'>
-                  { question.choices.map((element, index) => {
-                      return (
-                          <div key={index} className="option">
-                            <p>{element[keyChoiceTypeSelected]}</p>
-                          </div>
-                      )
-                    })}
-              </div>
+    
+        <>
+          <div className='container-preview-question'>
+            <div className='preview-question'>
+              <div className='preview-title'>{question.title}</div>
+                <div className='options-question-list'>
+                    { question.choices.map((element, index) => {
+                        return (
+                            <div key={index} className="option">
+                              <p>{element[keyChoiceTypeSelected]}</p>
+                            </div>
+                        )
+                      })}
+                </div>
+            </div>
           </div>
-        </div>
-
-        {/* styles */}              
-        <style jsx>
-          {styleQuestionTab}
-        </style>
-      </Card.Section >
-    </Card>
+            
+          <style jsx>
+            {styleQuestionTab}
+          </style>
+        </>
+   
 
   )
 }
