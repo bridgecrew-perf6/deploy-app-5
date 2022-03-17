@@ -121,6 +121,15 @@ const DiagnosticProvider = ({ children }) => {
     })
   }
 
+  const changeStateLabelEditable_Fn = (name, textContext, id) => {
+
+    dispatch({
+      type: 'CHANGE_STATE_LABEL_EDITABLE',
+      payload: {name, textContext, id}
+    })
+
+  }
+
 
   return (
     <stateContext.Provider 
@@ -142,7 +151,8 @@ const DiagnosticProvider = ({ children }) => {
         actionCreateQuestion_Fn,
         changeTypeQuestion_Fn,
         addOptionQuestion_Fn,
-        handleChangeStateSecondKey_Fn
+        handleChangeStateSecondKey_Fn,
+        changeStateLabelEditable_Fn
       }}
     >
 

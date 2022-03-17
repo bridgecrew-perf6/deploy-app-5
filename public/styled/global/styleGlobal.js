@@ -44,9 +44,7 @@ export default css.global`
   margin: 4rem 0;
 }
 
-.input-question > .input {
-  width: 100%;
-}
+
 
 .input-colors > .input {
   height: 50px;
@@ -59,21 +57,6 @@ export default css.global`
 textarea {
   width: 100%;
   height: 75px;
-}
-
-.setting-required > .check-custom {
-  width: 20px ;
-}
-
-.setting-multiple > .check-custom {
-  width: 20px ;
-}
-.setting-recommended > .check-custom {
-  width: 20px ;
-}
-
-.setting-score > .check-custom {
-  width: 20px ;
 }
 
 /* sidebar */

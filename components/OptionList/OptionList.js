@@ -5,6 +5,7 @@ import { contextDiagnostic } from '../../src/stateGlobal/diagnostic/DiagnosticPr
 import InputCustom from '../Input/InputCustom';
 import OptionDelete from '../OptionDelete/OptionDelete';
 import OptionItem from '../OptionItem/OptionItem';
+import { UploadSvg } from '../Svgs/SvgFiles';
 import InputTextarea from '../Textarea/InputTextarea';
 
 
@@ -13,8 +14,9 @@ const OptionList = () => {
   const {
     question: {choices}, 
     question,
+    selectSelected,
     handleChangeStateSecondKey_Fn, 
-    selectSelected
+    changeStateLabelEditable_Fn
   } = contextDiagnostic();
 
   console.log(question);
@@ -24,15 +26,23 @@ const OptionList = () => {
 
   const handleChangeText = (e) => {
     const {name , value, type} = e.target;
-  
+   
     if(type === 'file'){
       value = URL.createObjectURL(e.target.files[0]);
-    }
-    
+    }  
+
     let id = e.target.dataset.id; 
- 
     /* params : (nameInput, valueInput, objecState, subObjectState  */
-    handleChangeStateSecondKey_Fn(name , value , id, 'question', 'type')
+    handleChangeStateSecondKey_Fn(name , value , id,'question', 'type')
+  }
+
+  const handleTagEditable = (e) => {
+    const {textContent} = e.target;
+
+    let id = e.target.dataset.id; 
+    let name='label';
+
+    changeStateLabelEditable_Fn(name, textContent, id );
   }
 
 
@@ -73,6 +83,7 @@ const OptionList = () => {
                   nameInput="placeholder"
                   handle={handleChangeText}
                   valueInput={elemen.placeholder}
+                  wInput='85%'
                 />
               </OptionDelete> 
             </div>     
@@ -86,15 +97,20 @@ const OptionList = () => {
           (      
             <div key={index}>
               <OptionDelete>
-                <OptionItem urlImg={elemen.image}>                     
+                <OptionItem 
+                  urlImg={elemen.image} 
+                  iconSvg={<UploadSvg/>}
+                  dataId={index} 
+                  handleTagEditable={handleTagEditable}
+                  textLabel={elemen.label} 
+                >                     
                     <InputCustom 
-                      labelText='Upload'
                       dataId={index} 
                       typeInput="file"
                       nameInput={typeField[1]}
                       handle={handleChangeText}
                       valueInput={elemen.image}
-                      hideValue={true}
+                      hideValue={true}            
                   />
                 </OptionItem>  
               </OptionDelete> 
@@ -109,14 +125,23 @@ const OptionList = () => {
         choices.map((elemen, index) => 
           (
              
-            <div key={index} className='input-colors' >
-              <InputCustom  
-                dataId={index}
-                typeInput={typeField[1]} 
-                nameInput={typeField[1]}
-                handle={handleChangeText}
-                valueInput={elemen.color}
-              /> <p>{elemen.color}</p>
+            <div key={index}  >
+            <OptionDelete>
+              <OptionItem 
+                justifyC='flex-start' 
+                dataId={index} 
+                handleTagEditable={handleTagEditable}
+                textLabel={elemen.label} 
+              >  
+                <InputCustom  
+                  dataId={index}
+                  typeInput={typeField[1]} 
+                  nameInput={typeField[1]}
+                  handle={handleChangeText}
+                  valueInput={elemen.color}
+                /> 
+              </OptionItem>
+            </OptionDelete>
             
             <style jsx>
             {styleRenderTypeQuestion}
@@ -124,9 +149,6 @@ const OptionList = () => {
          </div>
           )    
         )
-
-        
-      
       )
 
     if(selectSelected === 'Input_textarea') 

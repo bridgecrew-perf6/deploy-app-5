@@ -53,7 +53,7 @@ const diagnosticReducer = (state , action) => {
       const sizeOption = state.question.choices.length;
       return {
         ...state,
-        question: {...state.question , choices: [ ...state.question.choices ,{id: sizeOption , [keyChoice]: valueChoice}]}
+        question: {...state.question , choices: [ ...state.question.choices,{id: sizeOption , label: valueChoice, [keyChoice]: valueChoice}]}
       }
     }
 
@@ -67,7 +67,7 @@ const diagnosticReducer = (state , action) => {
 
       return {
         ...state,
-        question: {...state.question , choices: [{id: 0, [keyChoice]: valueChoice }]}
+        question: {...state.question , choices: [{id: 0, label: valueChoice,[keyChoice]: valueChoice }]}
       }
     }
 
@@ -81,7 +81,18 @@ const diagnosticReducer = (state , action) => {
         const { name , value, id } = action.payload;
         return {
           ...state,
-          question: {...state.question ,  choices : state.question.choices.map( elemen => elemen.id ===  parseInt(id) ?  {...elemen , [name] : value} : elemen)}
+          question: {...state.question ,  choices : state.question.choices.map( elemen => elemen.id ===  parseInt(id) ?  {...elemen , label: value, [name] : value} : elemen)}
+        }
+      }
+
+
+      case 'CHANGE_STATE_LABEL_EDITABLE': {
+        const {name, textContext, id} = action.payload;
+      console.log({name, textContext, id});
+
+        return {
+          ...state,
+          question: {...state.question ,  choices : state.question.choices.map( elemen => elemen.id ===  parseInt(id) ?  {...elemen , [name]: textContext} : elemen)}
         }
       }
       

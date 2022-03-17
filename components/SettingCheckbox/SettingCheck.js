@@ -24,7 +24,7 @@ const SettingCheck = ({textSetting, nameInput, idInput}) => {
             handle={handleCheckStatus}
             idInput={idInput}
           />
-        <label for={idInput}></label>
+        <label htmlFor={idInput}></label>
       </div>
       
       <style jsx>

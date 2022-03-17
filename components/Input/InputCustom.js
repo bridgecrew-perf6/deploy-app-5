@@ -1,6 +1,5 @@
 import React from 'react'
-import styleInput from '../../public/styled/components/styleInput';
-import { InputStyles, Div } from './styles';
+import { InputStyles } from './styles';
 
 
 /* Props Component = <InputCustom/>
@@ -21,12 +20,13 @@ const InputCustom = (
           valueInput, 
           hideValue = false, 
           classCustom = 'input',
-          idInput = 'default'
+          idInput = 'default',
+          wInput
       }) => {
 
  
     return (
-      <Div type={typeInput} >
+      <>
           <p>{labelText}</p>
           <InputStyles
             data-id={dataId}
@@ -37,12 +37,9 @@ const InputCustom = (
             autoComplete="off"
             className={classCustom}
             id={idInput}
+            wInput={wInput}
           /> 
-            
-          <style jsx>
-            {styleInput}
-          </style>
-      </Div>
+      </>
     )
 }
 
