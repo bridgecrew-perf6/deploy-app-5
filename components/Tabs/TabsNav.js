@@ -6,14 +6,9 @@ import {
 } from '@shopify/polaris';
 import {contextDiagnostic} from '../../src/stateGlobal/diagnostic/DiagnosticProvider';
 
-const TabsNav = ({tabs}) => {
+const TabsNav = ({tabs, selectedTab, handleTabChange}) => {
  
-  const { selectedTab, chageSelectedTab_Fn } = contextDiagnostic();
-
-  const handleTabChange = useCallback(
-    (selectedTabIndex) => chageSelectedTab_Fn(selectedTabIndex),
-    [],
-  );
+  
   
   return (     
         <Card>

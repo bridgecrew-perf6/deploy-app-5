@@ -1,16 +1,11 @@
 import { 
   Card,
-  Form,
-  FormLayout,
-  TextField,
-  Button,
-  Subheading,
-  TextStyle
+
 } from '@shopify/polaris';
 import { contextDiagnostic } from '../../../../src/stateGlobal/diagnostic/DiagnosticProvider';
 
-import InputCustom from '../questions/typeQuestion/InputCustom';
-import InputTextarea from '../questions/typeQuestion/InputTextarea';
+import InputCustom from '../../../Input/InputCustom';
+import InputTextarea from '../../../Textarea/InputTextarea';
 
 const IntroductionCustomize = () => {
   

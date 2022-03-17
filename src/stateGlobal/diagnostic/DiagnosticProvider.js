@@ -108,10 +108,9 @@ const DiagnosticProvider = ({ children }) => {
     })
   }
 
-  const addOptionQuestion_Fn = (option) => {
+  const addOptionQuestion_Fn = () => {
     dispatch({
-      type: 'ADD_OPTION_QUESTION',
-      payload: option
+      type: 'ADD_OPTION_QUESTION'
     })
   }
 

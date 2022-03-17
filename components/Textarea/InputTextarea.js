@@ -1,16 +1,14 @@
 import React from 'react'
 
-const InputTextarea = ({nameInput, handle, valueInput}) => {
-
-
+const InputTextarea = ({dataId, nameInput, handle, valueInput}) => {
     return (
       <textarea
+        data-id={dataId}
         type="text"
         autoComplete="off"
         name={nameInput}
         onChange={handle}
         value={valueInput}
-
       > </textarea>
     )
 }

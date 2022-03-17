@@ -48,11 +48,14 @@ const diagnosticReducer = (state , action) => {
     }
       
 
-    case 'ADD_OPTION_QUESTION':
+    case 'ADD_OPTION_QUESTION': {
+      const {keyChoice, valueChoice} = getKey_Value_ChoiceSelected(state.selectSelected);
+      const sizeOption = state.question.choices.length;
       return {
         ...state,
-        question: {...state.question , choices: [ ...state.question.choices ,action.payload]}
+        question: {...state.question , choices: [ ...state.question.choices ,{id: sizeOption , [keyChoice]: valueChoice}]}
       }
+    }
 
     case 'RESTAR_STATE_TYPE_QUESTION': {
       /* restar state question.type onchange type selected */
@@ -74,8 +77,6 @@ const diagnosticReducer = (state , action) => {
           question {
             type: [update]
         } */
-        console.log(action.payload);
-        console.log(state.question );
 
         const { name , value, id } = action.payload;
         return {
@@ -92,16 +93,3 @@ const diagnosticReducer = (state , action) => {
 export default diagnosticReducer
 
 
-
-
-/* const question = [
-  {id : 1 , MultipleOptionText0: 'valueawdawdawd'},
-  {id : 2 ,MultipleOptionText1: 'value1awdawd'},
-  {id : 3 ,MultipleOptionText2: ''},
-  {id : 4 ,MultipleOptionText3: 'value1dawddddaw'}];
-
-
-  const result = question.map( elemen => elemen.id === 3 ? {...elemen ,'MultipleOptionText2' : "holaaa"} : elemen)
-
-
-  console.log(result); */

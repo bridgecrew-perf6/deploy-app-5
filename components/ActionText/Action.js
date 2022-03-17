@@ -4,9 +4,16 @@ import Button from '../Button/Button'
 import {Div} from './styles';
 
 
-const Action = ({title , textDescription, btnText, btnSvg, eventAction, reverse}) => {
+const Action = (
+          { title , 
+            textDescription, 
+            btnText, 
+            btnSvg, 
+            eventAction, 
+            reverse, 
+            divMargin}) => {
   return (
-    <Div reverse={reverse}>
+    <Div reverse={reverse} divMargin={divMargin}>
       { 
         title ? <Subheading>{ title }</Subheading> : <p>{ textDescription }</p>
       }

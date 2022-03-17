@@ -93,9 +93,7 @@ textarea {
     align-items: center;
     justify-content: center;
 }
-path {
-  fill: #5C5F62;
-}
+
 
 .link-close[aria-current]path {
   fill: #7551DC;
@@ -243,17 +241,6 @@ input.slider-check:checked + label {
 input.slider-check:checked + label::before {
   transform: translateX(calc(50px / 2.8));
   background-color: #FFFFFF;
-}
-
-.btn_add-option {
-  display: flex;
-  align-items: center; 
-  justify-content: space-between;
-
-}
-
-.svg-btn-add {
-  margin-left: 6px;
 }
 
 

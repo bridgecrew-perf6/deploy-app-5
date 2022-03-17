@@ -4,10 +4,9 @@ import {
         Card 
 } from '@shopify/polaris';
 
-
 import IntroductionCustomize from '../components/diagnostic/subComponents/introduction/IntroductionCustomize';
 import { contextDiagnostic } from '../src/stateGlobal/diagnostic/DiagnosticProvider';
-import QuestionCustomize from '../components/diagnostic/subComponents/questions/QuestionCustomize';
+import QuestionList from '../components/QuestionList/QuestionList';
 import ResultCustomize from '../components/diagnostic/subComponents/result/ResultCustomize';
 import IntroductionTab from '../components/diagnostic/subComponents/introduction/IntroductionTab';
 import QuestionTab from '../components/diagnostic/subComponents/questions/QuestionTab';
@@ -15,11 +14,24 @@ import ResultTab from '../components/diagnostic/subComponents/result/ResultTab';
 import CardTitle from '../components/CardTitle';
 import TabsNav from '../components/Tabs/TabsNav';
 import propsTabs from '../components/Tabs/data';
-
+import QuestionDetails from '../components/QuestionDetails/QuestionDetails';
+import { useCallback } from 'react';
 const Diagnostic = () => {
 
-  const { selectedTab } = contextDiagnostic();
   const {tabsQuestion} = propsTabs();
+
+  const { 
+      selectedTab, 
+      createQuestion, 
+      chageSelectedTab_Fn 
+    } = contextDiagnostic();
+    
+
+/* chage selected select */
+  const handleTabChange = useCallback(
+    (selectedTabIndex) => chageSelectedTab_Fn(selectedTabIndex),
+    [],
+  );
   
 
   return (
@@ -37,7 +49,11 @@ const Diagnostic = () => {
 
             {/* tabs */}
             
-              <TabsNav tabs={tabsQuestion}/>
+              <TabsNav 
+                  tabs={tabsQuestion} 
+                  selectedTab={selectedTab} 
+                  handleTabChange={handleTabChange} 
+              />
             
             {/* endtabs */}
             <div className='content-tab-customize'>
@@ -49,11 +65,26 @@ const Diagnostic = () => {
                   </CardTitle>
                 </div>                   
                 
+                
                 {/* diagnostic customize */}
                 <div className='card-diagnostic--customize'>                
-                  { selectedTab === 0 && (<IntroductionCustomize/>) }
-                  { selectedTab === 1 && (<QuestionCustomize/>) }
-                  { selectedTab === 2 && (<ResultCustomize/>) }  
+                  { 
+                    selectedTab === 0 
+                      && (<IntroductionCustomize/>) 
+                  }
+
+                  { 
+                    selectedTab === 1 
+                      && (
+                          !createQuestion 
+                            ? <QuestionList/> 
+                            : <QuestionDetails/>
+                          ) 
+                  }
+
+                  { 
+                    selectedTab === 2 
+                      && (<ResultCustomize/>) }  
                 </div>
             </div> 
         </Page>

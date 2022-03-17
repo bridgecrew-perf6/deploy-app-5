@@ -6,7 +6,7 @@ export const getKey_Value_ChoiceSelected = (selectSelected) => {
 
   if(selectSelected === 'Multiple_image'){
     keyChoice = 'image';
-    valueChoice = 'https://image.shutterstock.com/image-vector/click-icon-vector-select-press-260nw-1151377079.jpg';
+    valueChoice = '/static/imagePrev.png';
   }
 
   if(selectSelected === 'Multiple_color') {

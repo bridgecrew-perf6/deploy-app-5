@@ -1,12 +1,11 @@
 import styled, {css} from 'styled-components'
 
-export const Div = styled.div(({reverse}) => {
+export const Div = styled.div(({reverse, divMargin}) => {
  
   if(reverse === 'reverse'){
     return css`
       display: flex;
       justify-content: space-between;
-      margin-top: 10px;
       align-items: center;
       flex-flow: row-reverse;
       justify-content: flex-end;
@@ -17,8 +16,8 @@ export const Div = styled.div(({reverse}) => {
     return css`
       display: flex;
       justify-content: space-between;
-      margin-top: 10px;
       align-items: center;
+      margin: ${ divMargin || 0};
     `
   }
  
