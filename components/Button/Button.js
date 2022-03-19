@@ -1,6 +1,6 @@
 import React from 'react'
 import {ButtonStyles} from './styles';
-const Button = ({btnText, btnSvg, eventAction}) => {
+const Button = ({btnText, btnSvg, eventAction, wBtn}) => {
  
   return (
       
@@ -8,6 +8,7 @@ const Button = ({btnText, btnSvg, eventAction}) => {
         onClick={eventAction}
         bgColor="black"
         btnText={btnText}
+        wBtn={wBtn}
         >
         {btnText}
         {btnSvg}

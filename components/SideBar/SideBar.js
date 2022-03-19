@@ -1,16 +1,16 @@
-import { Navigation } from '@shopify/polaris';
-import React, { useState } from 'react'
-import { HomeMajor,AppsMajor } from '@shopify/polaris-icons';
+import React, { useEffect, useState } from 'react'
 import Item from './Item';
 import {Links} from './data';
 import {ArrowSvg} from '../Svgs/SvgFiles';
+import { SideStyles } from './styles';
+
+
 const SideBar = () => {
- 
+  
   const [open, setOpen] = useState(false);
 
-
-
-    return (
+  return (
+    <SideStyles>
       <div className={open ? 'sidebar-open' : 'sidebar'}>
           <div 
             onClick={()=> setOpen(!open)}
@@ -22,8 +22,9 @@ const SideBar = () => {
           <div className="link-container">
             {Links.map((data, index) => (<Item key={index} data={data} open={open}/>)  )}
           </div>
-      </div>    
-    )
+      </div>
+    </SideStyles>    
+  )
   }
 
 export default SideBar

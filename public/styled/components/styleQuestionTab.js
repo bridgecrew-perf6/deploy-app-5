@@ -4,26 +4,7 @@ import theme from '../theme'
 
 export default css`
 
-.container-preview-question {
-  display: flex;
-  justify-content: center;
-  margin: 2rem 0;
-}
 
-.preview-title {
-  margin-bottom: 1rem;
-}
-
-.preview-question {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  
-}
-
-.options-question-list {
-  width: 100%;
-}
 
 .option{
   height: 38px;

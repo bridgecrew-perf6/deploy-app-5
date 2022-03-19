@@ -45,6 +45,12 @@ const QuestionDetails = () => {
 
   const handleSelectChange = useCallback((value) => changeTypeQuestion_Fn(value), []);
 
+
+  const handleCheckStatus = (e) => {
+    const {name , checked} = e.target;
+    handleChangeState_Fn(name , checked , 'question')
+  }
+
   const {optionsQuestion} = selectProps();
   return (
 
@@ -79,6 +85,7 @@ const QuestionDetails = () => {
                     textSetting='Multiple'
                     nameInput='multiple' 
                     idInput='multiple'
+                    handleCheckStatus={handleCheckStatus}
                   /> 
           }     
         </Card.Section>
@@ -106,6 +113,7 @@ const QuestionDetails = () => {
               textSetting='Required'
               nameInput='required' 
               idInput='required'
+              handleCheckStatus={handleCheckStatus}
             />
 
             {
@@ -116,11 +124,13 @@ const QuestionDetails = () => {
                     textSetting='Recommended'
                     nameInput='recommended' 
                     idInput='recommended'
+                    handleCheckStatus={handleCheckStatus}
                   />
                   <SettingCheck 
                     textSetting='Score'
                     nameInput='score' 
                     idInput='score'
+                    handleCheckStatus={handleCheckStatus}
                   />   
                 </>
                 

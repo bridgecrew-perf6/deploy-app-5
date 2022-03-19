@@ -19,7 +19,7 @@ const DiagnosticProvider = ({ children }) => {
   }, [])
 
   const initialState = {
-    test: 0,
+   
     /* tab introduction */
     introductionObj:{
       heading     : "Welcome to your diagnostic",
@@ -55,19 +55,6 @@ const DiagnosticProvider = ({ children }) => {
 
   const [state, dispatch] = useReducer(diagnosticReducer, initialState);
 
-  /* TEST  */
-  const increseamFn = () => {
-    dispatch({
-      type : 'EVENT_INCRESEAM'
-    })
-  }
-
-  const decreseamFn = () => {
-    dispatch({
-      type : 'EVENT_DECRESEAM'
-    })
-  }
-  /* TEST  */
 
   /* function dispacher */
 
@@ -136,7 +123,6 @@ const DiagnosticProvider = ({ children }) => {
     
       value={{
        
-        test                : state.test,
         introductionObj     : state.introductionObj,
         selectedTab         : state.selectedTab,
         createQuestion      : state.createQuestion,
@@ -144,8 +130,6 @@ const DiagnosticProvider = ({ children }) => {
         keyChoiceTypeSelected: state.keyChoiceTypeSelected,
         question            : state.question,
 
-        increseamFn,
-        decreseamFn,
         handleChangeState_Fn,
         chageSelectedTab_Fn,
         actionCreateQuestion_Fn,

@@ -1,20 +1,20 @@
-import React, { useCallback} from 'react'
 
 import { 
   Card, 
   Tabs 
 } from '@shopify/polaris';
-import {contextDiagnostic} from '../../src/stateGlobal/diagnostic/DiagnosticProvider';
+
+import { TabsCustom } from './styles';
 
 const TabsNav = ({tabs, selectedTab, handleTabChange}) => {
  
   
   
   return (     
-        <Card>
+        <TabsCustom>
           <Tabs tabs={tabs} selected={selectedTab} onSelect={handleTabChange}>
           </Tabs>
-        </Card>
+        </TabsCustom>
   )
 }
 

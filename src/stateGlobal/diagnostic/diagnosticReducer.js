@@ -5,18 +5,6 @@ const diagnosticReducer = (state , action) => {
   
   switch (action.type) {
 
-    case 'EVENT_INCRESEAM':
-      return {
-        ...state,
-        test: state.test + 1
-      }
-    
-    case 'EVENT_DECRESEAM':
-      return {
-        ...state,
-        test: state.test - 1
-      }
-    
     case 'HANDLE_TEXT_CHANGE':
       const { name , value, stateCurrent } = action.payload;
       return {

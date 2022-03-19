@@ -1,14 +1,15 @@
 import React from 'react'
-import styledGobal from '../public/styled/global/styleGlobal';
+import GlobalStyle from '../styles/GlobalStyle';
+import SideBar from "../components/SideBar/SideBar";
 
 const Layout = ({children}) => {
+  
   return (
     
     <>
-     {children}
-      <style jsx global>
-        {styledGobal}
-      </style>
+      <GlobalStyle/>
+      <SideBar/>
+      {children}    
     </>
   )
 }

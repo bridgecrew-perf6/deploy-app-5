@@ -2,12 +2,12 @@ import {ScoreSvg, HomeSvg,DiagnosticSvg } from '../Svgs/SvgFiles';
 
 export const Links = [
   {
-    to: '/',
+    to: '/diagnostic',
     text: 'Home',
     icon: <HomeSvg/>
   },
   {
-    to: '/diagnostic',
+    to: '/',
     text: 'Diagnostic',
     icon: <DiagnosticSvg/>
   },
