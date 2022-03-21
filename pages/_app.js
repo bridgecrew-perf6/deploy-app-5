@@ -7,7 +7,6 @@ import { authenticatedFetch } from "@shopify/app-bridge-utils";
 import { Redirect } from "@shopify/app-bridge/actions";
 import "@shopify/polaris/dist/styles.css";
 import translations from "@shopify/polaris/locales/en.json";
-import '../public/css/styles.css';
 import DiagnosticProvider from "../src/stateGlobal/diagnostic/DiagnosticProvider";
 import Layout from '../components/Layout';
 

@@ -7,8 +7,10 @@ export const Div = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 7rem 2rem;
-  max-width: 400px;
+  max-width: 100%;
+  min-height: 339px;
+  justify-content: center;
+  padding: 0 60px;
 
   h1 {
     ${theme.textBoldTtitle};
@@ -18,7 +20,7 @@ export const Div = styled.div`
 
   p {
     color: ${theme.colors.greyDark};
-    text-align: justify;
+    text-align: center;
   }
 
   button {

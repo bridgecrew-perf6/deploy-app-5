@@ -5,7 +5,7 @@ export const LabelStyles = styled.label(() => {
 
   return css`
     height: 20px;
-    width: 70%;
+    max-width: 110px;
     overflow: hidden;
     margin-left: 10px;
     cursor: pointer;

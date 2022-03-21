@@ -1,5 +1,4 @@
 import React from 'react'
-import styleRenderTypeQuestion from '../../public/styled/components/styleRenderTypeQuestion';
 import { contextDiagnostic } from '../../src/stateGlobal/diagnostic/DiagnosticProvider'
 
 import InputCustom from '../Input/InputCustom';
@@ -25,10 +24,12 @@ const OptionList = () => {
   const typeField = selectSelected.split('_');
 
   const handleChangeText = (e) => {
-    const {name , value, type} = e.target;
+    let {name , value, type} = e.target;
    
     if(type === 'file'){
+
       value = URL.createObjectURL(e.target.files[0]);
+
     }  
 
     let id = e.target.dataset.id; 
@@ -142,10 +143,6 @@ const OptionList = () => {
                 /> 
               </OptionItem>
             </OptionDelete>
-            
-            <style jsx>
-            {styleRenderTypeQuestion}
-            </style>
          </div>
           )    
         )

@@ -2,10 +2,10 @@ import {
   Card,
 
 } from '@shopify/polaris';
-import { contextDiagnostic } from '../../../../src/stateGlobal/diagnostic/DiagnosticProvider';
+import { contextDiagnostic } from '../../src/stateGlobal/diagnostic/DiagnosticProvider';
 
-import InputCustom from '../../../Input/InputCustom';
-import InputTextarea from '../../../Textarea/InputTextarea';
+import InputCustom from '../Input/InputCustom';
+import InputTextarea from '../Textarea/InputTextarea';
 
 const IntroductionCustomize = () => {
   

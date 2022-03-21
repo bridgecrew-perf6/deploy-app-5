@@ -14,17 +14,10 @@ export const WindowStyle = styled.div`
     align-items: center;
     height: 26px;
     background: #F1F2F3;
-    margin-bottom: 20px;
 
     svg {
       margin-left: 17px;
     }
-  }
-
-  > div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
 `;

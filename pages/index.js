@@ -3,17 +3,22 @@ import {
         Page,
 } from '@shopify/polaris';
 
-import IntroductionCustomize from '../components/diagnostic/subComponents/introduction/IntroductionCustomize';
 import { contextDiagnostic } from '../src/stateGlobal/diagnostic/DiagnosticProvider';
+
+import IntroductionDetails from '../components/IntroductionDetails/IntroductionDetails';
+import IntroductionPreview from '../components/IntroductionPreview/IntroductionPreview';
+
+import QuestionPreview from '../components/QuestionPreview/QuestionPreview';
 import QuestionList from '../components/QuestionList/QuestionList';
-import ResultCustomize from '../components/diagnostic/subComponents/result/ResultCustomize';
-import IntroductionTab from '../components/IntroductionPreview/IntroductionPreview';
-import QuestionTab from '../components/diagnostic/subComponents/questions/QuestionTab';
-import ResultTab from '../components/diagnostic/subComponents/result/ResultTab';
+import QuestionDetails from '../components/QuestionDetails/QuestionDetails';
+
+import ResultPreview from '../components/ResultPreview/ResultPreview';
+import ResultDetails from '../components/ResultDetails/ResultDetails';
+
 import CardPreview from '../components/CardPreview/CardPreview';
 import TabsNav from '../components/Tabs/TabsNav';
 import propsTabs from '../components/Tabs/data';
-import QuestionDetails from '../components/QuestionDetails/QuestionDetails';
+
 import { useCallback } from 'react';
 
 
@@ -60,9 +65,9 @@ const Diagnostic = () => {
             <div className='content_tab'>
                 <div className='content_tab--preview'>   
                   <CardPreview >                                
-                      { selectedTab === 0 && (<IntroductionTab/>) }
-                      { selectedTab === 1 && (<QuestionTab/>)}
-                      { selectedTab === 2 && (<ResultTab/>)}
+                      { selectedTab === 0 && (<IntroductionPreview/>) }
+                      { selectedTab === 1 && (<QuestionPreview/>)}
+                      { selectedTab === 2 && (<ResultPreview/>)}
                   </CardPreview>
                 </div>                   
                 
@@ -71,7 +76,7 @@ const Diagnostic = () => {
                 <div className='content_tab--customize'>                
                   { 
                     selectedTab === 0 
-                      && (<IntroductionCustomize/>) 
+                      && (<IntroductionDetails/>) 
                   }
 
                   { 
@@ -85,7 +90,7 @@ const Diagnostic = () => {
 
                   { 
                     selectedTab === 2 
-                      && (<ResultCustomize/>) }  
+                      && (<ResultDetails/>) }  
                 </div>
             </div> 
         </Page>
