@@ -104,6 +104,10 @@ app.prepare().then(async () => {
     ctx.body = token;
 
   })
+
+  router.get("/geturl", async (ctx) => {
+     ctx.body = process.env.APP_BACKEND_URL;
+  })
 /* test request front --------------------------*/
 
 

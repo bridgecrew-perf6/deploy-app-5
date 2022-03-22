@@ -34,7 +34,7 @@ const InputCustom = (
             type={typeInput} 
             name={nameInput}
             onChange={handle}
-            value={ !hideValue ? valueInput : null}
+            {... ( typeInput !== 'file' && {'value':valueInput})}
             autoComplete="off"
             className={classCustom}
             id={idInput}

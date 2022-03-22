@@ -1,6 +1,6 @@
 import styled, {css} from 'styled-components'
 
-export const ButtonStyles = styled.button(({btnText, wBtn}) => {
+export const ButtonStyles = styled.button(({btnText, wBtn, mBtn}) => {
 
   if(btnText){
       return css`
@@ -8,6 +8,7 @@ export const ButtonStyles = styled.button(({btnText, wBtn}) => {
         align-items: center;
         justify-content: center;
         min-width: ${wBtn || '90px'} ;
+        margin: ${mBtn || 0};
         height: 36px;
         background:  #FFFFFF;
         border: 1px solid #C9CCCF;

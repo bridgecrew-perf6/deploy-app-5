@@ -10,6 +10,9 @@ const GlobalStyle = createGlobalStyle`
     font-family: ${theme.fontFamily.segoe};
   }
 
+  .Polaris-Page {
+    max-width: 90% !important;
+  }
 
   .Polaris-Tabs__Wrapper {
     background: #f6f6f7;

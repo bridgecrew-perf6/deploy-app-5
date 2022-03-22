@@ -1,4 +1,6 @@
 
+const Diamond = require('../public/imagePrev.png');
+
 /* get key and value for type question selected */
 export const getKey_Value_ChoiceSelected = (selectSelected) => {
 
@@ -7,7 +9,7 @@ export const getKey_Value_ChoiceSelected = (selectSelected) => {
 
   if(selectSelected === 'Multiple_image'){
     keyChoice = 'image';
-    valueChoice = '/static/imagePrev.png';
+    valueChoice = `${Diamond}`;
   }
 
   if(selectSelected === 'Multiple_color') {

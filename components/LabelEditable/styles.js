@@ -11,11 +11,12 @@ export const LabelStyles = styled.label(() => {
     cursor: pointer;
     
     :hover {
+      outline: 1px solid #b3b3b3;
       border-radius: 0.3rem;
     }
     :focus {
       outline: 1px solid #b3b3b3;
-
+      border-radius: 0.3rem;
     }
   `;
 })

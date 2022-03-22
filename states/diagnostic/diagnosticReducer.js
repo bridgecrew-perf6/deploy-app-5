@@ -3,53 +3,66 @@ import { uid } from 'uid';
 
 
 const diagnosticReducer = (state , action) => {
+
+
+  const STATES_CONDITION = {
+    'HANDLE_TEXT_CHANGE'            : () => handleTextchange(action.payload),
+    'CHANGE_SELECTED_TAB'           : () => handleSelectTab(action.payload),
+    'CHANGE_STATUS_CREATE_QUESTION' : () => changeStatusCreateList(action.payload),
+    'CHANGE_TYPE_QUESTION_SELECTED' : () => changeTypeQuestionSelected(action.payload),
+    'ADD_OPTION_QUESTION'           : () => addOptionQuestion(),
+    'RESTAR_STATE_TYPE_QUESTION'    : () => restartTypeQuestion(),
+    'CHANGE_OPTION_QUESTION_LIST'   : () => changeStateChoiceQuestion(action.payload),
+    'CHANGE_STATE_LABEL_EDITABLE'   : () => changeStateLabelEditable(action.payload),
+    'DELETE_STATE_OPTION_QUESTION'  : () => deleteChoiceQuestion(action.payload),
+  }
+  const STATE_DEFAULT = state;
   
-  switch (action.type) {
-
-    case 'HANDLE_TEXT_CHANGE':
-      const { name , value, stateCurrent } = action.payload;
-      return {
-        ...state,
-        [stateCurrent] : {...state[stateCurrent], [name] : value }
-      }
-
-    case 'CHANGE_SELECTED_TAB':
-      return {
-        ...state,
-        selectedTab: action.payload
-      }
-
-    case 'CHANGE_STATUS_CREATE_QUESTION':
-      return {
-        ...state,
-        createQuestion: action.payload
-      }
-
-    case 'CHANGE_TYPE_QUESTION_SELECTED': {
-      
-      const {keyChoice} = getKey_Value_ChoiceSelected(action.payload);
-      const typeSelected = action.payload.split('_')[1];
-
-      return {
-        ...state,
-        selectSelected: action.payload,
-        keyChoiceTypeSelected: keyChoice,
-        question: {...state.question, type : typeSelected}
-      }
+  const handleTextchange = (payload) => {
+    const { name , value, stateCurrent } = payload;
+    return {
+      ...state,
+      [stateCurrent] : {...state[stateCurrent], [name] : value }
     }
-      
+  }
 
-    case 'ADD_OPTION_QUESTION': {
-      const {keyChoice, valueChoice} = getKey_Value_ChoiceSelected(state.selectSelected);
+  const handleSelectTab = (payload) => {
+    return {
+      ...state,
+      selectedTab: payload
+    }
+  }
+
+  const changeStatusCreateList = (payload) => {
+    return {
+      ...state,
+      createQuestion: payload
+    }
+  }
+
+  const changeTypeQuestionSelected = (payload) => {
+    const {keyChoice} = getKey_Value_ChoiceSelected(payload);
+    const typeSelected = payload.split('_')[1];
+
+    return {
+      ...state,
+      selectSelected: payload,
+      keyChoiceTypeSelected: keyChoice,
+      question: {...state.question, type : typeSelected}
+    }
+  }
+
+  const addOptionQuestion = () => {
+    const {keyChoice, valueChoice} = getKey_Value_ChoiceSelected(state.selectSelected);
      
       return {
         ...state,
         question: {...state.question , choices: [ ...state.question.choices,{id: uid(), label: valueChoice, [keyChoice]: valueChoice}]}
       }
-    }
+  }
 
-    case 'RESTAR_STATE_TYPE_QUESTION': {
-      /* restar state question.type onchange type selected */
+  const restartTypeQuestion = () => {
+     /* restar state question.type onchange type selected */
       /* state update -> 
         question {
           type: [reinitialize option added]
@@ -60,42 +73,46 @@ const diagnosticReducer = (state , action) => {
         ...state,
         question: {...state.question , choices: [{id: uid(), label: valueChoice,[keyChoice]: valueChoice }]}
       }
-    }
+  }
 
-      case 'CHANGE_OPTION_QUESTION_LIST': {
-        /* update option added for question  */
+  const changeStateChoiceQuestion = (payload) => {
+    /* update option added for question  */
         /* state update -> 
           question {
             type: [update]
         } */
-
-        const { name , value, id } = action.payload;
+        const { name , value, id } = payload;
         return {
           ...state,
           question: {...state.question ,  choices : state.question.choices.map( elemen => elemen.id ===  id  ?  {...elemen , label: value, [name] : value} : elemen)}
         }
-      }
+  }
 
-
-      case 'CHANGE_STATE_LABEL_EDITABLE': {
-        const {name, textContext, id} = action.payload;
+  const changeStateLabelEditable = (payload) => {
+    const {name, textContext, id} = payload;
     
         return {
           ...state,
           question: {...state.question ,  choices : state.question.choices.map( elemen => elemen.id ===  id ?  {...elemen , [name]: textContext} : elemen)}
         }
-      }
-
-      case 'DELETE_STATE_OPTION_QUESTION': {
-        return {
-          ...state,
-          question: {...state.question, choices: state.question.choices.filter(e => e.id !== action.payload)}
-        }
-      }
-      
-      default:
-        return state;
   }
+
+  const deleteChoiceQuestion = (payload) => {
+    return {
+      ...state,
+      question: {...state.question, choices: state.question.choices.filter(e => e.id !== payload)}
+    }
+  }
+
+
+  /* call condition */
+  const stateReturn = STATES_CONDITION[action.type] 
+    ? STATES_CONDITION[action.type]() 
+    : STATE_DEFAULT;
+
+
+  return stateReturn;
+
 }
 
 export default diagnosticReducer

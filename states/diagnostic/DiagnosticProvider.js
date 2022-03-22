@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react'
 import {tokenSession} from '../../services/init/session';
 import diagnosticReducer from './diagnosticReducer';
-// import {iv , encrypt} from '../../../server/utils/encrypt';
+import {saveIntroduction} from '../../services/diagnostic/introduction';
 
 
 const stateContext = createContext();
@@ -19,14 +19,17 @@ const DiagnosticProvider = ({ children }) => {
   }, [])
 
   const initialState = {
+
+    quizId : 3,
    
     /* tab introduction */
     introductionObj:{
-      heading     : "Welcome to your diagnostic",
-      subheading  : "Discovery your hair condition",
-      buttomText  : "Start",
-      classCustom : "introduction"  
+      heading: "Welcome to your diagnostic",
+      subheading: "Discovery your hair condition",
+      buttonText: "Start",
+      className: "introduction"  
     },
+  
 
     /* Selected tab */
     selectedTab: 0,
@@ -125,6 +128,15 @@ const DiagnosticProvider = ({ children }) => {
   }
 
 
+  /* request API */
+
+  const saveIntroduction_Fn = async () => {
+    const rs = await saveIntroduction(state.introductionObj, state.quizId); 
+    console.log("desde el state", rs);
+
+  }
+
+
   return (
     <stateContext.Provider 
     
@@ -144,7 +156,9 @@ const DiagnosticProvider = ({ children }) => {
         addOptionQuestion_Fn,
         handleChangeStateSecondKey_Fn,
         changeStateLabelEditable_Fn,
-        deleteStateOption_Fn
+        deleteStateOption_Fn,
+
+        saveIntroduction_Fn
       }}
     >
 

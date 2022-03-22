@@ -6,23 +6,28 @@ import { contextDiagnostic } from '../../states/diagnostic/DiagnosticProvider';
 
 import InputCustom from '../Input/InputCustom';
 import InputTextarea from '../Textarea/InputTextarea';
-
+import Button from '../Button/Button';
 const IntroductionCustomize = () => {
   
   const { 
-      test , 
-      decreseamFn, 
       introductionObj : {
               heading,
               subheading,
               buttomText,
-              classCustom
+              className
 
-  }, handleChangeState_Fn } = contextDiagnostic();
+  }, 
+  handleChangeState_Fn,
+  saveIntroduction_Fn
+   } = contextDiagnostic();
   
   const handleChangeText = (e) => {
     const { name, value } = e.target;
     handleChangeState_Fn(name , value, 'introductionObj');
+  }
+
+  const actionSaveIntroduction = () => {
+    saveIntroduction_Fn();
   }
 
   return (
@@ -60,11 +65,16 @@ const IntroductionCustomize = () => {
                 
               <p>Class</p>
               <InputCustom 
-                nameInput="classCustom" 
+                nameInput="className" 
                 handle={handleChangeText}
-                valueInput={classCustom}/>
+                valueInput={className}/>
 
-              <button type="button" onClick={ decreseamFn }>{ test }</button>
+              <Button 
+                btnText='Save' 
+                wBtn='100%' 
+                mBtn='10px 0'
+                eventAction={actionSaveIntroduction}
+                />
             </Card.Section>
           </Card>
 
