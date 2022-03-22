@@ -2,7 +2,7 @@ import {
   Card,
 } from '@shopify/polaris';
 import { useEffect } from 'react';
-import { contextDiagnostic } from '../../src/stateGlobal/diagnostic/DiagnosticProvider';
+import { contextDiagnostic } from '../../states/diagnostic/DiagnosticProvider';
 import Action from '../ActionText/Action';
 import { AddSvg } from '../Svgs/SvgFiles';
 

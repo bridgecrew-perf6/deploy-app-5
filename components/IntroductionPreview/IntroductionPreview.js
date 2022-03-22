@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { contextDiagnostic } from '../../src/stateGlobal/diagnostic/DiagnosticProvider';
+import { contextDiagnostic } from '../../states/diagnostic/DiagnosticProvider';
 
 import { Div } from './styles';
 import { NextSvg } from '../Svgs/SvgFiles';

@@ -5,7 +5,7 @@ export const Div = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 12px;
+    margin-bottom: 12px;
 
   input {
     position: absolute;

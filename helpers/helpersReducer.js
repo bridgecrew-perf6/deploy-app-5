@@ -1,3 +1,4 @@
+
 /* get key and value for type question selected */
 export const getKey_Value_ChoiceSelected = (selectSelected) => {
 
@@ -11,7 +12,7 @@ export const getKey_Value_ChoiceSelected = (selectSelected) => {
 
   if(selectSelected === 'Multiple_color') {
     keyChoice = 'color';
-    valueChoice = '#0000';
+    valueChoice = '#000000';
   }
 
   return {

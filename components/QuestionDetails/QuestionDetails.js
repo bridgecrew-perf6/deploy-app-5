@@ -2,7 +2,7 @@ import {
   Card
 } from '@shopify/polaris';
 
-import { contextDiagnostic } from '../../src/stateGlobal/diagnostic/DiagnosticProvider';
+import { contextDiagnostic } from '../../states/diagnostic/DiagnosticProvider';
 import OptionList from '../OptionList/OptionList';
 
 import SelectList from '../SelectList/SelectList';
@@ -26,7 +26,7 @@ const QuestionDetails = () => {
     } = contextDiagnostic();
 
       
-    
+    console.log(question);
 
   const selectMultiple = selectSelected.includes('Multiple');
 
@@ -86,6 +86,8 @@ const QuestionDetails = () => {
                     nameInput='multiple' 
                     idInput='multiple'
                     handleCheckStatus={handleCheckStatus}
+                    status={question.multiple}
+                    
                   /> 
           }     
         </Card.Section>
@@ -114,6 +116,7 @@ const QuestionDetails = () => {
               nameInput='required' 
               idInput='required'
               handleCheckStatus={handleCheckStatus}
+              status={question.required}
             />
 
             {
@@ -125,12 +128,14 @@ const QuestionDetails = () => {
                     nameInput='recommended' 
                     idInput='recommended'
                     handleCheckStatus={handleCheckStatus}
+                    status={question.recommended}
                   />
                   <SettingCheck 
                     textSetting='Score'
                     nameInput='score' 
                     idInput='score'
                     handleCheckStatus={handleCheckStatus}
+                    status={question.score}
                   />   
                 </>
                 

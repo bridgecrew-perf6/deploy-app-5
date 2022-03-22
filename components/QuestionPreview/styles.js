@@ -25,7 +25,9 @@ export const Container = styled.div(() => {
       border-radius: 0.3rem;
       border: 1px solid ${theme.colors.inputBorder};
       width: 300px;
+
     }
+
     
   `
 });
@@ -43,7 +45,7 @@ export const Question = styled.div(({option}) => {
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
-        gap: 10px;  
+        gap: 12px;  
       }
 
       span {
@@ -52,11 +54,55 @@ export const Question = styled.div(({option}) => {
         border-radius: 9px;
         display: flex;
         align-items: center;
+
+        >p {
+          max-width: 105px;
+          margin-left: 8px;
+          overflow: hidden;
+          white-space: nowrap;
+        }
       }
     `
   }
 
-  return css`
-  
-  `
 });
+
+export const ColorBg = styled.div(({bgColor})=> {
+
+    return css`
+      background-color: ${bgColor};
+      width: 50px;
+      height: 50px;
+      border-radius: 9px;
+      border: 1px solid;
+    `
+})
+
+export const Ptext = styled.p(({index, option}) => {
+
+  if(option === 'choice'){
+    let result = printToLetter(index);
+  
+    return css`
+      ::before {
+        position: relative;
+        margin: 0 10px 0 6px;
+        content: '${result}';
+        font-size: 20px;
+        font-weight: 600;
+        top: 2px;
+      }
+  `;
+  }
+  }) 
+
+function printToLetter(number){
+
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  
+  const result = alphabet[number];
+
+  return result;
+
+}
+

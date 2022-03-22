@@ -1,5 +1,5 @@
 import React from 'react'
-import { contextDiagnostic } from '../../src/stateGlobal/diagnostic/DiagnosticProvider'
+import { contextDiagnostic } from '../../states/diagnostic/DiagnosticProvider'
 
 import InputCustom from '../Input/InputCustom';
 import OptionDelete from '../OptionDelete/OptionDelete';
@@ -11,17 +11,15 @@ import InputTextarea from '../Textarea/InputTextarea';
 const OptionList = () => {
 
   const {
-    question: {choices}, 
-    question,
+    question: {choices, type}, 
     selectSelected,
     handleChangeStateSecondKey_Fn, 
-    changeStateLabelEditable_Fn
+    changeStateLabelEditable_Fn,
+    deleteStateOption_Fn
   } = contextDiagnostic();
 
-  console.log(question);
 
-
-  const typeField = selectSelected.split('_');
+  const typeField = type;
 
   const handleChangeText = (e) => {
     let {name , value, type} = e.target;
@@ -46,23 +44,21 @@ const OptionList = () => {
     changeStateLabelEditable_Fn(name, textContent, id );
   }
 
-
-
   
     if(selectSelected === 'Input_text' || 
        selectSelected === 'Input_number' || 
        selectSelected === 'Input_email') 
         return (
-          choices.map((elemen, index) => 
+          choices.map((element) => 
             ( 
-              <div key={index}>                
+              <div key={element.id}>                
                     <InputCustom      
-                      dataId={index}
+                      dataId={element.id}
                       labelText='Placeholders'  
-                      typeInput={typeField[1]} 
+                      typeInput={typeField} 
                       nameInput="placeholder"
                       handle={handleChangeText}
-                      valueInput={elemen.placeholder}            
+                      valueInput={element.placeholder}            
                     />
                                
               </div>  
@@ -74,16 +70,16 @@ const OptionList = () => {
     
     if(selectSelected === 'Multiple_choice') 
       return (
-        choices.map((elemen, index) => 
+        choices.map((element) => 
           (      
-            <div key={index}>
-              <OptionDelete>                   
+            <div key={element.id}>
+              <OptionDelete actionDelete={() => deleteStateOption_Fn(element.id)}>                   
                 <InputCustom      
-                  dataId={index} 
+                  dataId={element.id} 
                   typeInput="text"
                   nameInput="placeholder"
                   handle={handleChangeText}
-                  valueInput={elemen.placeholder}
+                  valueInput={element.placeholder}
                   wInput='85%'
                 />
               </OptionDelete> 
@@ -94,23 +90,23 @@ const OptionList = () => {
     
     if(selectSelected === 'Multiple_image') 
       return (
-        choices.map((elemen, index) => 
+        choices.map((element) => 
           (      
-            <div key={index}>
-              <OptionDelete>
+            <div key={element.id}>
+              <OptionDelete actionDelete={() => deleteStateOption_Fn(element.id)}>
                 <OptionItem 
-                  urlImg={elemen.image} 
+                  urlImg={element.image} 
                   iconSvg={<UploadSvg/>}
-                  dataId={index} 
+                  dataId={element.id} 
                   handleTagEditable={handleTagEditable}
-                  textLabel={elemen.label} 
+                  textLabel={element.label} 
                 >                     
                     <InputCustom 
-                      dataId={index} 
+                      dataId={element.id} 
                       typeInput="file"
-                      nameInput={typeField[1]}
+                      nameInput={typeField}
                       handle={handleChangeText}
-                      valueInput={elemen.image}
+                      valueInput={element.image}
                       hideValue={true}            
                   />
                 </OptionItem>  
@@ -123,23 +119,23 @@ const OptionList = () => {
     if(selectSelected === 'Multiple_color') 
       return (
         
-        choices.map((elemen, index) => 
+        choices.map((element) => 
           (
              
-            <div key={index}  >
-            <OptionDelete>
+            <div key={element.id}  >
+            <OptionDelete actionDelete={() => deleteStateOption_Fn(element.id)}>
               <OptionItem 
                 justifyC='flex-start' 
-                dataId={index} 
+                dataId={element.id} 
                 handleTagEditable={handleTagEditable}
-                textLabel={elemen.label} 
+                textLabel={element.label} 
               >  
                 <InputCustom  
-                  dataId={index}
-                  typeInput={typeField[1]} 
-                  nameInput={typeField[1]}
+                  dataId={element.id}
+                  typeInput={typeField} 
+                  nameInput={typeField}
                   handle={handleChangeText}
-                  valueInput={elemen.color}
+                  valueInput={element.color}
                 /> 
               </OptionItem>
             </OptionDelete>
@@ -150,14 +146,14 @@ const OptionList = () => {
 
     if(selectSelected === 'Input_textarea') 
     return (
-      choices.map((elemen, index) => 
+      choices.map((element) => 
         ( 
-          <div key={index} className='input-textarea' >
+          <div key={element.id} className='input-textarea' >
             <InputTextarea
-              dataId={index} 
+              dataId={element.id} 
               nameInput="placeholder"
               handle={handleChangeText}
-              valueInput={elemen.placeholder}
+              valueInput={element.placeholder}
             />
           </div>
         )

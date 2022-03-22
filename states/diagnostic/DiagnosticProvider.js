@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react'
-import {tokenSession} from '../../request/session';
+import {tokenSession} from '../../services/init/session';
 import diagnosticReducer from './diagnosticReducer';
 // import {iv , encrypt} from '../../../server/utils/encrypt';
 
@@ -37,16 +37,16 @@ const DiagnosticProvider = ({ children }) => {
     keyChoiceTypeSelected: "placeholder",
 
     question:{
-      title  : "Cual es tu nombre",
-      type:"",
+      title  : "¿Cual es tu nombre?",
+      type:"text",
       className: "",
-      required: false,
-      recommended: false,
+      required: true,
+      recommended: true,
       multiple: false,
-      score : false,
+      score : true,
       choices   : 
       [{ 
-          id: 0,
+          id: '0',
           label: "",  
           placeholder : "placeholder"
         }],
@@ -89,7 +89,7 @@ const DiagnosticProvider = ({ children }) => {
   }
 
   const restarTypeQuestion = () => {
-    console.log("pasa");
+
     dispatch({
       type: 'RESTAR_STATE_TYPE_QUESTION'
     })
@@ -117,6 +117,13 @@ const DiagnosticProvider = ({ children }) => {
 
   }
 
+  const deleteStateOption_Fn = (id_delete) => {
+    dispatch({
+      type: 'DELETE_STATE_OPTION_QUESTION',
+      payload: id_delete
+    })
+  }
+
 
   return (
     <stateContext.Provider 
@@ -136,7 +143,8 @@ const DiagnosticProvider = ({ children }) => {
         changeTypeQuestion_Fn,
         addOptionQuestion_Fn,
         handleChangeStateSecondKey_Fn,
-        changeStateLabelEditable_Fn
+        changeStateLabelEditable_Fn,
+        deleteStateOption_Fn
       }}
     >
 

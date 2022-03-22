@@ -1,11 +1,12 @@
 
 import styled, { css } from "styled-components";
 
-export const ImgStyle = styled.img(() => {
+export const ImgStyle = styled.img(({wImg, hImg}) => {
 
   return css`
+   
     border-radius: 5px;
-    min-width: 42.3px;
-    min-height: 42.3px;
+    width: ${wImg || '42.3px' } ;
+    height:${hImg || '42.3px' };
   `;
 })

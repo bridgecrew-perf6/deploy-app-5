@@ -7,13 +7,13 @@ export const ButtonStyles = styled.button(({btnText, wBtn}) => {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: ${wBtn || '90px'} ;
+        min-width: ${wBtn || '90px'} ;
         height: 36px;
         background:  #FFFFFF;
         border: 1px solid #C9CCCF;
         border-radius: 5px;
         box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05);
- 
+        padding: 0 10px;
           &:hover {
             background: #f7f7f7;
             cursor: pointer;

@@ -7,6 +7,10 @@ export const Div = styled.div(() => {
     align-items: center;
     justify-content: space-between;
     margin-bottom: 7px;
+
+    svg {
+      cursor: pointer;
+    }
   `;
 
 })

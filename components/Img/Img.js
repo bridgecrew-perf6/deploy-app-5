@@ -2,10 +2,14 @@
 import React from 'react'
 import { ImgStyle } from './styles'
 
-const Img = ({urlImg}) => {
+const Img = ({urlImg, wImg, hImg}) => {
   return (
     
-      <ImgStyle src={urlImg}  width="42.3" height="42.3" />
+      <ImgStyle 
+        src={urlImg}
+        wImg={wImg}
+        hImg={hImg}  
+         />
     
   )
 }

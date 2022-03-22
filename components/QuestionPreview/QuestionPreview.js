@@ -1,37 +1,42 @@
 import React from 'react'
-import { contextDiagnostic } from '../../src/stateGlobal/diagnostic/DiagnosticProvider'
+import { contextDiagnostic } from '../../states/diagnostic/DiagnosticProvider'
 import Img from '../Img/Img';
-import InputCustom from '../Input/InputCustom';
-import { Container, Question } from './styles';
+import { ColorBg, Container, Ptext, Question } from './styles';
 
 const QuestionTab = () => {
 
-  const {question, keyChoiceTypeSelected, selectSelected} = contextDiagnostic();
+  const {question, keyChoiceTypeSelected} = contextDiagnostic();
 
-  const selected = selectSelected.split('_')[1];
-
+  const typeSelected = question.type; 
 
   return (
     
             <Container >
-              <Question option={selected}>
+              <Question option={typeSelected}>
                 <h1>{question.title}</h1>
                 <div>
-                { question.choices.map((element) => {
+                { question.choices.map((element, index) => {
                     return (
                       <span key={element.id} className="option">
-                        { selected === 'image' || selected=== 'color'
+                        { typeSelected === 'image' || typeSelected=== 'color'
                           ? 
-                            selected === 'image' 
+                          typeSelected === 'image' 
                               ? <>
-                                <Img urlImg={element[keyChoiceTypeSelected]}/> <p>{element.label}</p>
+                                <Img 
+                                  urlImg={element[keyChoiceTypeSelected]} wImg='50px'
+                                  hImg='50px'
+                                /> <p>{element.label}</p>
                                 </>
                               : <>
-                                <InputCustom typeInput='color' valueInput={element[keyChoiceTypeSelected]}/>
+                                <ColorBg bgColor={element[keyChoiceTypeSelected]}/>
                                 <p>{element.label}</p>
                                 </>  
                           : 
-                            <p>{element[keyChoiceTypeSelected]}</p>
+                            <Ptext 
+                              index={index} 
+                              option={typeSelected}>
+                                {element[keyChoiceTypeSelected]}
+                            </Ptext>
                         }
                         
                       </span>

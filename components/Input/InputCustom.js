@@ -21,7 +21,8 @@ const InputCustom = (
           hideValue = false, 
           classCustom = 'input',
           idInput = 'default',
-          wInput
+          wInput,
+          status
       }) => {
 
  
@@ -38,9 +39,12 @@ const InputCustom = (
             className={classCustom}
             id={idInput}
             wInput={wInput}
+            {... (status && {'checked': true})}
           /> 
       </>
     )
 }
 
 export default InputCustom
+
+

@@ -1,5 +1,6 @@
-import React from 'react'
-import { getKey_Value_ChoiceSelected } from '../../helpers/helpersReducer';
+import {  getKey_Value_ChoiceSelected } from '../../helpers/helpersReducer';
+import { uid } from 'uid';
+
 
 const diagnosticReducer = (state , action) => {
   
@@ -27,21 +28,23 @@ const diagnosticReducer = (state , action) => {
     case 'CHANGE_TYPE_QUESTION_SELECTED': {
       
       const {keyChoice} = getKey_Value_ChoiceSelected(action.payload);
+      const typeSelected = action.payload.split('_')[1];
 
       return {
         ...state,
         selectSelected: action.payload,
-        keyChoiceTypeSelected: keyChoice
+        keyChoiceTypeSelected: keyChoice,
+        question: {...state.question, type : typeSelected}
       }
     }
       
 
     case 'ADD_OPTION_QUESTION': {
       const {keyChoice, valueChoice} = getKey_Value_ChoiceSelected(state.selectSelected);
-      const sizeOption = state.question.choices.length;
+     
       return {
         ...state,
-        question: {...state.question , choices: [ ...state.question.choices,{id: sizeOption , label: valueChoice, [keyChoice]: valueChoice}]}
+        question: {...state.question , choices: [ ...state.question.choices,{id: uid(), label: valueChoice, [keyChoice]: valueChoice}]}
       }
     }
 
@@ -55,7 +58,7 @@ const diagnosticReducer = (state , action) => {
 
       return {
         ...state,
-        question: {...state.question , choices: [{id: 0, label: valueChoice,[keyChoice]: valueChoice }]}
+        question: {...state.question , choices: [{id: uid(), label: valueChoice,[keyChoice]: valueChoice }]}
       }
     }
 
@@ -69,18 +72,24 @@ const diagnosticReducer = (state , action) => {
         const { name , value, id } = action.payload;
         return {
           ...state,
-          question: {...state.question ,  choices : state.question.choices.map( elemen => elemen.id ===  parseInt(id) ?  {...elemen , label: value, [name] : value} : elemen)}
+          question: {...state.question ,  choices : state.question.choices.map( elemen => elemen.id ===  id  ?  {...elemen , label: value, [name] : value} : elemen)}
         }
       }
 
 
       case 'CHANGE_STATE_LABEL_EDITABLE': {
         const {name, textContext, id} = action.payload;
-      console.log({name, textContext, id});
-
+    
         return {
           ...state,
-          question: {...state.question ,  choices : state.question.choices.map( elemen => elemen.id ===  parseInt(id) ?  {...elemen , [name]: textContext} : elemen)}
+          question: {...state.question ,  choices : state.question.choices.map( elemen => elemen.id ===  id ?  {...elemen , [name]: textContext} : elemen)}
+        }
+      }
+
+      case 'DELETE_STATE_OPTION_QUESTION': {
+        return {
+          ...state,
+          question: {...state.question, choices: state.question.choices.filter(e => e.id !== action.payload)}
         }
       }
       
