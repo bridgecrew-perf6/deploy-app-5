@@ -13,9 +13,8 @@ const IntroductionCustomize = () => {
       introductionObj : {
               heading,
               subheading,
-              buttomText,
+              buttonText,
               className
-
   }, 
   handleChangeState_Fn,
   saveIntroduction_Fn
@@ -59,9 +58,9 @@ const IntroductionCustomize = () => {
               
               <p>Button text</p>
               <InputCustom 
-                nameInput="buttomText" 
+                nameInput="buttonText" 
                 handle={handleChangeText}
-                valueInput={buttomText}/>
+                valueInput={buttonText}/>
                 
               <p>Class</p>
               <InputCustom 

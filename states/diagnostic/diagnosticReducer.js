@@ -15,6 +15,7 @@ const diagnosticReducer = (state , action) => {
     'CHANGE_OPTION_QUESTION_LIST'   : () => changeStateChoiceQuestion(action.payload),
     'CHANGE_STATE_LABEL_EDITABLE'   : () => changeStateLabelEditable(action.payload),
     'DELETE_STATE_OPTION_QUESTION'  : () => deleteChoiceQuestion(action.payload),
+    'GET_INTRODUCCION_API'          : () => getIntroductionAPI(action.payload),
   }
   const STATE_DEFAULT = state;
   
@@ -101,6 +102,13 @@ const diagnosticReducer = (state , action) => {
     return {
       ...state,
       question: {...state.question, choices: state.question.choices.filter(e => e.id !== payload)}
+    }
+  }
+
+  const getIntroductionAPI = (payload) => {
+    return {
+      ...state,
+      introductionObj: payload
     }
   }
 

@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react'
 import {tokenSession} from '../../services/init/session';
 import diagnosticReducer from './diagnosticReducer';
-import {saveIntroduction} from '../../services/diagnostic/introduction';
+import {saveIntroduction, getIntroduction} from '../../services/diagnostic/introduction';
 
 
 const stateContext = createContext();
@@ -129,12 +129,23 @@ const DiagnosticProvider = ({ children }) => {
 
 
   /* request API */
-
+/* Introduction */
   const saveIntroduction_Fn = async () => {
     const rs = await saveIntroduction(state.introductionObj, state.quizId); 
-    console.log("desde el state", rs);
-
+    rs.status === 200 ? console.log("succes") : console.log("error")
   }
+
+  const getIntroduction_Fn = async () => {
+    const rs = await getIntroduction(state.quizId);
+    rs.status === 200 ? console.log("succes") : console.log("error")
+
+    dispatch({
+      type : 'GET_INTRODUCCION_API',
+      payload: rs.data
+    })
+  }
+
+  /* introduction */
 
 
   return (
@@ -158,7 +169,8 @@ const DiagnosticProvider = ({ children }) => {
         changeStateLabelEditable_Fn,
         deleteStateOption_Fn,
 
-        saveIntroduction_Fn
+        saveIntroduction_Fn,
+        getIntroduction_Fn
       }}
     >
 

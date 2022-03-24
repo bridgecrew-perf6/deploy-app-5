@@ -12,7 +12,7 @@ const IntroductionPreview = () => {
       introductionObj : { 
                       heading, 
                       subheading, 
-                      buttomText 
+                      buttonText 
                     } 
       } = contextDiagnostic();
   return (
@@ -28,7 +28,7 @@ const IntroductionPreview = () => {
             </p>
             
             <Button 
-              btnText={buttomText}
+              btnText={buttonText}
               btnSvg={<NextSvg/>}
               wBtn='100px'
             />
