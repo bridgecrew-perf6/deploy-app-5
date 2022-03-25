@@ -5,7 +5,6 @@ import { Div } from './styles';
 
 const SettingCheck = ({textSetting, nameInput, idInput, handleCheckStatus, status}) => {
 
-  console.log(status);
   return (
 
         <Div >

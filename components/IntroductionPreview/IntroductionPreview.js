@@ -15,8 +15,8 @@ const IntroductionPreview = () => {
                       buttonText 
                     } 
       } = contextDiagnostic();
-  return (
-
+  
+    return (
         <>
           <Div>
             <h1>
@@ -34,7 +34,6 @@ const IntroductionPreview = () => {
             />
           </Div>
         </>
-
   )
 }
 

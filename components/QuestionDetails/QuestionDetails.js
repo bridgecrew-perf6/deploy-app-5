@@ -12,6 +12,7 @@ import { AddSvg, PrevSvg } from '../Svgs/SvgFiles';
 import SettingCheck from '../SettingCheckbox/SettingCheck';
 import selectProps from '../SelectList/data';
 import { useCallback } from 'react';
+import Button from '../Button/Button';
 
 const QuestionDetails = () => {
 /* questionDetails */
@@ -25,9 +26,8 @@ const QuestionDetails = () => {
     
     } = contextDiagnostic();
 
-      
-    console.log(question);
-
+  
+  const {optionsQuestion} = selectProps();
   const selectMultiple = selectSelected.includes('Multiple');
 
   const handleChangeText = (e) => {
@@ -51,7 +51,12 @@ const QuestionDetails = () => {
     handleChangeState_Fn(name , checked , 'question')
   }
 
-  const {optionsQuestion} = selectProps();
+
+  
+  /* Send register question update */
+  const actionSaveQuestion = () => {
+    console.log("guaardando..");
+  }
   return (
 
     <Card >
@@ -147,8 +152,14 @@ const QuestionDetails = () => {
                 valueInput={question.className}
                 handle={handleChangeText}
               />
+
+              <Button 
+                btnText='Save Questions' 
+                wBtn='100%' 
+                mBtn='10px 0'
+                eventAction={actionSaveQuestion}
+                />
         </Card.Section> 
-        
     </Card>
   )
 }

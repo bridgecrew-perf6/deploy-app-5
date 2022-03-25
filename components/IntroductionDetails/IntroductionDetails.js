@@ -7,7 +7,10 @@ import { contextDiagnostic } from '../../states/diagnostic/DiagnosticProvider';
 import InputCustom from '../Input/InputCustom';
 import InputTextarea from '../Textarea/InputTextarea';
 import Button from '../Button/Button';
-const IntroductionCustomize = () => {
+import { useMutation, useQueryClient } from 'react-query';
+import Message from '../Message/Message';
+
+const IntroductionDetails = () => {
   
   const { 
       introductionObj : {
@@ -25,8 +28,12 @@ const IntroductionCustomize = () => {
     handleChangeState_Fn(name , value, 'introductionObj');
   }
 
+
+  /* Send Register Update */
+  const {mutate, isError, isLoading, isSuccess} = useMutation(saveIntroduction_Fn);
+
   const actionSaveIntroduction = () => {
-    saveIntroduction_Fn();
+    mutate();
   }
 
   return (
@@ -74,10 +81,16 @@ const IntroductionCustomize = () => {
                 mBtn='10px 0'
                 eventAction={actionSaveIntroduction}
                 />
+               
+                {/* Message interactions */}
+                {isSuccess && <Message mesagge="Success"/>}
+                {isError && <Message mesagge="Server error" error={true}/>}
+                {/* Message interactions */}
+
             </Card.Section>
           </Card>
 
   )
 }
 
-export default IntroductionCustomize;
+export default IntroductionDetails;

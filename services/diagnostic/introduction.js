@@ -1,14 +1,14 @@
 import axios from "axios";
 import { geturlAPI } from "../config/axiosFront";
 
+// const API = await  geturlAPI();
+
+const API='https://mmm-diagnostic-api.herokuapp.com';
 
 export const saveIntroduction = async (data, idQuiz) => {
 
-  const API = await  geturlAPI();
-
   const TOKEN = localStorage.getItem('tokenAPI');
 
-    try {
       const  response  = await axios({
         method: "PUT",
         headers: {
@@ -19,17 +19,13 @@ export const saveIntroduction = async (data, idQuiz) => {
         data: JSON.stringify(data),
       });
       return response;
-    } catch (error) {
-      console.error(`Error: ${error.message}`);
-    }
-  
+    
 }
 
 export const getIntroduction = async (idQuiz) => {
-  const API = await  geturlAPI();
+
   const TOKEN = localStorage.getItem('tokenAPI');
 
-    try {
       const  response  = await axios({
         method: "GET",
         headers: {
@@ -39,7 +35,5 @@ export const getIntroduction = async (idQuiz) => {
         url: `${API}/v1/quiz/${idQuiz}/introduction`,
       });
       return response;
-    } catch (error) {
-      console.error(`Error: ${error.message}`);
-    } 
+   
 }

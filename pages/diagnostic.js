@@ -1,6 +1,9 @@
 
 import { 
-        Page,
+
+  Frame,
+  Page
+
 } from '@shopify/polaris';
 
 import { contextDiagnostic } from '../states/diagnostic/DiagnosticProvider';
@@ -20,11 +23,12 @@ import TabsNav from '../components/Tabs/TabsNav';
 import propsTabs from '../components/Tabs/data';
 
 import { useCallback, useEffect } from 'react';
+import { useQuery } from 'react-query';
+import Skeleton from '../components/Skeleton/Skeleton';
+import Message from '../components/Message/Message';
 
 
 const Diagnostic = () => {
-
-  const {tabsQuestion} = propsTabs();
 
   const { 
       selectedTab, 
@@ -33,22 +37,27 @@ const Diagnostic = () => {
       getIntroduction_Fn 
     } = contextDiagnostic();
 
-    useEffect(() => {
-      getIntroduction_Fn();
-    }, [])
-  
+  const {tabsQuestion} = propsTabs();
+
+  /* chage selected select */
+  const handleTabChange = useCallback((selectedTabIndex) => chageSelectedTab_Fn(selectedTabIndex),[],);
+
     
+  /* Geters api querys update state local */
+  const {isLoading, isFetching, isError} =useQuery(['getIntroduction'], getIntroduction_Fn);
 
-/* chage selected select */
-  const handleTabChange = useCallback(
-    (selectedTabIndex) => chageSelectedTab_Fn(selectedTabIndex),
-    [],
-  );
-  
 
+
+ 
+  if(isLoading || isFetching){
+    return (
+        <Skeleton/>
+      )
+  } 
   return (
     <>
       <div className='container'>
+        <Frame>
         <Page 
           title="My diagnostic" 
           primaryAction={{
@@ -99,7 +108,13 @@ const Diagnostic = () => {
                       && (<ResultDetails/>) }  
                 </div>
             </div> 
+
+            {/* Message interactions */}
+              {isError && <Message mesagge="Server Error" error={true}/>}
+            {/* Message interactions */}
+
         </Page>
+        </Frame>
       </div>
 
 </>

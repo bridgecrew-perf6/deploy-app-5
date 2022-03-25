@@ -132,7 +132,7 @@ const DiagnosticProvider = ({ children }) => {
 /* Introduction */
   const saveIntroduction_Fn = async () => {
     const rs = await saveIntroduction(state.introductionObj, state.quizId); 
-    rs.status === 200 ? console.log("succes") : console.log("error")
+    return rs;
   }
 
   const getIntroduction_Fn = async () => {
@@ -143,6 +143,7 @@ const DiagnosticProvider = ({ children }) => {
       type : 'GET_INTRODUCCION_API',
       payload: rs.data
     })
+    return rs;
   }
 
   /* introduction */

@@ -9,6 +9,17 @@ import "@shopify/polaris/dist/styles.css";
 import translations from "@shopify/polaris/locales/en.json";
 import DiagnosticProvider from "../states/diagnostic/DiagnosticProvider";
 import Layout from '../components/Layout';
+import {QueryClient, QueryClientProvider} from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools'
+
+const queryClient = new QueryClient({ 
+  defaultOptions: {
+    queries : {
+      refetchOnWindowFocus: false
+    }
+  }
+  
+});
 
 function userLoggedInFetch(app) {
   const fetchFunction = authenticatedFetch(app);
@@ -46,11 +57,14 @@ function MyProvider(props) {
 
   return (
     <ApolloProvider client={client}>
-      <DiagnosticProvider>
-        <Layout>
-          <Component {...props} />
-        </Layout>
-      </DiagnosticProvider>
+      <QueryClientProvider client={queryClient}>
+        <DiagnosticProvider>
+          <Layout>
+            <Component {...props} />
+          <ReactQueryDevtools/>
+          </Layout>
+        </DiagnosticProvider>
+      </QueryClientProvider>
     </ApolloProvider>
   );
 }
