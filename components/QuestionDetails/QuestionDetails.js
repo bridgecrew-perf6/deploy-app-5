@@ -13,6 +13,7 @@ import SettingCheck from '../SettingCheckbox/SettingCheck';
 import selectProps from '../SelectList/data';
 import { useCallback } from 'react';
 import Button from '../Button/Button';
+import { useMutation } from 'react-query';
 
 const QuestionDetails = () => {
 /* questionDetails */
@@ -22,7 +23,8 @@ const QuestionDetails = () => {
       question, 
       selectSelected,
       addOptionQuestion_Fn,
-      changeTypeQuestion_Fn
+      changeTypeQuestion_Fn,
+      saveQuestion_Fn
     
     } = contextDiagnostic();
 
@@ -54,9 +56,13 @@ const QuestionDetails = () => {
 
   
   /* Send register question update */
+  const {mutate, isError, isLoading, isSuccess} = useMutation(saveQuestion_Fn);
+
   const actionSaveQuestion = () => {
     console.log("guaardando..");
+    mutate();
   }
+  console.log({isError, isSuccess});
   return (
 
     <Card >

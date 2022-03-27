@@ -46,9 +46,7 @@ const Diagnostic = () => {
   /* Geters api querys update state local */
   const {isLoading, isFetching, isError} =useQuery(['getIntroduction'], getIntroduction_Fn);
 
-
-
- 
+  
   if(isLoading || isFetching){
     return (
         <Skeleton/>

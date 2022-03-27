@@ -2,6 +2,7 @@ import React, { createContext, useContext, useReducer, useEffect } from 'react'
 import {tokenSession} from '../../services/init/session';
 import diagnosticReducer from './diagnosticReducer';
 import {saveIntroduction, getIntroduction} from '../../services/diagnostic/introduction';
+import { saveQuestion } from '../../services/diagnostic/question';
 
 
 const stateContext = createContext();
@@ -128,8 +129,8 @@ const DiagnosticProvider = ({ children }) => {
   }
 
 
-  /* request API */
-/* Introduction */
+/* request API */
+/* Introduction services */
   const saveIntroduction_Fn = async () => {
     const rs = await saveIntroduction(state.introductionObj, state.quizId); 
     return rs;
@@ -145,9 +146,13 @@ const DiagnosticProvider = ({ children }) => {
     })
     return rs;
   }
-
   /* introduction */
+  /* Question services*/
 
+  const saveQuestion_Fn = () => {
+    const rs = saveQuestion(state.question, state.quizId);
+    return rs;
+  }
 
   return (
     <stateContext.Provider 
@@ -171,7 +176,8 @@ const DiagnosticProvider = ({ children }) => {
         deleteStateOption_Fn,
 
         saveIntroduction_Fn,
-        getIntroduction_Fn
+        getIntroduction_Fn,
+        saveQuestion_Fn
       }}
     >
 
