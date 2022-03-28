@@ -7,8 +7,10 @@ import Action from '../ActionText/Action';
 import OptionDelete from '../OptionDelete/OptionDelete';
 import QuestionItem from '../QuestionItem/QuestionItem';
 import { AddSvg } from '../Svgs/SvgFiles';
+import {DragDropContext, Droppable, Draggable, resetServerContext} from 'react-beautiful-dnd'
 
 const QuestionList = () => {
+  resetServerContext()
 /* questionList */
   const { createQuestion , actionCreateQuestion_Fn, listQuestions} = contextDiagnostic();
 
@@ -33,18 +35,48 @@ const QuestionList = () => {
         <Card.Section >
           <p>Select or drag a question</p>
 
-          { listQuestions.map(element => (
+          <DragDropContext onDragEnd={(result) =>{
+              console.log(result);
+            }}>
+            <Droppable droppableId='questions'>
+              {(droppableProvided) =>(
+                <div 
+                {...droppableProvided.droppableProps}
+                ref={droppableProvided.innerRef}
+                >
 
-            <OptionDelete actionDelete={() => deleteStateQuestion_Fn()}>
-              <QuestionItem 
-                type={element.type}
-              >                     
-                {element.title}
-              </QuestionItem>  
-            </OptionDelete>
+                  { listQuestions.map((element, index) => (
 
-          ))}
-             
+                    <Draggable key={index+10} draggableId={index+10} index={index}>
+                            
+                            {(draggableProvided) => (
+                            
+                            <OptionDelete 
+                            {...draggableProvided.draggableProps}
+                                  ref={draggableProvided.innerRef}
+                                  {...draggableProvided.dragHandleProps}
+                              actionDelete={() => deleteStateQuestion_Fn()}
+                              
+                            >
+                              
+                                <QuestionItem 
+                                  type={element.type}
+                                  
+                                >                     
+                                  {element.title}
+                                </QuestionItem>
+                              
+                            </OptionDelete>)}
+                          
+                      </Draggable>
+                     
+                    
+                  ))}
+              {droppableProvided.placeholder}  
+
+              </div>)}
+              </Droppable>
+          </DragDropContext>
         </Card.Section>
          
         <Card.Section >
