@@ -27,20 +27,25 @@ export const getTokenAccesAPI = async () => {
     };
 
 
-  const response = await clientAxios.post('/v1/auth/login', data ,{
-    
-    headers: {
-      'X-Access-Token': `${publicKey}`,
-      "User-Agent": "axios 0.21.1"
+    try {
+      const response = await clientAxios({
+        method: "POST",
+        headers: {
+          'X-Access-Token': `${publicKey}`,
+          'Content-Type': 'application/json'
+        },
+        url: '/v1/auth/login',
+        data: JSON.stringify(data),
+      });
+  
+      const token = response.data.token; 
+
+      console.log("antes", token);
+
+      return token;
+    } catch (error) {
+      console.error(`Error aqui: ${error.message}`);
     }
-    
-  });
-
-  const token = response.data.token; 
-  console.log("acios",clientAxios.baseURL);
-  console.log("antes", token);
-
-  return token;
 }
 
 

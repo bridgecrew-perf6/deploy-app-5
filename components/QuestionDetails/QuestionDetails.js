@@ -24,11 +24,12 @@ const QuestionDetails = () => {
       selectSelected,
       addOptionQuestion_Fn,
       changeTypeQuestion_Fn,
-      saveQuestion_Fn
+      saveQuestion_Fn,
+      listQuestions
     
     } = contextDiagnostic();
 
-  
+  console.log(listQuestions);
   const {optionsQuestion} = selectProps();
   const selectMultiple = selectSelected.includes('Multiple');
 
@@ -56,13 +57,15 @@ const QuestionDetails = () => {
 
   
   /* Send register question update */
-  const {mutate, isError, isLoading, isSuccess} = useMutation(saveQuestion_Fn);
+  //const {mutate, isError, isLoading, isSuccess} = useMutation(saveQuestion_Fn);
 
   const actionSaveQuestion = () => {
     console.log("guaardando..");
-    mutate();
+    //mutate();
+    saveQuestion_Fn();
+
   }
-  console.log({isError, isSuccess});
+  //console.log({isError, isSuccess});
   return (
 
     <Card >

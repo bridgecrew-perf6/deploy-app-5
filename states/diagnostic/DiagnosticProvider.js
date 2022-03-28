@@ -54,7 +54,9 @@ const DiagnosticProvider = ({ children }) => {
           label: "",  
           placeholder : "placeholder"
         }],
-    }
+    },
+
+    listQuestions:[]
   }
 
   const [state, dispatch] = useReducer(diagnosticReducer, initialState);
@@ -150,8 +152,11 @@ const DiagnosticProvider = ({ children }) => {
   /* Question services*/
 
   const saveQuestion_Fn = () => {
-    const rs = saveQuestion(state.question, state.quizId);
-    return rs;
+  /* const rs = saveQuestion(state.question, state.quizId);
+  return rs; */
+  dispatch({
+    type: 'REGISTER_QUESTION_SERVER'
+  })
   }
 
   return (
@@ -159,13 +164,14 @@ const DiagnosticProvider = ({ children }) => {
     
       value={{
        
-        introductionObj     : state.introductionObj,
-        selectedTab         : state.selectedTab,
-        createQuestion      : state.createQuestion,
-        selectSelected      : state.selectSelected,
-        keyChoiceTypeSelected: state.keyChoiceTypeSelected,
-        question            : state.question,
-
+        introductionObj       : state.introductionObj,
+        selectedTab           : state.selectedTab,
+        createQuestion        : state.createQuestion,
+        selectSelected        : state.selectSelected,
+        keyChoiceTypeSelected : state.keyChoiceTypeSelected,
+        question              : state.question,
+        listQuestions         : state.listQuestions,
+  
         handleChangeState_Fn,
         chageSelectedTab_Fn,
         actionCreateQuestion_Fn,
