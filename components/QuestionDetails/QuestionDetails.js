@@ -160,6 +160,7 @@ const QuestionDetails = () => {
                 nameInput="className"
                 valueInput={question.className}
                 handle={handleChangeText}
+                placeh='Class Name'
               />
 
               <Button 

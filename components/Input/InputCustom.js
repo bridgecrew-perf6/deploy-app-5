@@ -22,7 +22,8 @@ const InputCustom = (
           classCustom = 'input',
           idInput = 'default',
           wInput,
-          status
+          status,
+          placeh
       }) => {
 
  
@@ -39,6 +40,7 @@ const InputCustom = (
             className={classCustom}
             id={idInput}
             wInput={wInput}
+            placeholder={placeh}
             {... (status && {'checked': true})}
           /> 
       </>

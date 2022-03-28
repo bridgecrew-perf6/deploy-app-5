@@ -18,6 +18,7 @@ export const Div = styled.div(() => {
       border-radius: 5px;
       ${theme.shadow}
       cursor: pointer;
+      background: white;
 
       &.active {
         background: ${theme.colors.btnHover};
