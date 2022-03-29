@@ -50,11 +50,12 @@ const DiagnosticProvider = ({ children }) => {
       score : true,
       choices   : 
       [{ 
-          id: '0',
+          id: "0",
           label: "",  
           placeholder : "placeholder"
-        }],
+        }]
     },
+    
 
     listQuestions:[]
   }
@@ -152,8 +153,8 @@ const DiagnosticProvider = ({ children }) => {
   /* Question services*/
 
   const saveQuestion_Fn = () => {
-  /* const rs = saveQuestion(state.question, state.quizId);
-  return rs; */
+    /* const rs = saveQuestion(state.question, state.quizId);
+    return rs; */
   dispatch({
     type: 'REGISTER_QUESTION_SERVER'
   })

@@ -1,9 +1,11 @@
 import {  getKey_Value_ChoiceSelected } from '../../helpers/helpersReducer';
 import { uid } from 'uid';
+import nextId, {setPrefix} from "react-id-generator";
 
 
 const diagnosticReducer = (state , action) => {
 
+  setPrefix("");
 
   const STATES_CONDITION = {
     'HANDLE_TEXT_CHANGE'            : () => handleTextchange(action.payload),
@@ -59,7 +61,7 @@ const diagnosticReducer = (state , action) => {
      
       return {
         ...state,
-        question: {...state.question , choices: [ ...state.question.choices,{id: uid(), label: valueChoice, [keyChoice]: valueChoice}]}
+        question: {...state.question , choices: [ ...state.question.choices,{id: nextId(), label: valueChoice, [keyChoice]: valueChoice}]}
       }
   }
 
@@ -73,7 +75,7 @@ const diagnosticReducer = (state , action) => {
 
       return {
         ...state,
-        question: {...state.question , choices: [{id: uid(), label: valueChoice,[keyChoice]: valueChoice }]}
+        question: {...state.question , choices: [{id: nextId(), label: valueChoice,[keyChoice]: valueChoice }]}
       }
   }
 

@@ -13,9 +13,10 @@ export const saveQuestion = async (data, idQuiz) => {
       'X-Auth-Token': TOKEN,
       'Content-Type': 'application/json'
     },
-    url: `${API}/v1/quiz/${idQuiz}/create`,
+    url: `${API}/v1/question/${idQuiz}/create`,
     data: JSON.stringify(data),
 
   });
+  
   return response;
 }

@@ -14,6 +14,7 @@ import selectProps from '../SelectList/data';
 import { useCallback } from 'react';
 import Button from '../Button/Button';
 import { useMutation } from 'react-query';
+import Message from '../Message/Message';
 
 const QuestionDetails = () => {
 /* questionDetails */
@@ -29,7 +30,7 @@ const QuestionDetails = () => {
     
     } = contextDiagnostic();
 
-  console.log(listQuestions);
+  console.log(question);
   const {optionsQuestion} = selectProps();
   const selectMultiple = selectSelected.includes('Multiple');
 
@@ -57,15 +58,15 @@ const QuestionDetails = () => {
 
   
   /* Send register question update */
-  //const {mutate, isError, isLoading, isSuccess} = useMutation(saveQuestion_Fn);
+  const {mutate, isError, isLoading, isSuccess} = useMutation(saveQuestion_Fn);
 
   const actionSaveQuestion = () => {
     console.log("guaardando..");
-    //mutate();
-    saveQuestion_Fn();
-
+    mutate();
   }
-  //console.log({isError, isSuccess});
+  console.log({isError, isSuccess});
+
+
   return (
 
     <Card >
@@ -169,6 +170,9 @@ const QuestionDetails = () => {
                 mBtn='10px 0'
                 eventAction={actionSaveQuestion}
                 />
+
+                {isSuccess && <Message mesagge="Question Register"/>}
+                {isError && <Message mesagge="Server error!" error={true}/>}
         </Card.Section> 
     </Card>
   )
