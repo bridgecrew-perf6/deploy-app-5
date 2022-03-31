@@ -11,7 +11,8 @@ import InputTextarea from '../Textarea/InputTextarea';
 const OptionList = () => {
 
   const {
-    question: {choices, type}, 
+    question: {choices, type},
+    question, 
     selectSelected,
     handleChangeStateSecondKey_Fn, 
     changeStateLabelEditable_Fn,
@@ -44,10 +45,13 @@ const OptionList = () => {
     changeStateLabelEditable_Fn(name, textContent, id );
   }
 
+  console.log(selectSelected);
+  console.log(question);
+
   
-    if(selectSelected === 'Input_text' || 
-       selectSelected === 'Input_number' || 
-       selectSelected === 'Input_email') 
+    if(selectSelected === 'text' || 
+       selectSelected === 'number' || 
+       selectSelected === 'email') 
         return (
           choices.map((element) => 
             ( 
@@ -68,7 +72,7 @@ const OptionList = () => {
           )
         )
     
-    if(selectSelected === 'Multiple_choice') 
+    if(selectSelected === 'choice') 
       return (
         choices.map((element) => 
           (      
@@ -88,7 +92,7 @@ const OptionList = () => {
         )
       )
     
-    if(selectSelected === 'Multiple_image') 
+    if(selectSelected === 'image') 
       return (
         choices.map((element) => 
           (      
@@ -116,7 +120,7 @@ const OptionList = () => {
         )
       )
 
-    if(selectSelected === 'Multiple_color') 
+    if(selectSelected === 'color') 
       return (
         
         choices.map((element) => 
@@ -144,7 +148,7 @@ const OptionList = () => {
         )
       )
 
-    if(selectSelected === 'Input_textarea') 
+    if(selectSelected === 'textarea') 
     return (
       choices.map((element) => 
         ( 

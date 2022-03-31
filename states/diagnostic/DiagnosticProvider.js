@@ -37,7 +37,7 @@ const DiagnosticProvider = ({ children }) => {
     /* add question */
     createQuestion:false,
     /* type question */
-    selectSelected: "Input_text",
+    selectSelected: "text",
     keyChoiceTypeSelected: "placeholder",
 
     questionInitials:{

@@ -3,12 +3,13 @@ import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { contextDiagnostic } from '../../states/diagnostic/DiagnosticProvider';
 import OptionDelete from '../OptionDelete/OptionDelete';
 import QuestionItem from '../QuestionItem/QuestionItem';
+import MessageConfirm from '../Message/MessageConfirm';
 
 const DragDrod = () => {
 
+  const [deleting, setDeleting] = useState(false)
+
   const { listQuestions} = contextDiagnostic();
-
-
 
   const reorderQuestions = (list, startIndex, endIndex) => {
     const result =[...list];
@@ -17,13 +18,21 @@ const DragDrod = () => {
     return result;
   }
 
-  const deleteStateQuestion_Fn = () => {
+  const deleteValidate = () => {
+    
+    setDeleting(true);
+  }
+
+  const deletedConfirmQuestion = () => {
     console.log("eliminando...");
+    setDeleting(false);
+
   }
 
 
-  return (
 
+  return (
+<>
     <DragDropContext 
       onDragEnd={({source, destination}) =>{
         if(!destination){
@@ -61,7 +70,7 @@ const DragDrod = () => {
 
                           {/* Item question */}
                           <OptionDelete 
-                            actionDelete={() => deleteStateQuestion_Fn()}
+                            actionDelete={() => deleteValidate()}
                           >
                         
                             <QuestionItem 
@@ -85,8 +94,20 @@ const DragDrod = () => {
 
             </div>
           )}
+          
+          
       </Droppable>
-      </DragDropContext>
+    </DragDropContext>
+
+      { deleting && 
+        <MessageConfirm  
+          mesagge="Elimnando" 
+          actionTitle="Aceptar" 
+          actionChange={deletedConfirmQuestion} 
+          changeStateDelete={setDeleting} 
+        />
+      }
+</>
   )
 }
 

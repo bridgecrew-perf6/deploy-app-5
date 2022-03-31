@@ -12,6 +12,7 @@ const QuestionPreview = () => {
 
   const validatQuestion = Object.keys(question).length === 0 ;
 
+  console.log("desde aca", keyChoiceTypeSelected);
   return (
     
    validatQuestion 

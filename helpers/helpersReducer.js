@@ -7,12 +7,12 @@ export const getKey_Value_ChoiceSelected = (selectSelected) => {
   let keyChoice = 'placeholder';
   let valueChoice = 'placeholder';
 
-  if(selectSelected === 'Multiple_image'){
+  if(selectSelected === 'image'){
     keyChoice = 'image';
     valueChoice = `${Diamond}`;
   }
 
-  if(selectSelected === 'Multiple_color') {
+  if(selectSelected === 'color') {
     keyChoice = 'color';
     valueChoice = '#000000';
   }

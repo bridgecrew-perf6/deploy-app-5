@@ -28,9 +28,7 @@ const QuestionItem = ({children, type, id_question}) => {
         e.target.classList.add('active');
         getIdQuestion = e.target.dataset.id;
       }
-      
-
-      console.log(getIdQuestion);
+  
       getQuestionOptions_Fn(parseInt(getIdQuestion))
 
      /*  const {

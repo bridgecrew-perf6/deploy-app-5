@@ -26,13 +26,11 @@ const QuestionDetails = () => {
       addOptionQuestion_Fn,
       changeTypeQuestion_Fn,
       saveQuestion_Fn,
-      listQuestions
-    
+   
     } = contextDiagnostic();
 
-  console.log(question);
   const {optionsQuestion} = selectProps();
-  const selectMultiple = selectSelected.includes('Multiple');
+  const optionMultiple = /choice|image|color/.test(selectSelected);
 
   const handleChangeText = (e) => {
     const {name , value} = e.target;
@@ -61,10 +59,10 @@ const QuestionDetails = () => {
   const {mutate, isError, isLoading, isSuccess} = useMutation(saveQuestion_Fn);
 
   const actionSaveQuestion = () => {
-    console.log("guaardando..");
+
     mutate();
   }
-  console.log(selectSelected);
+
 
 
   return (
@@ -95,7 +93,7 @@ const QuestionDetails = () => {
           /> {/* select option type question */}
           { 
           //* setting selected multiple options */ 
-            selectMultiple
+            optionMultiple
               && <SettingCheck 
                     textSetting='Multiple'
                     nameInput='multiple' 
@@ -109,7 +107,7 @@ const QuestionDetails = () => {
                    
         <Card.Section>
           {
-            selectMultiple
+            optionMultiple
               &&  
               <Action 
                 title='Options' 
@@ -135,7 +133,7 @@ const QuestionDetails = () => {
             />
 
             {
-              selectMultiple
+              optionMultiple
                 &&
                 <>
                   <SettingCheck 

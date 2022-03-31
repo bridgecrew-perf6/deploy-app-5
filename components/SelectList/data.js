@@ -2,13 +2,13 @@
 const data =  () => {
 
  const  optionsQuestion = [
-        {label: 'Text', value: 'Input_text'},
-        {label: 'Number', value: 'Input_number'},
-        {label: 'Email', value: 'Input_email'},
-        {label: 'Multiple Option', value: 'Multiple_choice'},
-        {label: 'Image Option', value: 'Multiple_image'},
-        {label: 'Color Option', value: 'Multiple_color'},
-        {label: 'Text Area', value: 'Input_textarea'},
+        {label: 'Text', value: 'text'},
+        {label: 'Number', value: 'number'},
+        {label: 'Email', value: 'email'},
+        {label: 'Multiple Option', value: 'choice'},
+        {label: 'Image Option', value: 'image'},
+        {label: 'Color Option', value: 'color'},
+        {label: 'Text Area', value: 'textarea'},
     ];
 
 

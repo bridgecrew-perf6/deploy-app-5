@@ -43,22 +43,25 @@ const diagnosticReducer = (state , action) => {
   }
 
   const changeStatusCreateList = (payload) => {
+    const {keyChoice} = getKey_Value_ChoiceSelected(state.questionInitials.type);
+
     return {
       ...state,
       createQuestion: payload,
-      question: state.questionInitials
+      question: state.questionInitials,
+      selectSelected: state.questionInitials.type,
+      keyChoiceTypeSelected: keyChoice,
     }
   }
 
   const changeTypeQuestionSelected = (payload) => {
     const {keyChoice} = getKey_Value_ChoiceSelected(payload);
-    const typeSelected = payload.split('_')[1];
-
+   
     return {
       ...state,
       selectSelected: payload,
       keyChoiceTypeSelected: keyChoice,
-      question: {...state.question, type : typeSelected}
+      question: {...state.question, type : payload}
     }
   }
 
@@ -81,7 +84,7 @@ const diagnosticReducer = (state , action) => {
 
       return {
         ...state,
-        question: {...state.question , choices: [{id: nextId(), label: valueChoice,[keyChoice]: valueChoice }]}
+        question: {...state.question , choices: [{id: parseInt(nextId()), label: valueChoice,[keyChoice]: valueChoice }]}
       }
   }
 
@@ -136,9 +139,13 @@ const diagnosticReducer = (state , action) => {
   }
 
   const updateStateQuestionPreview = (payload) => {
+    const questionPreviewSelected = state.listQuestions.filter((e) => e.id === payload )[0];
+    const {keyChoice} = getKey_Value_ChoiceSelected(questionPreviewSelected.type);
     return {
       ...state,
-      question: state.listQuestions.filter((e) => e.id === payload )[0]
+      question: questionPreviewSelected,
+      keyChoiceTypeSelected: keyChoice
+
     }
   }
 
@@ -154,5 +161,4 @@ const diagnosticReducer = (state , action) => {
 }
 
 export default diagnosticReducer
-
 
