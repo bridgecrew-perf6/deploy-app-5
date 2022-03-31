@@ -8,8 +8,7 @@ const DragDrod = () => {
 
   const { listQuestions} = contextDiagnostic();
 
-  const [list, setList] = useState(listQuestions)
-  console.log(list);
+
 
   const reorderQuestions = (list, startIndex, endIndex) => {
     const result =[...list];
@@ -45,7 +44,7 @@ const DragDrod = () => {
               {...droppableProvided.droppableProps}
               ref={droppableProvided.innerRef}
             >
-              { list.map((element, index) => (
+              { listQuestions.map((element, index) => (
 
                 <Draggable 
                   key={`dragable${index}`} 
@@ -67,6 +66,7 @@ const DragDrod = () => {
                         
                             <QuestionItem 
                               type={element.type}
+                              id_question={element.id}
                             >                     
                               {element.title}
                             </QuestionItem>

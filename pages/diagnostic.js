@@ -34,7 +34,8 @@ const Diagnostic = () => {
       selectedTab, 
       createQuestion, 
       chageSelectedTab_Fn,
-      getIntroduction_Fn 
+      getIntroduction_Fn ,
+      getListQuestion_Fn
     } = contextDiagnostic();
 
   const {tabsQuestion} = propsTabs();
@@ -44,7 +45,17 @@ const Diagnostic = () => {
 
     
   /* Geters api querys update state local */
-  const {isLoading, isFetching, isError} =useQuery(['getIntroduction'], getIntroduction_Fn);
+  const {
+      isLoading, 
+      isFetching, 
+      isError
+      } = useQuery(['getintroduction'], getIntroduction_Fn);
+
+  const {
+      isLoading: loadQuestion,
+      isFetching: fetchQuestion,
+      isError: errorQuestion
+      } = useQuery(['getlistquestion'], getListQuestion_Fn);
 
   
   if(isLoading || isFetching){
@@ -109,6 +120,7 @@ const Diagnostic = () => {
 
             {/* Message interactions */}
               {isError && <Message mesagge="Server Error" error={true}/>}
+              {errorQuestion && <Message mesagge="Question load error" error={true} />}
             {/* Message interactions */}
 
         </Page>

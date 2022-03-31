@@ -14,11 +14,6 @@ const QuestionList = () => {
 /* questionList */
   const { createQuestion , actionCreateQuestion_Fn} = contextDiagnostic();
 
-  useEffect(() => {
-    actionCreateQuestion_Fn(false);
-
-  }, [])
-
   const actionEvent = () => {
     actionCreateQuestion_Fn(!createQuestion)
   }

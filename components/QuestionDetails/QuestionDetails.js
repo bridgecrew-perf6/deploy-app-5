@@ -64,7 +64,7 @@ const QuestionDetails = () => {
     console.log("guaardando..");
     mutate();
   }
-  console.log({isError, isSuccess});
+  console.log(selectSelected);
 
 
   return (

@@ -5,7 +5,7 @@ import { geturlAPI } from "../config/axiosFront";
 
 const API='https://mmm-diagnostic-api.herokuapp.com';
 
-export const saveIntroduction = async (data, idQuiz) => {
+export const saveIntroductionServer = async (data, idQuiz) => {
 
   const TOKEN = localStorage.getItem('tokenAPI');
 
@@ -22,7 +22,7 @@ export const saveIntroduction = async (data, idQuiz) => {
     
 }
 
-export const getIntroduction = async (idQuiz) => {
+export const getIntroductionServer = async (idQuiz) => {
 
   const TOKEN = localStorage.getItem('tokenAPI');
 

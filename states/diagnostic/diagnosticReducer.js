@@ -17,8 +17,10 @@ const diagnosticReducer = (state , action) => {
     'CHANGE_OPTION_QUESTION_LIST'   : () => changeStateChoiceQuestion(action.payload),
     'CHANGE_STATE_LABEL_EDITABLE'   : () => changeStateLabelEditable(action.payload),
     'DELETE_STATE_OPTION_QUESTION'  : () => deleteChoiceQuestion(action.payload),
-    'GET_INTRODUCCION_API'          : () => getIntroductionAPI(action.payload),
-    'REGISTER_QUESTION_SERVER'      : () => registerQuestionAPI(),
+    'GET_INTRODUCCION_STATE'        : () => getIntroductionState(action.payload),
+    'POST_QUESTION_LIST_STATE'      : () => registerQuestionsListState(action.payload),
+    'GET_QUESTION_LIST_ALL_STATE'   : () => getQuestionOptionListState(action.payload),
+    'UPDATE_SATATE_QUESTION_PREVIEW': () => updateStateQuestionPreview(action.payload)
   }
   const STATE_DEFAULT = state;
   
@@ -31,16 +33,20 @@ const diagnosticReducer = (state , action) => {
   }
 
   const handleSelectTab = (payload) => {
+    
     return {
       ...state,
-      selectedTab: payload
+      selectedTab: payload,
+      question: {},
+      createQuestion: false
     }
   }
 
   const changeStatusCreateList = (payload) => {
     return {
       ...state,
-      createQuestion: payload
+      createQuestion: payload,
+      question: state.questionInitials
     }
   }
 
@@ -61,7 +67,7 @@ const diagnosticReducer = (state , action) => {
      
       return {
         ...state,
-        question: {...state.question , choices: [ ...state.question.choices,{id: nextId(), label: valueChoice, [keyChoice]: valueChoice}]}
+        question: {...state.question , choices: [ ...state.question.choices,{id: parseInt(nextId()), label: valueChoice, [keyChoice]: valueChoice}]}
       }
   }
 
@@ -88,7 +94,7 @@ const diagnosticReducer = (state , action) => {
         const { name , value, id } = payload;
         return {
           ...state,
-          question: {...state.question ,  choices : state.question.choices.map( elemen => elemen.id ===  id  ?  {...elemen , label: value, [name] : value} : elemen)}
+          question: {...state.question ,  choices : state.question.choices.map( elemen => elemen.id ===  parseInt(id)   ?  {...elemen , label: value, [name] : value} : elemen)}
         }
   }
 
@@ -97,7 +103,7 @@ const diagnosticReducer = (state , action) => {
     
         return {
           ...state,
-          question: {...state.question ,  choices : state.question.choices.map( elemen => elemen.id ===  id ?  {...elemen , [name]: textContext} : elemen)}
+          question: {...state.question ,  choices : state.question.choices.map( elemen => elemen.id ===  parseInt(id) ?  {...elemen , [name]: textContext} : elemen)}
         }
   }
 
@@ -108,17 +114,31 @@ const diagnosticReducer = (state , action) => {
     }
   }
 
-  const getIntroductionAPI = (payload) => {
+  const getIntroductionState = (payload) => {
     return {
       ...state,
       introductionObj: payload
     }
   }
 
-  const registerQuestionAPI = () => {
+  const registerQuestionsListState = (payload) => {
     return {
       ...state,
-      listQuestions: [...state.listQuestions, state.question]
+      listQuestions: [...state.listQuestions, payload]
+    }
+  }
+
+  const getQuestionOptionListState = (payload) => {
+    return {
+      ...state,
+      listQuestions: payload
+    }
+  }
+
+  const updateStateQuestionPreview = (payload) => {
+    return {
+      ...state,
+      question: state.listQuestions.filter((e) => e.id === payload )[0]
     }
   }
 

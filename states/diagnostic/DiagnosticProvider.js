@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react'
 import {tokenSession} from '../../services/init/session';
 import diagnosticReducer from './diagnosticReducer';
-import {saveIntroduction, getIntroduction} from '../../services/diagnostic/introduction';
-import { saveQuestion } from '../../services/diagnostic/question';
+import {saveIntroductionServer, getIntroductionServer} from '../../services/diagnostic/introduction';
+import { getQuestionListServer, getQuestionOptionListServer, saveQuestionServer } from '../../services/diagnostic/question';
 
 
 const stateContext = createContext();
@@ -40,21 +40,23 @@ const DiagnosticProvider = ({ children }) => {
     selectSelected: "Input_text",
     keyChoiceTypeSelected: "placeholder",
 
-    question:{
-      title  : "¿Cual es tu nombre?",
+    questionInitials:{
+      title  : "¿Write a question?",
       type:"text",
       className: "",
-      required: true,
+      required: false,
       recommended: true,
-      multiple: false,
-      score : true,
+      multiple: true,
+      score : false,
       choices   : 
       [{ 
-          id: "0",
+          id: 0,
           label: "",  
           placeholder : "placeholder"
         }]
     },
+
+    question: {},
     
 
     listQuestions:[]
@@ -80,6 +82,8 @@ const DiagnosticProvider = ({ children }) => {
   }
 
   const actionCreateQuestion_Fn = (status) => {
+    console.log("cambia question");
+
     dispatch({
       type: 'CHANGE_STATUS_CREATE_QUESTION',
       payload: status
@@ -132,19 +136,20 @@ const DiagnosticProvider = ({ children }) => {
   }
 
 
+
 /* request API */
 /* Introduction services */
   const saveIntroduction_Fn = async () => {
-    const rs = await saveIntroduction(state.introductionObj, state.quizId); 
+    const rs = await saveIntroductionServer(state.introductionObj, state.quizId); 
     return rs;
   }
 
   const getIntroduction_Fn = async () => {
-    const rs = await getIntroduction(state.quizId);
+    const rs = await getIntroductionServer(state.quizId);
     rs.status === 200 ? console.log("succes") : console.log("error")
 
     dispatch({
-      type : 'GET_INTRODUCCION_API',
+      type : 'GET_INTRODUCCION_STATE',
       payload: rs.data
     })
     return rs;
@@ -152,12 +157,36 @@ const DiagnosticProvider = ({ children }) => {
   /* introduction */
   /* Question services*/
 
-  const saveQuestion_Fn = () => {
-    /* const rs = saveQuestion(state.question, state.quizId);
-    return rs; */
-  dispatch({
-    type: 'REGISTER_QUESTION_SERVER'
-  })
+  const getListQuestion_Fn = async () => {
+    const rs = await getQuestionListServer(state.quizId);
+    dispatch({
+      type: 'GET_QUESTION_LIST_ALL_STATE',
+      payload: rs
+    })
+    return rs;
+  }
+
+
+
+  const saveQuestion_Fn = async () => {
+    const rs = await saveQuestionServer(state.question, state.quizId);
+ 
+    dispatch({
+      type: 'POST_QUESTION_LIST_STATE',
+      payload: rs
+
+    })
+    return rs;
+  }
+
+  const getQuestionOptions_Fn = async (id_question_preview) => {
+    /* const rs = await getQuestionOptionListServer(state.quizId , id);
+    console.log(rs); */
+    dispatch({
+      type: 'UPDATE_SATATE_QUESTION_PREVIEW',
+      payload: id_question_preview
+    });
+    
   }
 
   return (
@@ -184,7 +213,9 @@ const DiagnosticProvider = ({ children }) => {
 
         saveIntroduction_Fn,
         getIntroduction_Fn,
-        saveQuestion_Fn
+        saveQuestion_Fn,
+        getListQuestion_Fn,
+        getQuestionOptions_Fn
       }}
     >
 
