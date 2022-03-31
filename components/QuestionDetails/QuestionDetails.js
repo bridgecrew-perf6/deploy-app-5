@@ -13,7 +13,7 @@ import SettingCheck from '../SettingCheckbox/SettingCheck';
 import selectProps from '../SelectList/data';
 import { useCallback } from 'react';
 import Button from '../Button/Button';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 import Message from '../Message/Message';
 
 const QuestionDetails = () => {
@@ -26,6 +26,7 @@ const QuestionDetails = () => {
       addOptionQuestion_Fn,
       changeTypeQuestion_Fn,
       saveQuestion_Fn,
+      changeStateComponent_Fn
    
     } = contextDiagnostic();
 
@@ -56,12 +57,20 @@ const QuestionDetails = () => {
 
   
   /* Send register question update */
-  const {mutate, isError, isLoading, isSuccess} = useMutation(saveQuestion_Fn);
+  const queryClient = useQueryClient();
+
+  const {mutate, isError, isLoading, isSuccess} = 
+    useMutation(saveQuestion_Fn, {
+      onSuccess: (list) => {
+        queryClient.invalidateQueries(["getlistquestion"])
+      }
+    });
 
   const actionSaveQuestion = () => {
-
     mutate();
   }
+
+  console.log({question, selectSelected});
 
 
 
@@ -163,7 +172,8 @@ const QuestionDetails = () => {
               />
 
               <Button 
-                btnText='Save Questions' 
+                btnText='Save Questions'
+                loadingState={isLoading} 
                 wBtn='100%' 
                 mBtn='10px 0'
                 eventAction={actionSaveQuestion}

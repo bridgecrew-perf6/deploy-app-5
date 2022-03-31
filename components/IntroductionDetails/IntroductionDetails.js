@@ -80,10 +80,11 @@ const IntroductionDetails = () => {
                 wBtn='100%' 
                 mBtn='10px 0'
                 eventAction={actionSaveIntroduction}
+                loadingState={isLoading}
                 />
                
                 {/* Message interactions */}
-                {isSuccess && <Message mesagge="Success"/>}
+                {isSuccess && <Message mesagge="Success save"/>}
                 {isError && <Message mesagge="Server error" error={true}/>}
                 {/* Message interactions */}
 

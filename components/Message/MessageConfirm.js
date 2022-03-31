@@ -6,7 +6,7 @@ const MessageConfirm = ({mesagge, actionTitle, actionChange, changeStateDelete})
   const [active, setActive] = useState(true);
 
   const toggleActive = useCallback(() => {
-    changeStateDelete(false)
+    changeStateDelete({status:false, id:0})
     setActive((active) => !active), []
   });
 

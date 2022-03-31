@@ -1,6 +1,7 @@
 import React from 'react'
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import {ButtonStyles} from './styles';
-const Button = ({btnText, btnSvg, eventAction, wBtn, mBtn}) => {
+const Button = ({btnText, btnSvg, eventAction, wBtn, mBtn, loadingState}) => {
  
   return (
       
@@ -10,7 +11,8 @@ const Button = ({btnText, btnSvg, eventAction, wBtn, mBtn}) => {
         wBtn={wBtn}
         mBtn={mBtn}
         >
-        {btnText}
+        {loadingState ? <LoadingSpinner/> : btnText}
+        
         {btnSvg}
       </ButtonStyles>
   )

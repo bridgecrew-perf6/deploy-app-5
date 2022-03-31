@@ -8,13 +8,9 @@ const QuestionItem = ({children, type, id_question}) => {
 
   let text_or_choice = /choice|image|color/.test(type);
 
-  const { getQuestionOptions_Fn, listQuestions, question } = contextDiagnostic();
-
-  console.log({listQuestions, question});
+  const {  stateEditingOrPreview, changeStateEditing_Fn } = contextDiagnostic();
 
   const actionSelectedView = (e) => {
-
-    let getIdQuestion; 
 
     document.querySelectorAll('.active').forEach((e) => {
       e.classList.remove('active');
@@ -22,31 +18,24 @@ const QuestionItem = ({children, type, id_question}) => {
 
       if(e.target.classList.contains('text')){
         e.target.parentElement.parentElement.classList.add('active');
-        getIdQuestion = e.target.parentElement.parentElement.dataset.id;
-    
+        
       }else {
-        e.target.classList.add('active');
-        getIdQuestion = e.target.dataset.id;
+        e.target.classList.add('active');  
       }
   
-      getQuestionOptions_Fn(parseInt(getIdQuestion))
+      stateEditingOrPreview(id_question)
 
-     /*  const {
-        isLoading, 
-        isFetching, 
-        isError
-        } = useQuery(['getquestionoptions', getIdQuestion], () => getQuestionOptions_Fn(getIdQuestion) ); */
   }
 
   const actionEditQuestion = (e) => {
     e.stopPropagation();
-    console.log("Editar question");
+    changeStateEditing_Fn(id_question); 
   }
 
 
 
   return (
-    <Div onClick={actionSelectedView} data-id={id_question}>
+    <Div onClick={actionSelectedView}>
      <div >
       { 
         text_or_choice 

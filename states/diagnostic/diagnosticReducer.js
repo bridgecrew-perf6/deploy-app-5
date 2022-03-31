@@ -20,7 +20,12 @@ const diagnosticReducer = (state , action) => {
     'GET_INTRODUCCION_STATE'        : () => getIntroductionState(action.payload),
     'POST_QUESTION_LIST_STATE'      : () => registerQuestionsListState(action.payload),
     'GET_QUESTION_LIST_ALL_STATE'   : () => getQuestionOptionListState(action.payload),
-    'UPDATE_SATATE_QUESTION_PREVIEW': () => updateStateQuestionPreview(action.payload)
+    'UPDATE_SATATE_QUESTION_PREVIEW': () => updateStateQuestionPreview(action.payload),
+    'UPDATE_SATATE_QUESTION_LIST_CACHE': () => updateStateListCache(action.payload),
+    'CHANGE_STATE_ID_QUESTION_EDIT_PREVIEW': () => changeIdStateEditingPreview(action.payload),
+    'DELETE_STATE_CACHE_QUESTION'       : () => deteleListCacheQuestionState(action.payload),
+    'CHANGE_STATE_EDITING'            : () => changeStateEditing(action.payload),
+    'CHANGE_COMPONENT_EDITING'        : () => changeComponentEditing()
   }
   const STATE_DEFAULT = state;
   
@@ -36,9 +41,11 @@ const diagnosticReducer = (state , action) => {
     
     return {
       ...state,
+      idEditingPreview:0,
       selectedTab: payload,
       question: {},
       createQuestion: false
+      
     }
   }
 
@@ -51,6 +58,7 @@ const diagnosticReducer = (state , action) => {
       question: state.questionInitials,
       selectSelected: state.questionInitials.type,
       keyChoiceTypeSelected: keyChoice,
+      idEditingPreview: 0
     }
   }
 
@@ -127,7 +135,8 @@ const diagnosticReducer = (state , action) => {
   const registerQuestionsListState = (payload) => {
     return {
       ...state,
-      listQuestions: [...state.listQuestions, payload]
+      listQuestions: [...state.listQuestions, payload],
+      listQuestionsCache: [...state.listQuestionsCache, payload],
     }
   }
 
@@ -138,15 +147,58 @@ const diagnosticReducer = (state , action) => {
     }
   }
 
+ 
   const updateStateQuestionPreview = (payload) => {
-    const questionPreviewSelected = state.listQuestions.filter((e) => e.id === payload )[0];
-    const {keyChoice} = getKey_Value_ChoiceSelected(questionPreviewSelected.type);
+    /* const questionPreviewSelected = state.listQuestions.filter((e) => e.id === payload )[0]; */
+    const {keyChoice} = getKey_Value_ChoiceSelected(payload.type);
     return {
       ...state,
-      question: questionPreviewSelected,
+      question: payload,
       keyChoiceTypeSelected: keyChoice
-
     }
+  }
+
+  const updateStateListCache = (payload) => {
+      return {
+        ...state,
+        listQuestionsCache: [...state.listQuestionsCache, payload]
+      }
+  }
+
+  const changeIdStateEditingPreview = (payload) => {
+    return {
+      ...state,
+      idEditingPreview: payload
+    }
+  }
+
+  const deteleListCacheQuestionState = (payload) => {
+    return {
+      ...state,
+      idEditingPreview: 0,
+      listQuestionsCache: state.listQuestionsCache.filter(e=> e.id !== payload),
+      question: payload === state.question.id ? {} : state.question
+    }
+  }
+
+  const changeStateEditing = (payload) => {
+    return {
+      ...state,
+      idEditingPreview: payload
+    }
+  }
+
+  const changeComponentEditing = () => {
+    const {keyChoice} = getKey_Value_ChoiceSelected(state.question.type);
+
+    return {
+      ...state,
+      createQuestion: true,
+      editingQuestion: true,
+      selectSelected: state.question.type,
+      keyChoiceTypeSelected: keyChoice
+    }
+
   }
 
 

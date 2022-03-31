@@ -4,12 +4,14 @@ import { contextDiagnostic } from '../../states/diagnostic/DiagnosticProvider';
 import OptionDelete from '../OptionDelete/OptionDelete';
 import QuestionItem from '../QuestionItem/QuestionItem';
 import MessageConfirm from '../Message/MessageConfirm';
+import { useMutation, useQueryClient } from 'react-query';
+import Message from '../Message/Message';
 
 const DragDrod = () => {
 
-  const [deleting, setDeleting] = useState(false)
+  const { listQuestions, deteleteQuestion_Fn, listQuestionsCache} = contextDiagnostic();
 
-  const { listQuestions} = contextDiagnostic();
+  const [deleting, setDeleting] = useState({status:false, id:0})
 
   const reorderQuestions = (list, startIndex, endIndex) => {
     const result =[...list];
@@ -18,21 +20,28 @@ const DragDrod = () => {
     return result;
   }
 
-  const deleteValidate = () => {
-    
-    setDeleting(true);
+
+  /* Deleted Question  */
+  const queryClient = useQueryClient();
+
+  const {mutate, isError, isLoading, isSuccess} = 
+    useMutation(deteleteQuestion_Fn,{
+      onSuccess: (list) => {
+        queryClient.invalidateQueries(["getlistquestion"])
+      }
+    });
+
+  const deleteValidate = (id_question) => {  
+    setDeleting({status:true, id:id_question});
   }
 
   const deletedConfirmQuestion = () => {
-    console.log("eliminando...");
+    mutate(deleting.id);
     setDeleting(false);
-
   }
 
-
-
   return (
-<>
+  <>
     <DragDropContext 
       onDragEnd={({source, destination}) =>{
         if(!destination){
@@ -56,8 +65,8 @@ const DragDrod = () => {
               { listQuestions.map((element, index) => (
 
                 <Draggable 
-                  key={`dragable${index}`} 
-                  draggableId={`dragable${index}`} 
+                  key={`dragable${element.id}`} 
+                  draggableId={`dragable${element.id}`} 
                   index={index}
                 >
             
@@ -70,7 +79,8 @@ const DragDrod = () => {
 
                           {/* Item question */}
                           <OptionDelete 
-                            actionDelete={() => deleteValidate()}
+                            actionDelete={() => deleteValidate(element.id)}
+                            loadingState={isLoading}
                           >
                         
                             <QuestionItem 
@@ -99,15 +109,20 @@ const DragDrod = () => {
       </Droppable>
     </DragDropContext>
 
-      { deleting && 
+      {/* Message interactions */}
+      { deleting.status && 
         <MessageConfirm  
-          mesagge="Elimnando" 
-          actionTitle="Aceptar" 
+          mesagge="¿You're sure?" 
+          actionTitle="Sure" 
           actionChange={deletedConfirmQuestion} 
           changeStateDelete={setDeleting} 
         />
       }
-</>
+
+      {isError && <Message mesagge="Server error" error={true}/>}
+      {isSuccess && <Message mesagge="Delete Success"/>}
+      {/* Message interactions */}
+  </>
   )
 }
 

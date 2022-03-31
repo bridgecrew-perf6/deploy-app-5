@@ -1,20 +1,34 @@
 import React from 'react'
+import { useQuery } from 'react-query';
 import { contextDiagnostic } from '../../states/diagnostic/DiagnosticProvider'
 import Img from '../Img/Img';
+import Skeleton from '../Skeleton/Skeleton';
 import StateEmpty from '../StateEmpty/StateEmpty';
 import { ColorBg, Container, Ptext, Question } from './styles';
 
 const QuestionPreview = () => {
 
-  const {question, keyChoiceTypeSelected} = contextDiagnostic();
+  const {question, keyChoiceTypeSelected, getQuestionOptions_Fn, idEditingPreview} = contextDiagnostic();
+
+     const {
+        isLoading, 
+        isFetching, 
+        isError
+        } = useQuery(['getquestionoptions', idEditingPreview], () => getQuestionOptions_Fn(idEditingPreview) );
+
+        console.log({isLoading, isFetching, isError});
 
   const typeSelected = question.type; 
 
   const validatQuestion = Object.keys(question).length === 0 ;
 
-  console.log("desde aca", keyChoiceTypeSelected);
-  return (
-    
+  if(isLoading){
+    return(
+      <Skeleton/>
+    )
+  }
+
+  return ( 
    validatQuestion 
     ? <StateEmpty/> 
     :   (<Container >

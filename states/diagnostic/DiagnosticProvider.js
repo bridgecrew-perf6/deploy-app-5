@@ -2,7 +2,7 @@ import React, { createContext, useContext, useReducer, useEffect } from 'react'
 import {tokenSession} from '../../services/init/session';
 import diagnosticReducer from './diagnosticReducer';
 import {saveIntroductionServer, getIntroductionServer} from '../../services/diagnostic/introduction';
-import { getQuestionListServer, getQuestionOptionListServer, saveQuestionServer } from '../../services/diagnostic/question';
+import { deleteQuestionServer, getQuestionListServer, getQuestionOptionListServer, saveQuestionServer } from '../../services/diagnostic/question';
 
 
 const stateContext = createContext();
@@ -36,6 +36,7 @@ const DiagnosticProvider = ({ children }) => {
     selectedTab: 0,
     /* add question */
     createQuestion:false,
+    editingQuestion: false,
     /* type question */
     selectSelected: "text",
     keyChoiceTypeSelected: "placeholder",
@@ -59,7 +60,9 @@ const DiagnosticProvider = ({ children }) => {
     question: {},
     
 
-    listQuestions:[]
+    listQuestions:[],
+    listQuestionsCache:[],
+    idEditingPreview: 0
   }
 
   const [state, dispatch] = useReducer(diagnosticReducer, initialState);
@@ -161,7 +164,7 @@ const DiagnosticProvider = ({ children }) => {
     const rs = await getQuestionListServer(state.quizId);
     dispatch({
       type: 'GET_QUESTION_LIST_ALL_STATE',
-      payload: rs
+      payload: rs.data.items
     })
     return rs;
   }
@@ -179,14 +182,71 @@ const DiagnosticProvider = ({ children }) => {
     return rs;
   }
 
+  const stateEditingOrPreview = (id_question) => {
+    dispatch({
+      type: 'CHANGE_STATE_ID_QUESTION_EDIT_PREVIEW',
+      payload: id_question
+    })
+  }
+
   const getQuestionOptions_Fn = async (id_question_preview) => {
-    /* const rs = await getQuestionOptionListServer(state.quizId , id);
-    console.log(rs); */
+    if(id_question_preview === 0) return;
+     const questionPreviewSelected = state.listQuestionsCache.filter((e) => e.id === id_question_preview );
+     console.log(questionPreviewSelected);
+
+     if(questionPreviewSelected.length === 0){
+      const questionOptionsUdtateServe = await getOneQuestionOptions(id_question_preview);
+        dispatcherUpdateQuestionSelected(questionOptionsUdtateServe);
+        dispatcherUpdateCacheList(questionOptionsUdtateServe);
+        
+     }else{
+        dispatcherUpdateQuestionSelected(questionPreviewSelected[0]);
+     }
+  }
+
+  const getOneQuestionOptions = async (id_question) => {
+    
+    const rs = await getQuestionOptionListServer(state.quizId , id_question);
+    return rs;
+  }
+
+  const dispatcherUpdateQuestionSelected = (questionUdtate) => {
     dispatch({
       type: 'UPDATE_SATATE_QUESTION_PREVIEW',
-      payload: id_question_preview
+      payload: questionUdtate
     });
-    
+  }
+
+  const dispatcherUpdateCacheList = (questionUdtate) => {
+    dispatch({
+      type: 'UPDATE_SATATE_QUESTION_LIST_CACHE',
+      payload: questionUdtate
+    });
+  }
+
+  const deteleteQuestion_Fn = async (id_question) => {
+
+    const rs = await deleteQuestionServer(state.quizId, id_question);
+    dispatch({
+      type: 'DELETE_STATE_CACHE_QUESTION',
+      payload: id_question,
+    })
+    return rs;
+  }
+
+  const changeStateEditing_Fn = (id_question) => {
+    dispatch({
+      type: 'CHANGE_STATE_EDITING',
+      payload: id_question
+    })
+
+  }
+
+  const changeStateComponent_Fn = () => {
+    dispatch({
+      type: 'CHANGE_COMPONENT_EDITING'
+    })
+
   }
 
   return (
@@ -201,6 +261,8 @@ const DiagnosticProvider = ({ children }) => {
         keyChoiceTypeSelected : state.keyChoiceTypeSelected,
         question              : state.question,
         listQuestions         : state.listQuestions,
+        listQuestionsCache    : state.listQuestionsCache,
+        idEditingPreview      : state.idEditingPreview,
   
         handleChangeState_Fn,
         chageSelectedTab_Fn,
@@ -215,7 +277,11 @@ const DiagnosticProvider = ({ children }) => {
         getIntroduction_Fn,
         saveQuestion_Fn,
         getListQuestion_Fn,
-        getQuestionOptions_Fn
+        getQuestionOptions_Fn,
+        stateEditingOrPreview,
+        deteleteQuestion_Fn,
+        changeStateEditing_Fn,
+        changeStateComponent_Fn
       }}
     >
 

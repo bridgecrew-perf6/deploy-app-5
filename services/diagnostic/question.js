@@ -36,11 +36,11 @@ export const getQuestionListServer = async (idQuiz) => {
     url: `${API}/v1/question/${idQuiz}/list`,
   })
   
-  const rs = await Promise.all( response.data.items.map(async ({id}) => {
+  /* const rs = await Promise.all( response.data.items.map(async ({id}) => {
     return await getQuestionOptionListServer( idQuiz, id);
-  }));
+  })); */
   
-  return rs;
+  return response;
 }
 
 export const getQuestionOptionListServer = async ( idQuiz, id) => {
@@ -58,5 +58,21 @@ export const getQuestionOptionListServer = async ( idQuiz, id) => {
   
     return response.data;
 
+}
+
+export const deleteQuestionServer = async (idQuiz, id) => {
+
+  const TOKEN = localStorage.getItem('tokenAPI');
+
+  const response = await axios({
+    method: "DELETE",
+    headers: {
+      'X-Auth-Token': TOKEN,
+      'Content-Type': 'application/json'
+    },
+    url: `${API}/v1/question/${idQuiz}/delete/${id}`,
+  })
+
+  return response;
 }
 

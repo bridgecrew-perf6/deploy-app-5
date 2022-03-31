@@ -45,8 +45,6 @@ const OptionList = () => {
     changeStateLabelEditable_Fn(name, textContent, id );
   }
 
-  console.log(selectSelected);
-  console.log(question);
 
   
     if(selectSelected === 'text' || 
