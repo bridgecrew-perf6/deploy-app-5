@@ -13,9 +13,9 @@ import SettingCheck from '../SettingCheckbox/SettingCheck';
 import selectProps from '../SelectList/data';
 import { useCallback } from 'react';
 import Button from '../Button/Button';
-import { useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import Message from '../Message/Message';
-
+import Skeleton from '../Skeleton/Skeleton';
 const QuestionDetails = () => {
 /* questionDetails */
   const { 
@@ -26,7 +26,8 @@ const QuestionDetails = () => {
       addOptionQuestion_Fn,
       changeTypeQuestion_Fn,
       saveQuestion_Fn,
-      changeStateComponent_Fn
+      idEditingPreview,
+      editingQuestion,
    
     } = contextDiagnostic();
 
@@ -48,142 +49,172 @@ const QuestionDetails = () => {
 
   const handleSelectChange = useCallback((value) => changeTypeQuestion_Fn(value), []);
 
-
   const handleCheckStatus = (e) => {
     const {name , checked} = e.target;
+    console.log({name , checked});
+
+
     handleChangeState_Fn(name , checked , 'question')
   }
 
 
-  
+
   /* Send register question update */
   const queryClient = useQueryClient();
 
   const {mutate, isError, isLoading, isSuccess} = 
     useMutation(saveQuestion_Fn, {
       onSuccess: (list) => {
-        queryClient.invalidateQueries(["getlistquestion"])
+        queryClient.invalidateQueries(["getlistquestion"]),
+        queryClient.invalidateQueries(["getquestionoptions"])
       }
     });
 
-  const actionSaveQuestion = () => {
-    mutate();
-  }
-
-  console.log({question, selectSelected});
-
+    const actionSaveQuestion = () => {
+      mutate();
+    }
+    /* Send register question update */
 
 
-  return (
 
-    <Card >
-        <Card.Section>
-          <Action 
-            title='Add a question'  
-            eventAction={actionChangeList}
-            reverse="reverse"
-            btnSvg={<PrevSvg/>}
-          />
-        </Card.Section>
+      /* Get state query actual*/
+      const {
+        isLoading: isLoadinEditing
+        } = useQuery(['getquestionoptions', idEditingPreview]);
 
-        <Card.Section>
-          <InputCustom
-            labelText='Question'
-            nameInput="title"
-            valueInput={question.title}
-            handle={handleChangeText}
-          />
-     
-          {/* option type question */}
-          <SelectList 
-            optionsQuestion={optionsQuestion}
-            selectSelected={selectSelected}
-            handleSelectChange={handleSelectChange} 
-          /> {/* select option type question */}
-          { 
-          //* setting selected multiple options */ 
-            optionMultiple
-              && <SettingCheck 
-                    textSetting='Multiple'
-                    nameInput='multiple' 
-                    idInput='multiple'
-                    handleCheckStatus={handleCheckStatus}
-                    status={question.multiple}
-                    
-                  /> 
-          }     
-        </Card.Section>
-                   
-        <Card.Section>
-          {
-            optionMultiple
-              &&  
-              <Action 
-                title='Options' 
-                btnText='Add' 
-                btnSvg={<AddSvg/>} 
-                eventAction={actionAddOption}
-                divMargin='0 0 19px 0'
-              />      // add more option *
-          } 
-               
-           {/* load type question - option [text, choice, image, etc] */}
-           <OptionList/>
-        </Card.Section>
+      if(isLoadinEditing){
+        return (
+          <Card>
+            <Skeleton/>
+          </Card>
+        )
+      }
+      /* Chage Editin Form */
 
-          {/* setting question [require, class] */}
-        <Card.Section>
-           <SettingCheck 
-              textSetting='Required'
-              nameInput='required' 
-              idInput='required'
-              handleCheckStatus={handleCheckStatus}
-              status={question.required}
+    return (
+
+      <Card >
+          <Card.Section>
+            <Action 
+              title='Add a question'  
+              eventAction={actionChangeList}
+              reverse="reverse"
+              btnSvg={<PrevSvg/>}
             />
-
+          </Card.Section>
+  
+          <Card.Section>
+            <InputCustom
+              labelText='Question'
+              nameInput="title"
+              valueInput={question.title}
+              handle={handleChangeText}
+            />
+       
+            {/* option type question */}
+            <SelectList 
+              optionsQuestion={optionsQuestion}
+              selectSelected={selectSelected}
+              handleSelectChange={handleSelectChange} 
+            /> {/* select option type question */}
+            { 
+            //* setting selected multiple options */ 
+              optionMultiple
+                && <SettingCheck 
+                      textSetting='Multiple'
+                      nameInput='multiple' 
+                      idInput='multiple'
+                      valueInput={question.multiple}
+                      handleCheckStatus={handleCheckStatus}
+                      status={question.multiple} 
+                    /> 
+            }     
+          </Card.Section>
+                     
+          <Card.Section>
             {
               optionMultiple
-                &&
-                <>
-                  <SettingCheck 
-                    textSetting='Recommended'
-                    nameInput='recommended' 
-                    idInput='recommended'
-                    handleCheckStatus={handleCheckStatus}
-                    status={question.recommended}
-                  />
-                  <SettingCheck 
-                    textSetting='Score'
-                    nameInput='score' 
-                    idInput='score'
-                    handleCheckStatus={handleCheckStatus}
-                    status={question.score}
-                  />   
-                </>
-                
-            }
+                &&  
+                <Action 
+                  title='Options' 
+                  btnText='Add' 
+                  btnSvg={<AddSvg/>} 
+                  eventAction={actionAddOption}
+                  divMargin='0 0 19px 0'
+                />      // add more option *
+            } 
+                 
+             {/* load type question - option [text, choice, image, etc] */}
+             <OptionList/>
+          </Card.Section>
+  
+            {/* setting question [require, class] */}
+          <Card.Section>
+             <SettingCheck 
+                textSetting='Required'
+                nameInput='required' 
+                idInput='required'
+                handleCheckStatus={handleCheckStatus}
+                status={question.required}
+                valueInput={question.required}
 
-              <InputCustom
-                labelText='ClassName'
-                nameInput="className"
-                valueInput={question.className}
-                handle={handleChangeText}
-                placeh='Class Name'
               />
+  
+              {
+                optionMultiple
+                  &&
+                  <>
+                    <SettingCheck 
+                      textSetting='Recommended'
+                      nameInput='recommended' 
+                      idInput='recommended'
+                      handleCheckStatus={handleCheckStatus}
+                      status={question.recommended}
+                      valueInput={question.recommended}
 
-              <Button 
-                btnText='Save Questions'
-                loadingState={isLoading} 
-                wBtn='100%' 
-                mBtn='10px 0'
-                eventAction={actionSaveQuestion}
+                      
+                    />
+                    <SettingCheck 
+                      textSetting='Score'
+                      nameInput='score' 
+                      idInput='score'
+                      handleCheckStatus={handleCheckStatus}
+                      status={question.score}
+                      valueInput={question.score}
+
+                    />   
+                  </>
+                  
+              }
+  
+                <InputCustom
+                  labelText='ClassName'
+                  nameInput="className"
+                  valueInput={question.className}
+                  handle={handleChangeText}
+                  placeh='Class Name'
                 />
-
-                {isSuccess && <Message mesagge="Question Register"/>}
-                {isError && <Message mesagge="Server error!" error={true}/>}
-        </Card.Section> 
-    </Card>
-  )
+  
+                <Button 
+                  btnText={editingQuestion ? 'Update Question':'Save Question'}
+                  loadingState={isLoading} 
+                  wBtn='100%' 
+                  mBtn='10px 0'
+                  eventAction={actionSaveQuestion}
+                  />
+  
+                  {isSuccess 
+                    && <Message 
+                          mesagge={editingQuestion 
+                                    ? 'Update success'
+                                    : 'Save success'
+                                  }
+                          />}
+                  {isError && <Message mesagge="Server error!" error={true}/>}
+          </Card.Section> 
+      </Card>
+    )
+  
 }
 
 export default QuestionDetails

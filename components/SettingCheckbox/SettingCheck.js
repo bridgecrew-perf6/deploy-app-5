@@ -3,7 +3,7 @@ import InputCustom from '../Input/InputCustom';
 import { Div } from './styles';
 
 
-const SettingCheck = ({textSetting, nameInput, idInput, handleCheckStatus, status}) => {
+const SettingCheck = ({textSetting, nameInput, idInput, handleCheckStatus, status, valueInput}) => {
 
   return (
 
@@ -15,6 +15,7 @@ const SettingCheck = ({textSetting, nameInput, idInput, handleCheckStatus, statu
               handle={handleCheckStatus}
               idInput={idInput}
               status={status}
+              valueInput={valueInput}
             />
           <label htmlFor={idInput}></label>
         </Div>   

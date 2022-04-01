@@ -9,7 +9,7 @@ import Message from '../Message/Message';
 
 const DragDrod = () => {
 
-  const { listQuestions, deteleteQuestion_Fn, listQuestionsCache} = contextDiagnostic();
+  const { listQuestions, deteleteQuestion_Fn} = contextDiagnostic();
 
   const [deleting, setDeleting] = useState({status:false, id:0})
 
@@ -21,7 +21,7 @@ const DragDrod = () => {
   }
 
 
-  /* Deleted Question  */
+  /* Deleted Question server  */
   const queryClient = useQueryClient();
 
   const {mutate, isError, isLoading, isSuccess} = 
@@ -37,8 +37,9 @@ const DragDrod = () => {
 
   const deletedConfirmQuestion = () => {
     mutate(deleting.id);
-    setDeleting(false);
+    setDeleting({status:false, id:0});
   }
+  /* Deleted Question server  */
 
   return (
   <>

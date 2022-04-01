@@ -10,23 +10,25 @@ const QuestionPreview = () => {
 
   const {question, keyChoiceTypeSelected, getQuestionOptions_Fn, idEditingPreview} = contextDiagnostic();
 
-     const {
-        isLoading, 
-        isFetching, 
-        isError
-        } = useQuery(['getquestionoptions', idEditingPreview], () => getQuestionOptions_Fn(idEditingPreview) );
-
-        console.log({isLoading, isFetching, isError});
-
   const typeSelected = question.type; 
 
   const validatQuestion = Object.keys(question).length === 0 ;
 
-  if(isLoading){
-    return(
-      <Skeleton/>
-    )
-  }
+
+  /* get question selected server */
+  const {
+    isLoading,
+    isFetching,
+    isRefetching
+    } = useQuery(['getquestionoptions', idEditingPreview], () => getQuestionOptions_Fn(idEditingPreview) );
+
+    if( isLoading || isFetching){
+      return(
+        <Skeleton/>
+      )
+    }  
+  /* get question selected server */
+
 
   return ( 
    validatQuestion 

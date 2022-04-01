@@ -2,7 +2,7 @@ import React, { createContext, useContext, useReducer, useEffect } from 'react'
 import {tokenSession} from '../../services/init/session';
 import diagnosticReducer from './diagnosticReducer';
 import {saveIntroductionServer, getIntroductionServer} from '../../services/diagnostic/introduction';
-import { deleteQuestionServer, getQuestionListServer, getQuestionOptionListServer, saveQuestionServer } from '../../services/diagnostic/question';
+import { deleteQuestionServer, getQuestionListServer, getQuestionOptionListServer, saveQuestionServer, deleteOptionQuestionServer } from '../../services/diagnostic/question';
 
 
 const stateContext = createContext();
@@ -85,7 +85,6 @@ const DiagnosticProvider = ({ children }) => {
   }
 
   const actionCreateQuestion_Fn = (status) => {
-    console.log("cambia question");
 
     dispatch({
       type: 'CHANGE_STATUS_CREATE_QUESTION',
@@ -103,7 +102,6 @@ const DiagnosticProvider = ({ children }) => {
   }
 
   const restarTypeQuestion = () => {
-
     dispatch({
       type: 'RESTAR_STATE_TYPE_QUESTION'
     })
@@ -128,14 +126,17 @@ const DiagnosticProvider = ({ children }) => {
       type: 'CHANGE_STATE_LABEL_EDITABLE',
       payload: {name, textContext, id}
     })
-
   }
 
-  const deleteStateOption_Fn = (id_delete) => {
+  const deleteStateOption_Fn = async (id_delete) => {
+
+    const rs = await deleteOptionQuestionServer(state.quizId, id_delete)
     dispatch({
       type: 'DELETE_STATE_OPTION_QUESTION',
       payload: id_delete
     })
+
+    return rs;
   }
 
 
@@ -190,18 +191,22 @@ const DiagnosticProvider = ({ children }) => {
   }
 
   const getQuestionOptions_Fn = async (id_question_preview) => {
+
     if(id_question_preview === 0) return;
+    
      const questionPreviewSelected = state.listQuestionsCache.filter((e) => e.id === id_question_preview );
      console.log(questionPreviewSelected);
-
+    let questionOptionsUdtateServe;
      if(questionPreviewSelected.length === 0){
-      const questionOptionsUdtateServe = await getOneQuestionOptions(id_question_preview);
+       questionOptionsUdtateServe = await getOneQuestionOptions(id_question_preview);
         dispatcherUpdateQuestionSelected(questionOptionsUdtateServe);
         dispatcherUpdateCacheList(questionOptionsUdtateServe);
         
      }else{
         dispatcherUpdateQuestionSelected(questionPreviewSelected[0]);
      }
+
+     return questionOptionsUdtateServe;
   }
 
   const getOneQuestionOptions = async (id_question) => {
@@ -242,13 +247,6 @@ const DiagnosticProvider = ({ children }) => {
 
   }
 
-  const changeStateComponent_Fn = () => {
-    dispatch({
-      type: 'CHANGE_COMPONENT_EDITING'
-    })
-
-  }
-
   return (
     <stateContext.Provider 
     
@@ -263,6 +261,7 @@ const DiagnosticProvider = ({ children }) => {
         listQuestions         : state.listQuestions,
         listQuestionsCache    : state.listQuestionsCache,
         idEditingPreview      : state.idEditingPreview,
+        editingQuestion       : state.editingQuestion,
   
         handleChangeState_Fn,
         chageSelectedTab_Fn,
@@ -280,8 +279,7 @@ const DiagnosticProvider = ({ children }) => {
         getQuestionOptions_Fn,
         stateEditingOrPreview,
         deteleteQuestion_Fn,
-        changeStateEditing_Fn,
-        changeStateComponent_Fn
+        changeStateEditing_Fn
       }}
     >
 

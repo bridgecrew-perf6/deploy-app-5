@@ -76,3 +76,20 @@ export const deleteQuestionServer = async (idQuiz, id) => {
   return response;
 }
 
+export const deleteOptionQuestionServer = async (idQuiz, id) => {
+
+  const TOKEN = localStorage.getItem('tokenAPI');
+
+  const response = await axios({
+    method: 'DELETE',
+    headers:{
+      'X-Auth-Token': TOKEN,
+      'Content-Type': 'application/json'
+    },
+    url: `${API}/v1/choice/${idQuiz}/deleted/${id}`
+  })
+
+  return response;
+
+}
+
