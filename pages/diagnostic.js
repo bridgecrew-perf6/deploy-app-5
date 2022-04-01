@@ -26,6 +26,8 @@ import { useCallback, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import Skeleton from '../components/Skeleton/Skeleton';
 import Message from '../components/Message/Message';
+import { useMutation } from 'react-query';
+import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
 
 
 const Diagnostic = () => {
@@ -35,7 +37,8 @@ const Diagnostic = () => {
       createQuestion, 
       chageSelectedTab_Fn,
       getIntroduction_Fn ,
-      getListQuestion_Fn
+      getListQuestion_Fn,
+      saveOrderListQuestion_Fn
     } = contextDiagnostic();
 
   const {tabsQuestion} = propsTabs();
@@ -52,17 +55,30 @@ const Diagnostic = () => {
       } = useQuery(['getintroduction'], getIntroduction_Fn);
 
   const {
-      isLoading: loadQuestion,
-      isFetching: fetchQuestion,
-      isError: errorQuestion
+      isError: errorQuestion,
+      isLoading: loadQuestion
       } = useQuery(['getlistquestion'], getListQuestion_Fn);
 
-  
+
+
+/* Updating order question list */
+
+const { 
+    mutate, 
+    isLoading: loadMutate, 
+    isError: errorMutate, 
+    isSuccess: succesMutate} = useMutation(saveOrderListQuestion_Fn)
+
+const actionGeneralDiagnostic = () => {
+  mutate();
+}
+
+  console.log("muatinf", loadMutate);
   if(isLoading || isFetching){
     return (
         <Skeleton lineText={20}/>
       )
-  } 
+  }  
   return (
     <>
       <div className='container'>
@@ -70,10 +86,10 @@ const Diagnostic = () => {
         <Page 
           title="My diagnostic" 
           primaryAction={{
-              content: 'Save', 
+              content: loadMutate ? <LoadingSpinner/> : 'Save' , 
               disabled: false,
               onAction: () => {
-                console.log("se hizo click en save");
+                actionGeneralDiagnostic();
               }
           }}>
 
@@ -107,7 +123,7 @@ const Diagnostic = () => {
                     selectedTab === 1 
                       && (
                           !createQuestion 
-                            ? <QuestionList/> 
+                            ? <QuestionList loadQuestion={loadQuestion}/> 
                             : <QuestionDetails/>
                           ) 
                   }
@@ -121,6 +137,8 @@ const Diagnostic = () => {
             {/* Message interactions */}
               {isError && <Message mesagge="Server Error" error={true}/>}
               {errorQuestion && <Message mesagge="Question load error" error={true} />}
+              {errorMutate && <Message mesagge="Error saver order" error={true}/>}
+              {succesMutate && <Message mesagge="Save order success" />}
             {/* Message interactions */}
 
         </Page>

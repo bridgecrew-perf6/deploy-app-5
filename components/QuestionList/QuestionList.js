@@ -5,8 +5,9 @@ import { contextDiagnostic } from '../../states/diagnostic/DiagnosticProvider';
 import Action from '../ActionText/Action';
 import { AddSvg } from '../Svgs/SvgFiles';
 import DragDrod from '../DragDrop/DragDrod';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 
-const QuestionList = () => {
+const QuestionList = ({loadQuestion}) => {
 /* questionList */
   const { createQuestion , actionCreateQuestion_Fn} = contextDiagnostic();
 
@@ -22,7 +23,7 @@ const QuestionList = () => {
         
         <Card.Section >
           <p>Select or drag a question</p>
- 
+          {loadQuestion && <LoadingSpinner/>}
         {/* lisy question dragables */}
           <DragDrod/>
           

@@ -2,7 +2,7 @@ import React, { createContext, useContext, useReducer, useEffect } from 'react'
 import {tokenSession} from '../../services/init/session';
 import diagnosticReducer from './diagnosticReducer';
 import {saveIntroductionServer, getIntroductionServer} from '../../services/diagnostic/introduction';
-import { deleteQuestionServer, getQuestionListServer, getQuestionOptionListServer, saveQuestionServer, deleteOptionQuestionServer } from '../../services/diagnostic/question';
+import { deleteQuestionServer, getQuestionListServer, getQuestionOptionListServer, saveQuestionServer, deleteOptionQuestionServer, saveOrderQuestionServer } from '../../services/diagnostic/question';
 
 
 const stateContext = createContext();
@@ -247,6 +247,19 @@ const DiagnosticProvider = ({ children }) => {
 
   }
 
+  const updatListQuestionDraging_Fn = (listDrag) => {
+    dispatch({
+      type: 'UPDATING_LIST_DRAGING',
+      payload:listDrag
+    })
+  }
+
+  const saveOrderListQuestion_Fn = async () => {
+    const orderIds =  state.listQuestions.map(({ id }) => (id));
+    const rs = await saveOrderQuestionServer(state.quizId, orderIds);
+    return rs;
+  }
+
   return (
     <stateContext.Provider 
     
@@ -279,7 +292,9 @@ const DiagnosticProvider = ({ children }) => {
         getQuestionOptions_Fn,
         stateEditingOrPreview,
         deteleteQuestion_Fn,
-        changeStateEditing_Fn
+        changeStateEditing_Fn,
+        updatListQuestionDraging_Fn,
+        saveOrderListQuestion_Fn
       }}
     >
 

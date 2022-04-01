@@ -24,7 +24,8 @@ const diagnosticReducer = (state , action) => {
     'UPDATE_SATATE_QUESTION_LIST_CACHE': () => updateStateListCache(action.payload),
     'CHANGE_STATE_ID_QUESTION_EDIT_PREVIEW': () => changeIdStateEditingPreview(action.payload),
     'DELETE_STATE_CACHE_QUESTION'       : () => deteleListCacheQuestionState(action.payload),
-    'CHANGE_STATE_EDITING'            : () => changeStateEditing(action.payload)
+    'CHANGE_STATE_EDITING'            : () => changeStateEditing(action.payload),
+    'UPDATING_LIST_DRAGING'       : () => updatingListQuestionDraging(action.payload)
   }
   const STATE_DEFAULT = state;
   
@@ -188,6 +189,13 @@ const diagnosticReducer = (state , action) => {
       idEditingPreview: payload,
       createQuestion: true,
       editingQuestion: true,
+    }
+  }
+
+  const updatingListQuestionDraging = (payload) => {
+    return {
+      ...state,
+      listQuestions: payload
     }
   }
 

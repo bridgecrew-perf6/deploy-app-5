@@ -93,3 +93,19 @@ export const deleteOptionQuestionServer = async (idQuiz, id) => {
 
 }
 
+
+export const saveOrderQuestionServer = async (idQuiz , order) => {
+  const TOKEN = localStorage.getItem('tokenAPI');
+
+  const response = await axios({
+    method: 'PUT',
+    headers:{
+      'X-Auth-Token': TOKEN,
+      'Content-Type': 'application/json'
+    },
+    url: `${API}/v1/question/${idQuiz}/order`,
+    data: {"order": order}
+  })
+
+  return response;
+}

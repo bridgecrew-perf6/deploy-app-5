@@ -9,9 +9,10 @@ import Message from '../Message/Message';
 
 const DragDrod = () => {
 
-  const { listQuestions, deteleteQuestion_Fn} = contextDiagnostic();
+  const { listQuestions, deteleteQuestion_Fn, updatListQuestionDraging_Fn} = contextDiagnostic();
 
   const [showconfirm, setShowconfirm] = useState({status:false, id:0})
+
 
   const reorderQuestions = (list, startIndex, endIndex) => {
     const result =[...list];
@@ -20,6 +21,7 @@ const DragDrod = () => {
     return result;
   }
 
+  console.log("list drag", listQuestions);
 
   /* Deleted Question server  */
   const queryClient = useQueryClient();
@@ -55,7 +57,8 @@ const DragDrod = () => {
           return;
         }
       
-        setList(prev => reorderQuestions(prev, source.index, destination.index))
+        updatListQuestionDraging_Fn(reorderQuestions(listQuestions, source.index, destination.index))
+        
       }}>
 
         <Droppable 
