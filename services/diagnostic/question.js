@@ -86,7 +86,7 @@ export const deleteOptionQuestionServer = async (idQuiz, id) => {
       'X-Auth-Token': TOKEN,
       'Content-Type': 'application/json'
     },
-    url: `${API}/v1/choice/${idQuiz}/deleted/${id}`
+    url: `${API}/v1/choice/${idQuiz}/delete/${id}`
   })
 
   return response;

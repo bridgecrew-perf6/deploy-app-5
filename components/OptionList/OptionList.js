@@ -132,6 +132,7 @@ const OptionList = () => {
                   <OptionDelete 
                     actionDelete={() => deleteValidate(element.id)}
                     loadingState={isLoading}
+                    resetState={showconfirm}
                     >    
                     <OptionItem 
                       urlImg={element.image} 
@@ -164,6 +165,7 @@ const OptionList = () => {
                   <OptionDelete 
                       actionDelete={() => deleteValidate(element.id)}
                       loadingState={isLoading}
+                      resetState={showconfirm}
                       >    
                     <OptionItem 
                       justifyC='flex-start' 

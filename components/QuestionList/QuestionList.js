@@ -1,13 +1,9 @@
 import { 
   Card,
 } from '@shopify/polaris';
-import { useEffect, useState } from 'react';
 import { contextDiagnostic } from '../../states/diagnostic/DiagnosticProvider';
 import Action from '../ActionText/Action';
-import OptionDelete from '../OptionDelete/OptionDelete';
-import QuestionItem from '../QuestionItem/QuestionItem';
 import { AddSvg } from '../Svgs/SvgFiles';
-import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd'
 import DragDrod from '../DragDrop/DragDrod';
 
 const QuestionList = () => {

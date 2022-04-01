@@ -85,7 +85,7 @@ const QuestionDetails = () => {
       if(isLoadinEditing){
         return (
           <Card>
-            <Skeleton/>
+            <Skeleton lineText={25}/>
           </Card>
         )
       }

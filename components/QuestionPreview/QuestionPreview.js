@@ -24,7 +24,7 @@ const QuestionPreview = () => {
 
     if( isLoading || isFetching){
       return(
-        <Skeleton/>
+        <Skeleton lineText={11}/>
       )
     }  
   /* get question selected server */

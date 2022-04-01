@@ -7,20 +7,17 @@ import {
   SkeletonPage, 
   TextContainer
 } from '@shopify/polaris';
-const Skeleton = () => {
+const Skeleton = ({lineText = 10}) => {
   return (
-    <SkeletonPage primaryAction >
+    <SkeletonPage primaryAction={false} >
         <Layout>
           <Layout.Section>
-            <Card sectioned>
-              <SkeletonBodyText />
-            </Card>
-            <Card sectioned>
+        
               <TextContainer>
                 <SkeletonDisplayText size="small" />
-                <SkeletonBodyText lines={10}/>
+                <SkeletonBodyText lines={lineText}/>
               </TextContainer>
-            </Card>
+
           </Layout.Section>
         </Layout>
       </SkeletonPage>  

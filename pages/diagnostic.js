@@ -60,7 +60,7 @@ const Diagnostic = () => {
   
   if(isLoading || isFetching){
     return (
-        <Skeleton/>
+        <Skeleton lineText={20}/>
       )
   } 
   return (
