@@ -1,9 +1,9 @@
 import React from 'react'
 
-const ResultTab = () => {
+const ResultPreview = () => {
   return (
-    <div>ResultTab</div>
+    <div>ResultPreview</div>
   )
 }
 
-export default ResultTab
+export default ResultPreview

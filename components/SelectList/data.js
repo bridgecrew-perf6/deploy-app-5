@@ -11,9 +11,17 @@ const data =  () => {
         {label: 'Text Area', value: 'textarea'},
     ];
 
+    const  optionsSection = [
+      {label: 'Hero', value: 'hero'},
+      {label: 'Score', value: 'score'},
+      {label: 'Section', value: 'section'},
+      {label: 'Section + IMG', value: 'sectionImage'},
+      {label: 'Recommendation', value: 'recommendation'}
+  ];
 
 return {
-  optionsQuestion
+  optionsQuestion,
+  optionsSection
 }
 }
 
