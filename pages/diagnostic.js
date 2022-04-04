@@ -77,7 +77,6 @@ const actionGeneralDiagnostic = () => {
   mutate();
 }
 
-  console.log("muatinf", loadMutate);
   if(isLoading || isFetching){
     return (
         <Skeleton lineText={20}/>

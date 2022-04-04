@@ -6,9 +6,13 @@ import InputCustom from '../Input/InputCustom';
 import Message from '../Message/Message';
 import MessageConfirm from '../Message/MessageConfirm';
 import OptionDelete from '../OptionDelete/OptionDelete';
-import OptionItem from '../OptionItem/OptionItem';
+import ItemColor from '../Items/ItemColor';
+import ItemImage from '../Items/ItemImage';
+
 import { UploadSvg } from '../Svgs/SvgFiles';
 import InputTextarea from '../Textarea/InputTextarea';
+import OptionImage from '../OptionsItems/OptionImage';
+import OptionColor from '../OptionsItems/OptionColor';
 
 
 const OptionList = () => {
@@ -134,22 +138,11 @@ const OptionList = () => {
                     loadingState={isLoading}
                     resetState={showconfirm}
                     >    
-                    <OptionItem 
-                      urlImg={element.image} 
-                      iconSvg={<UploadSvg/>}
-                      dataId={element.id} 
+                    <OptionImage
+                      element={element}
                       handleTagEditable={handleTagEditable}
-                      textLabel={element.label} 
-                    >                     
-                        <InputCustom 
-                          dataId={element.id} 
-                          typeInput="file"
-                          nameInput={typeField}
-                          handle={handleChangeText}
-                          valueInput={element.image}
-                          hideValue={true}            
-                      />
-                    </OptionItem>  
+                      handleChangeText={handleChangeText}
+                      />  
                   </OptionDelete> 
                 </div>  
               )    
@@ -167,20 +160,11 @@ const OptionList = () => {
                       loadingState={isLoading}
                       resetState={showconfirm}
                       >    
-                    <OptionItem 
-                      justifyC='flex-start' 
-                      dataId={element.id} 
+                   <OptionColor 
+                      element={element}
                       handleTagEditable={handleTagEditable}
-                      textLabel={element.label} 
-                    >  
-                      <InputCustom  
-                        dataId={element.id}
-                        typeInput={typeField} 
-                        nameInput={typeField}
-                        handle={handleChangeText}
-                        valueInput={element.color}
-                      /> 
-                    </OptionItem>
+                      handleChangeText={handleChangeText}
+                   />
                   </OptionDelete>
                 </div>
               )    
@@ -220,9 +204,6 @@ const OptionList = () => {
 
     </>
   )
-
-    
- 
 
 }
 
