@@ -10,6 +10,7 @@ import { useCallback } from 'react';
 import InputCustom from '../Input/InputCustom';
 import InputTextarea from '../Textarea/InputTextarea';
 import OptionsSection from '../OptionsSection/OptionsSection';
+import FormSection from './FormSection';
 
 const ResultDetails = () => {
 
@@ -49,24 +50,7 @@ console.log("lista:", content);
       </Card.Section>
 
       <Card.Section>
-        <InputCustom
-          labelText='Title'
-          nameInput="title"
-          valueInput={content.title}
-          /* handle={handleChangeText} */
-        />
-        <InputCustom
-          labelText='Subtitle'
-          nameInput="subtitle"
-          valueInput={content.subtitle}
-          /* handle={handleChangeText} */
-        />
-        <InputTextarea
-          labelText='Parragrah'
-          nameInput="parragrah"
-          /* handle={handleChangeText} */
-          valueInput={content.parragrah}
-        />
+        <FormSection content={content}/>{/* validate que funcione */}
       </Card.Section>
 
       <Card.Section>
