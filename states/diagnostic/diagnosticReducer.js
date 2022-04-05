@@ -1,5 +1,4 @@
 import {  getKey_Value_ChoiceSelected } from '../../helpers/helpersReducer';
-import { uid } from 'uid';
 import nextId, {setPrefix} from "react-id-generator";
 
 
@@ -18,7 +17,7 @@ const diagnosticReducer = (state , action) => {
     'CHANGE_STATE_LABEL_EDITABLE'   : () => changeStateLabelEditable(action.payload),
     'DELETE_STATE_OPTION_QUESTION'  : () => deleteChoiceQuestion(action.payload),
     'GET_INTRODUCCION_STATE'        : () => getIntroductionState(action.payload),
-    'POST_QUESTION_LIST_STATE'      : () => restartStateCacheInvalidate(action.payload),
+    'RESTAT_LIST_CACHE'      : () => restartStateCacheInvalidate(),
     'GET_QUESTION_LIST_ALL_STATE'   : () => getQuestionOptionListState(action.payload),
     'UPDATE_SATATE_QUESTION_PREVIEW': () => updateStateQuestionPreview(action.payload),
     'UPDATE_SATATE_QUESTION_LIST_CACHE': () => updateStateListCache(action.payload),
@@ -134,7 +133,7 @@ const diagnosticReducer = (state , action) => {
     }
   }
 
-  const restartStateCacheInvalidate = (payload) => {
+  const restartStateCacheInvalidate = () => {
     return {
       ...state,
       listQuestionsCache:[]

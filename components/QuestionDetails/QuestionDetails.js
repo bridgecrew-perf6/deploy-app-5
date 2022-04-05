@@ -77,19 +77,19 @@ const QuestionDetails = () => {
 
 
 
-      /* Get state query actual*/
-      const {
-        isLoading: isLoadinEditing
-        } = useQuery(['getquestionoptions', idEditingPreview]);
+    /* Get state query actual*/
+    const {
+      isLoading: isLoadinEditing
+      } = useQuery(['getquestionoptions', idEditingPreview]);
 
-      if(isLoadinEditing){
-        return (
-          <Card>
-            <Skeleton lineText={25}/>
-          </Card>
-        )
-      }
-      /* Chage Editin Form */
+    if(isLoadinEditing){
+      return (
+        <Card>
+          <Skeleton lineText={25}/>
+        </Card>
+      )
+    }
+    /* Chage Editin Form */
 
     return (
 
@@ -113,6 +113,7 @@ const QuestionDetails = () => {
        
             {/* option type question */}
             <SelectList 
+              title="Type question"
               optionsQuestion={optionsQuestion}
               selectSelected={selectSelected}
               handleSelectChange={handleSelectChange} 

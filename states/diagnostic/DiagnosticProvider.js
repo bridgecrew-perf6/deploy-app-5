@@ -113,10 +113,10 @@ const DiagnosticProvider = ({ children }) => {
     })
   }
 
-  const handleChangeStateSecondKey_Fn = (name, value, id, stateCurrent, stateSub) => {
+  const handleChangeStateSecondKey_Fn = (name, value, id) => {
     dispatch({
       type: 'CHANGE_OPTION_QUESTION_LIST',
-      payload: { name, value, id, stateCurrent, stateSub }
+      payload: { name, value, id}
     })
   }
 
@@ -176,9 +176,7 @@ const DiagnosticProvider = ({ children }) => {
     const rs = await saveQuestionServer(state.question, state.quizId);
  
     dispatch({
-      type: 'POST_QUESTION_LIST_STATE',
-      payload: rs
-
+      type: 'RESTAT_LIST_CACHE',
     })
     return rs;
   }

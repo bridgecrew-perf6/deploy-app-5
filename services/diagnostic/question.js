@@ -18,9 +18,7 @@ export const saveQuestionServer = async (data, idQuiz) => {
 
   });
 
-  const rs = await getQuestionOptionListServer( idQuiz, response.data.id);
-  
-  return rs;
+  return response;
 }
 
 export const getQuestionListServer = async (idQuiz) => {

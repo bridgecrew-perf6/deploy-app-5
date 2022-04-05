@@ -37,8 +37,7 @@ import ResultProvider from '../states/result/ResultProvider';
 const Diagnostic = () => {
 
   const { 
-      selectedTab, 
-      createQuestion, 
+      selectedTab,
       chageSelectedTab_Fn,
       getIntroduction_Fn ,
       getListQuestion_Fn,
@@ -63,25 +62,25 @@ const Diagnostic = () => {
       isLoading: loadQuestion
       } = useQuery(['getlistquestion'], getListQuestion_Fn);
 
+ 
 
+  /* Updating order question list */
 
-/* Updating order question list */
+  const { 
+      mutate, 
+      isLoading: loadMutate, 
+      isError: errorMutate, 
+      isSuccess: succesMutate} = useMutation(saveOrderListQuestion_Fn)
 
-const { 
-    mutate, 
-    isLoading: loadMutate, 
-    isError: errorMutate, 
-    isSuccess: succesMutate} = useMutation(saveOrderListQuestion_Fn)
+  const actionGeneralDiagnostic = () => {
+    mutate();
+  }
 
-const actionGeneralDiagnostic = () => {
-  mutate();
-}
-
-  if(isLoading || isFetching){
-    return (
-        <Skeleton lineText={20}/>
-      )
-  }  
+    if(isLoading || isFetching){
+      return (
+          <Skeleton lineText={20}/>
+        )
+    }  
   return (
     <>
       <div className='container'>

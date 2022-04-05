@@ -38,8 +38,8 @@ const OptionList = () => {
     }  
 
     let id = e.target.dataset.id; 
-    /* params : (nameInput, valueInput, objecState, subObjectState  */
-    handleChangeStateSecondKey_Fn(name , value , id,'question', 'type')
+    /* params : (nameInput, valueInput */
+    handleChangeStateSecondKey_Fn(name , value , id)
   }
 
   const handleTagEditable = (e) => {

@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useReducer } from 'react'
+import { getSectionListServer, saveSectionServer } from '../../services/diagnostic/result';
 import resultReducer from './resultReducer';
 
 
@@ -17,7 +18,8 @@ const ResultProvider = ({children}) => {
     createSection: false,
     typeSectionSelected: 'hero',
 
-    sectionsList: []
+    sectionsList: [],
+    totalSections:0
   }
 
 
@@ -46,6 +48,48 @@ const ResultProvider = ({children}) => {
     })
   }
 
+  const changeStateSection_Fn = (name, value, id_section) => {
+    
+    dispatch({
+      type:'CHANGE_STATE_SECTIONS_FORM',
+      payload: {name, value, id_section}
+    })
+  }
+
+  const addOptionSection_Fn = (idCurrentSection) => {
+    dispatch({
+      type:'ADD_OPTION_SECTION',
+      payload: idCurrentSection
+    })
+  }
+
+  const changeStateOption_Fn = (name, value, id_option, idCurrentSection) => {
+    dispatch({
+      type: 'CHANGE_STATE_OPTION_SECTION',
+      payload: {name, value, id_option, idCurrentSection}
+    })
+  }
+
+
+
+  /* Interactions API */
+  const saveSection_Fn = async(section) => {
+    console.log("test register sections", section);
+    const rs = await saveSectionServer( section, state.quizId, state.idCurrentSection);
+    return rs;
+  }
+
+  const getSectionList_Fn =  async () => {
+
+    const rs = await getSectionListServer(state.quizId);
+    
+    dispatch({
+      type: 'LOAD_STATE_LIST_SECTION',
+      payload: rs.data
+    })
+
+    return rs;
+  }
 
   /* Functionls */
 
@@ -59,11 +103,17 @@ const ResultProvider = ({children}) => {
         typeSectionSelected : state.typeSectionSelected,
         sectionsList : state.sectionsList,
         idCurrentSection : state.idCurrentSection,
+        totalSections : state.totalSections,
 
 
         changeStateCreate_Fn,
         changeStateList_Fn,
-        changeTypeSection_Fn
+        changeTypeSection_Fn,
+        changeStateSection_Fn,
+        addOptionSection_Fn,
+        changeStateOption_Fn,
+        saveSection_Fn,
+        getSectionList_Fn
 
       }}
     >
