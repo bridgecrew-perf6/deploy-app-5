@@ -12,6 +12,7 @@ import OptionDelete from '../OptionDelete/OptionDelete';
 import OptionImage from '../OptionsItems/OptionImage';
 import Button from '../Button/Button';
 import { useMutation, useQueryClient } from 'react-query';
+import Message from '../Message/Message';
 
 const ResultDetails = () => {
 
@@ -80,10 +81,9 @@ const queryClient = useQueryClient();
 
 const {mutate, isError, isLoading, isSuccess} = 
   useMutation(saveSection_Fn, {
-    /* onSuccess: (list) => {
-      queryClient.invalidateQueries(["getlistquestion"]),
-      queryClient.invalidateQueries(["getquestionoptions"])
-    } */
+    onSuccess: (list) => {
+      /* queryClient.invalidateQueries(["getlistsection"]) */
+    }
   });
 
   const actionSaveSection = () => {
@@ -155,12 +155,16 @@ console.log({isError, isLoading, isSuccess});
           <Card.Section>
             <Button 
               btnText='Save Section'
-              /* loadingState={isLoading} */ 
+              loadingState={isLoading} 
               wBtn='100%' 
               mBtn='10px 0'
               eventAction={actionSaveSection}
               />  
           </Card.Section>
+          
+          {/* Interaction messages */}
+          {isError && <Message mesagge="Server Error" error={true}/>}
+          {isSuccess && <Message mesagge="Save section success" />}
     </Card>
   )
 }

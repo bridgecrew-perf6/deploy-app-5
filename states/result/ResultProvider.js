@@ -74,8 +74,8 @@ const ResultProvider = ({children}) => {
 
   /* Interactions API */
   const saveSection_Fn = async(section) => {
-    console.log("test register sections", section);
     const rs = await saveSectionServer( section, state.quizId, state.idCurrentSection);
+    console.log("respuesta de save:", rs);
     return rs;
   }
 

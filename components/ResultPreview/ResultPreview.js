@@ -1,41 +1,30 @@
 import React from 'react'
-import { contextResult } from '../../states/result/ResultProvider'
+import { useQuery } from 'react-query';
+import { contextResult } from '../../states/result/ResultProvider';
+import SectionBasic from '../SectionsResult/SectionBasic';
+import Skeleton from '../Skeleton/Skeleton';
+import { Div } from './styles';
 
-const ResultPreview = () => {
+const ResultPreview = ({isLoading}) => {
 
   const {sectionsList}  = contextResult();
 
+  console.log("validate", sectionsList);
 
+
+  if(isLoading)
+  return <Skeleton lineText={20}/>
 
   return (
-    <div>
-      <h2>Result</h2>
-
+    <Div>
+      <h1>Your results</h1>
       {
-        sectionsList.map(e => {
+        sectionsList.map(data => {
           
-          const {title, subtitle, parragrah} = e.content;
-
-          return (
-            <>
-
-            <h2>title:{title}</h2>
-
-            <h3>subtitle:{subtitle}</h3>
-
-            <p>parragrah:{parragrah}</p>
-
-            <br/>
-              <hr/>
-
-            </>
-
-          )
+            return <SectionBasic data={data}/>
         })
       }
-      
-
-    </div>
+    </Div>
   )
 }
 

@@ -18,8 +18,7 @@ const QuestionPreview = () => {
   /* get question selected server */
   const {
     isLoading,
-    isFetching,
-    isRefetching
+    isFetching
     } = useQuery(['getquestionoptions', idEditingPreview], () => getQuestionOptions_Fn(idEditingPreview) );
 
     if( isLoading || isFetching){

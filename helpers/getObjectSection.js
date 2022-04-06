@@ -1,5 +1,6 @@
 import React from 'react'
-const Diamond = require('../public/imagePrev.png');
+import image from '../public/imagePrev.png'
+
 
 export const getObjectSection = (selectSelected) => {
 
@@ -15,7 +16,7 @@ export const getObjectSection = (selectSelected) => {
       subtitle: "Write a subtitle",
       parragrah: "Yoy descriptions",
       images:[{
-        id: 0, label:'Text',  image: `${Diamond}`
+        id: 0, label:'Text',  image: image.src
       }]
     }
   }

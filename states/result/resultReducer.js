@@ -78,6 +78,7 @@ const resultReducer = (state, action) => {
 
   const loadStateListSection = ({items, totalItems}) => {
     const itemsObj = items.map(e => ({...e, content: JSON.parse(e.content)}))
+    console.log("reisar:", itemsObj);
     return {
       ...state,
       sectionsList: itemsObj,
