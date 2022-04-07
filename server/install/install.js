@@ -5,12 +5,14 @@ import { iv , encrypt} from '../utils/encrypt';
 
 
 export const installExecute = async (shop) => {
-    console.log("install...");
+    console.log("install...", shop);
     const shopURL = `https://${shop}`;
 
     const response = await clientAxios.post('/v1/auth/create-account', {"shop": shopURL});
+
+    console.log("test res:", response.data);
   
-    const res =  saveSesionStore(response);
+     await saveSesionStore(response);
 
   
 }
