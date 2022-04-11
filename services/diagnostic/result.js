@@ -1,42 +1,22 @@
-import axios from "axios";
-
-const API='https://mmm-diagnostic-api.herokuapp.com';
+import clientAxios from "../config/clientAxios";
 
 
 export const saveSectionServer = async (data, idQuiz, idSection) => {
-
-  const TOKEN = localStorage.getItem('tokenAPI');
 
   const section_data = {...data, content: JSON.stringify(data.content)} 
 
   console.log("despues",data);
 
-  const  response  = await axios({
-    method: "PUT",
-    headers: {
-      'X-Auth-Token': TOKEN,
-      'Content-Type': 'application/json'
-    },
-    url: `${API}/v1/result/${idQuiz}/set/${idSection}`,
-    data: JSON.stringify(section_data),
-
-  });
+  const URL = `/v1/result/${idQuiz}/set/${idSection}`;
+  const  response  = await clientAxios.put(URL, section_data);
 
   return response;
 }
 
 export const getSectionListServer = async (idQuiz) => {
 
-  const TOKEN = localStorage.getItem('tokenAPI');
-
-  const response = await axios({
-    method: 'GET',
-    headers: {
-      'X-Auth-Token': TOKEN,
-      'Content-Type': 'application/json'
-    },
-    url: `${API}/v1/result/${idQuiz}/list`
-  });
+  const URL = `/v1/result/${idQuiz}/list`
+  const response = await clientAxios.get(URL);
 
   return response;
 

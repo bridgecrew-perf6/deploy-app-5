@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-console.log(path.join());
- export const saveSesionStore = (data) => {
+
+ export const saveFileSession = (data) => {
 
   data = {
     "shop": "https://m4ke-my-m4sk.myshopify.com/",

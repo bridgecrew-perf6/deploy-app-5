@@ -1,39 +1,15 @@
-import axios from "axios";
-import { geturlAPI } from "../config/axiosFront";
 
-// const API = await  geturlAPI();
-
-const API='https://mmm-diagnostic-api.herokuapp.com';
+import clientAxios from "../config/clientAxios";
 
 export const saveIntroductionServer = async (data, idQuiz) => {
 
-  const TOKEN = localStorage.getItem('tokenAPI');
-
-      const  response  = await axios({
-        method: "PUT",
-        headers: {
-          'X-Auth-Token': TOKEN,
-          'Content-Type': 'application/json'
-        },
-        url: `${API}/v1/quiz/${idQuiz}/introduction`,
-        data: JSON.stringify(data),
-      });
-      return response;
-    
+      const  response  = await clientAxios.put(`/v1/quiz/${idQuiz}/introduction`, data);
+      return response;   
 }
 
 export const getIntroductionServer = async (idQuiz) => {
 
-  const TOKEN = localStorage.getItem('tokenAPI');
-
-      const  response  = await axios({
-        method: "GET",
-        headers: {
-          'X-Auth-Token': TOKEN,
-          'Content-Type': 'application/json'
-        },
-        url: `${API}/v1/quiz/${idQuiz}/introduction`,
-      });
+      const  response  = await clientAxios.get(`/v1/quiz/${idQuiz}/introduction`);
       return response;
    
 }

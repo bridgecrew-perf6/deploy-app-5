@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react'
-import {tokenSession} from '../../services/init/session';
 import diagnosticReducer from './diagnosticReducer';
 import {saveIntroductionServer, getIntroductionServer} from '../../services/diagnostic/introduction';
 import { deleteQuestionServer, getQuestionListServer, getQuestionOptionListServer, saveQuestionServer, deleteOptionQuestionServer, saveOrderQuestionServer } from '../../services/diagnostic/question';
@@ -14,10 +13,7 @@ export const contextDiagnostic = () => {
 
 const DiagnosticProvider = ({ children }) => {
 
-  useEffect(() => {
-    console.log("verificando contacto al serve");
-    tokenSession();
-  }, [])
+  
 
   const initialState = {
 

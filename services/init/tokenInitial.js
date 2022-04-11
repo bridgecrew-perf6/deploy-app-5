@@ -1,7 +1,7 @@
 
 import axios from 'axios'
 
-export const tokenSession = async () => {
+export const tokenInitial = async () => {
   const token = localStorage.getItem('tokenAPI');
   if(token) {
     console.log("el token existe");
