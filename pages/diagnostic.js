@@ -7,18 +7,6 @@ import {
 } from '@shopify/polaris';
 
 import { contextDiagnostic } from '../states/diagnostic/DiagnosticProvider';
-
-import IntroductionDetails from '../components/IntroductionDetails/IntroductionDetails';
-import IntroductionPreview from '../components/IntroductionPreview/IntroductionPreview';
-
-import QuestionPreview from '../components/QuestionPreview/QuestionPreview';
-import QuestionList from '../components/QuestionList/QuestionList';
-import QuestionDetails from '../components/QuestionDetails/QuestionDetails';
-
-import ResultPreview from '../components/ResultPreview/ResultPreview';
-import ResultDetails from '../components/ResultDetails/ResultDetails';
-
-import CardPreview from '../components/CardPreview/CardPreview';
 import TabsNav from '../components/Tabs/TabsNav';
 import propsTabs from '../components/Tabs/data';
 
@@ -62,7 +50,6 @@ const Diagnostic = () => {
       isLoading: loadQuestion
       } = useQuery(['getlistquestion'], getListQuestion_Fn);
 
- 
 
   /* Updating order question list */
 

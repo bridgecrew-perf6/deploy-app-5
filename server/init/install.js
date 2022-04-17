@@ -11,7 +11,7 @@ export const installExecute = async (shop) => {
 
     console.log("test res:", response.data);
   
-     await saveFileSession(response);
+    await saveFileSession(response);
 
 }
 

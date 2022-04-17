@@ -146,7 +146,6 @@ const DiagnosticProvider = ({ children }) => {
 
   const getIntroduction_Fn = async () => {
     const rs = await getIntroductionServer(state.quizId);
-    rs.status === 200 ? console.log("succes") : console.log("error")
 
     dispatch({
       type : 'GET_INTRODUCCION_STATE',
