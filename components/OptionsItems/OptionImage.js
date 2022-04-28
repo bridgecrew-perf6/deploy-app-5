@@ -1,29 +1,27 @@
-import React from 'react'
-import InputCustom from '../Input/InputCustom'
-import ItemImage from '../Items/ItemImage'
-import { UploadSvg } from '../Svgs/SvgFiles'
+import React from "react";
+import InputCustom from "../Input/InputCustom";
+import ItemImage from "../Items/ItemImage";
+import { UploadSvg } from "../Svgs/SvgFiles";
 
-const OptionImage = ({element, handleTagEditable, handleChangeText}) => {
+const OptionImage = ({ element, handleChangeText }) => {
+  console.log("lement", element);
   return (
-          
-            <ItemImage 
-              urlImg={element.image} 
-              iconSvg={<UploadSvg/>}
-              dataId={element.id} 
-              handleTagEditable={handleTagEditable}
-              textLabel={element.label} 
-            >                     
-                <InputCustom 
-                  dataId={element.id} 
-                  typeInput="file"
-                  nameInput="image"
-                  handle={handleChangeText}
-                  valueInput={element.image}
-                  hideValue={true}            
-              />
-            </ItemImage>  
+    <ItemImage
+      urlImg={element.image}
+      iconSvg={<UploadSvg />}
+      dataId={element.id}
+      handleTag={handleChangeText}
+      tagText={element.label}
+    >
+      <InputCustom
+        dataId={element.id}
+        typeInput="file"
+        nameInput="image"
+        handle={handleChangeText}
+        valueInput={element.image}
+      />
+    </ItemImage>
+  );
+};
 
-  )
-}
-
-export default OptionImage
+export default OptionImage;

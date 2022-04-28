@@ -1,46 +1,47 @@
-import React from 'react'
-import Img from '../Img/Img';
-import { EmptyStyle, SectionStyles } from './styles'
+import React from "react";
+import Img from "../Img/Img";
+import { EmptyStyle, SectionStyles } from "./styles";
 
-const SectionBasic = ({data}) => {
+const SectionBasic = ({ data }) => {
+  const { type, id } = data;
+  const { title, subtitle, parragrah, images } = data.content;
 
-  const {type} = data;
-  const {title, subtitle, parragrah, images} = data.content;
-
-  console.log(type);
+  console.log(data);
   return (
-          <SectionStyles>
+    <SectionStyles>
+      <h2>{title}</h2>
 
-            <h2>{title}</h2>
+      <h3>{subtitle}</h3>
 
-            <h3>{subtitle}</h3>
+      <p>{parragrah}</p>
 
-            <p>{parragrah}</p>
+      {type === "images" && (
+        <div>
+          {images.map((img) => (
+            <span key={img.id}>
+              <Img urlImg={img.image} wImg="130px" hImg="130px" />
+              {img.label}
+            </span>
+          ))}
+        </div>
+      )}
 
-            {type === 'sectionImage' &&
-              <span>
-                {images.map(img => 
-                  (
-                    <Img urlImg={img.image} wImg="130px" hImg="130px"/>
-                  )
-                )}
-              </span>
-            }
+      {type === "blocks" && (
+        <div>
+          {images.map((img) => (
+            <span key={img.id}>
+              <Img urlImg={img.image} wImg="130px" hImg="130px" />
+              {img.label}
+            </span>
+          ))}
+        </div>
+      )}
 
-            {type === 'score' &&
-              <EmptyStyle>
-                Score
-              </EmptyStyle>
-            }
+      {type === "score" && <EmptyStyle>Score</EmptyStyle>}
 
-            {type === 'recommendation' &&
-              <EmptyStyle>
-                Recommendation
-              </EmptyStyle>
-            }
+      {type === "recommendation" && <EmptyStyle>Recommendation</EmptyStyle>}
+    </SectionStyles>
+  );
+};
 
-          </SectionStyles>
-  )
-}
-
-export default SectionBasic
+export default SectionBasic;
