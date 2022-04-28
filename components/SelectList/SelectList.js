@@ -5,12 +5,12 @@ import { Div } from './styles';
 
 
 
-const SelectList = ({optionsQuestion, selectSelected, handleSelectChange}) => {
+const SelectList = ({optionsQuestion, selectSelected, handleSelectChange, title}) => {
 
   return (
     <Div>
       <Select
-          label="Date range"
+          label={title}
           options={optionsQuestion}
           onChange={handleSelectChange}
           value={selectSelected}

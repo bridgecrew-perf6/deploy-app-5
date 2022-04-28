@@ -1,5 +1,4 @@
 import {  getKey_Value_ChoiceSelected } from '../../helpers/helpersReducer';
-import { uid } from 'uid';
 import nextId, {setPrefix} from "react-id-generator";
 
 
@@ -18,14 +17,14 @@ const diagnosticReducer = (state , action) => {
     'CHANGE_STATE_LABEL_EDITABLE'   : () => changeStateLabelEditable(action.payload),
     'DELETE_STATE_OPTION_QUESTION'  : () => deleteChoiceQuestion(action.payload),
     'GET_INTRODUCCION_STATE'        : () => getIntroductionState(action.payload),
-    'POST_QUESTION_LIST_STATE'      : () => registerQuestionsListState(action.payload),
+    'RESTAT_LIST_CACHE'      : () => restartStateCacheInvalidate(),
     'GET_QUESTION_LIST_ALL_STATE'   : () => getQuestionOptionListState(action.payload),
     'UPDATE_SATATE_QUESTION_PREVIEW': () => updateStateQuestionPreview(action.payload),
     'UPDATE_SATATE_QUESTION_LIST_CACHE': () => updateStateListCache(action.payload),
     'CHANGE_STATE_ID_QUESTION_EDIT_PREVIEW': () => changeIdStateEditingPreview(action.payload),
     'DELETE_STATE_CACHE_QUESTION'       : () => deteleListCacheQuestionState(action.payload),
     'CHANGE_STATE_EDITING'            : () => changeStateEditing(action.payload),
-    'CHANGE_COMPONENT_EDITING'        : () => changeComponentEditing()
+    'UPDATING_LIST_DRAGING'       : () => updatingListQuestionDraging(action.payload)
   }
   const STATE_DEFAULT = state;
   
@@ -58,7 +57,8 @@ const diagnosticReducer = (state , action) => {
       question: state.questionInitials,
       selectSelected: state.questionInitials.type,
       keyChoiceTypeSelected: keyChoice,
-      idEditingPreview: 0
+      idEditingPreview: 0,
+      editingQuestion: false
     }
   }
 
@@ -121,7 +121,8 @@ const diagnosticReducer = (state , action) => {
   const deleteChoiceQuestion = (payload) => {
     return {
       ...state,
-      question: {...state.question, choices: state.question.choices.filter(e => e.id !== payload)}
+      question: {...state.question, choices: state.question.choices.filter(e => e.id !== payload)},
+      listQuestionsCache: []
     }
   }
 
@@ -132,11 +133,10 @@ const diagnosticReducer = (state , action) => {
     }
   }
 
-  const registerQuestionsListState = (payload) => {
+  const restartStateCacheInvalidate = () => {
     return {
       ...state,
-      listQuestions: [...state.listQuestions, payload],
-      listQuestionsCache: [...state.listQuestionsCache, payload],
+      listQuestionsCache:[]
     }
   }
 
@@ -149,12 +149,13 @@ const diagnosticReducer = (state , action) => {
 
  
   const updateStateQuestionPreview = (payload) => {
-    /* const questionPreviewSelected = state.listQuestions.filter((e) => e.id === payload )[0]; */
+    /* Update state question and editing, with question selected  */
     const {keyChoice} = getKey_Value_ChoiceSelected(payload.type);
     return {
       ...state,
       question: payload,
-      keyChoiceTypeSelected: keyChoice
+      keyChoiceTypeSelected: keyChoice,
+      selectSelected: payload.type
     }
   }
 
@@ -184,24 +185,20 @@ const diagnosticReducer = (state , action) => {
   const changeStateEditing = (payload) => {
     return {
       ...state,
-      idEditingPreview: payload
-    }
-  }
-
-  const changeComponentEditing = () => {
-    const {keyChoice} = getKey_Value_ChoiceSelected(state.question.type);
-
-    return {
-      ...state,
+      idEditingPreview: payload,
       createQuestion: true,
       editingQuestion: true,
-      selectSelected: state.question.type,
-      keyChoiceTypeSelected: keyChoice
     }
-
   }
 
+  const updatingListQuestionDraging = (payload) => {
+    return {
+      ...state,
+      listQuestions: payload
+    }
+  }
 
+ 
   /* call condition */
   const stateReturn = STATES_CONDITION[action.type] 
     ? STATES_CONDITION[action.type]() 

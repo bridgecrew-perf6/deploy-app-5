@@ -1,19 +1,6 @@
-
-import clientAxios from '../config/axios';
-import {saveSesionStore , readFileSession} from '../utils/writeReadFile';
 import { iv , encrypt} from '../utils/encrypt';
-
-
-export const installExecute = async (shop) => {
-    console.log("install...");
-    const shopURL = `https://${shop}`;
-
-    const response = await clientAxios.post('/v1/auth/create-account', {"shop": shopURL});
-  
-    const res =  saveSesionStore(response);
-
-  
-}
+import { readFileSession} from '../utils/writeReadFile';
+import serverAxios from '../config/serverAxios';
 
 
 export const getTokenAccesAPI = async () => {
@@ -28,7 +15,7 @@ export const getTokenAccesAPI = async () => {
 
 
     try {
-      const response = await clientAxios({
+      const response = await serverAxios({
         method: "POST",
         headers: {
           'X-Access-Token': `${publicKey}`,
@@ -47,5 +34,3 @@ export const getTokenAccesAPI = async () => {
       console.error(`Error aqui: ${error.message}`);
     }
 }
-
-

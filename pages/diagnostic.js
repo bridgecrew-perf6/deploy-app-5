@@ -26,16 +26,22 @@ import { useCallback, useEffect } from 'react';
 import { useQuery } from 'react-query';
 import Skeleton from '../components/Skeleton/Skeleton';
 import Message from '../components/Message/Message';
+import { useMutation } from 'react-query';
+import LoadingSpinner from '../components/LoadingSpinner/LoadingSpinner';
+import Introduction from '../components/Introduction/Introduction';
+import Questions from '../components/Questions/Questions';
+import Result from '../components/Result/Result';
+import ResultProvider from '../states/result/ResultProvider';
 
 
 const Diagnostic = () => {
 
   const { 
-      selectedTab, 
-      createQuestion, 
+      selectedTab,
       chageSelectedTab_Fn,
       getIntroduction_Fn ,
-      getListQuestion_Fn
+      getListQuestion_Fn,
+      saveOrderListQuestion_Fn
     } = contextDiagnostic();
 
   const {tabsQuestion} = propsTabs();
@@ -52,17 +58,29 @@ const Diagnostic = () => {
       } = useQuery(['getintroduction'], getIntroduction_Fn);
 
   const {
-      isLoading: loadQuestion,
-      isFetching: fetchQuestion,
-      isError: errorQuestion
+      isError: errorQuestion,
+      isLoading: loadQuestion
       } = useQuery(['getlistquestion'], getListQuestion_Fn);
 
-  
-  if(isLoading || isFetching){
-    return (
-        <Skeleton/>
-      )
-  } 
+ 
+
+  /* Updating order question list */
+
+  const { 
+      mutate, 
+      isLoading: loadMutate, 
+      isError: errorMutate, 
+      isSuccess: succesMutate} = useMutation(saveOrderListQuestion_Fn)
+
+  const actionGeneralDiagnostic = () => {
+    mutate();
+  }
+
+    if(isLoading || isFetching){
+      return (
+          <Skeleton lineText={20}/>
+        )
+    }  
   return (
     <>
       <div className='container'>
@@ -70,57 +88,40 @@ const Diagnostic = () => {
         <Page 
           title="My diagnostic" 
           primaryAction={{
-              content: 'Save', 
+              content: loadMutate ? <LoadingSpinner/> : 'Save' , 
               disabled: false,
               onAction: () => {
-                console.log("se hizo click en save");
+                actionGeneralDiagnostic();
               }
           }}>
 
-            {/* tabs */}
-            
+            {/* tabs */}       
               <TabsNav 
                   tabs={tabsQuestion} 
                   selectedTab={selectedTab} 
                   handleTabChange={handleTabChange} 
               />
-            
             {/* endtabs */}
+
+            {/* content tabs */}
             <div className='content_tab'>
-                <div className='content_tab--preview'>   
-                  <CardPreview >                                
-                      { selectedTab === 0 && (<IntroductionPreview/>) }
-                      { selectedTab === 1 && (<QuestionPreview/>)}
-                      { selectedTab === 2 && (<ResultPreview/>)}
-                  </CardPreview>
-                </div>                   
-                
-                
-                {/* diagnostic customize */}
-                <div className='content_tab--customize'>                
-                  { 
-                    selectedTab === 0 
-                      && (<IntroductionDetails/>) 
-                  }
-
-                  { 
-                    selectedTab === 1 
-                      && (
-                          !createQuestion 
-                            ? <QuestionList/> 
-                            : <QuestionDetails/>
-                          ) 
-                  }
-
-                  { 
-                    selectedTab === 2 
-                      && (<ResultDetails/>) }  
-                </div>
+              { selectedTab === 0 && (<Introduction/>) }
+              { selectedTab === 1 && (<Questions loadQuestion={loadQuestion}/>)}
+              { selectedTab === 2 
+                && (
+                <ResultProvider> 
+                  <Result/>
+                </ResultProvider>)
+              }
             </div> 
+            {/* end content tabs */}
+
 
             {/* Message interactions */}
               {isError && <Message mesagge="Server Error" error={true}/>}
               {errorQuestion && <Message mesagge="Question load error" error={true} />}
+              {errorMutate && <Message mesagge="Error saver order" error={true}/>}
+              {succesMutate && <Message mesagge="Save order success" />}
             {/* Message interactions */}
 
         </Page>

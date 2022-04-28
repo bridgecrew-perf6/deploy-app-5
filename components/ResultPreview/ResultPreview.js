@@ -1,9 +1,31 @@
 import React from 'react'
+import { useQuery } from 'react-query';
+import { contextResult } from '../../states/result/ResultProvider';
+import SectionBasic from '../SectionsResult/SectionBasic';
+import Skeleton from '../Skeleton/Skeleton';
+import { Div } from './styles';
 
-const ResultTab = () => {
+const ResultPreview = ({isLoading}) => {
+
+  const {sectionsList}  = contextResult();
+
+  console.log("validate", sectionsList);
+
+
+  if(isLoading)
+  return <Skeleton lineText={20}/>
+
   return (
-    <div>ResultTab</div>
+    <Div>
+      <h1>Your results</h1>
+      {
+        sectionsList.map(data => {
+          
+            return <SectionBasic data={data}/>
+        })
+      }
+    </Div>
   )
 }
 
-export default ResultTab
+export default ResultPreview

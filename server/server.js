@@ -6,7 +6,9 @@ import Shopify, { ApiVersion } from "@shopify/shopify-api";
 import Koa from "koa";
 import next from "next";
 import Router from "koa-router";
-import {getTokenAccesAPI, installExecute} from './install/install';
+import {installExecute} from './init/install';
+import {getTokenAccesAPI} from './init/tokenFresh';
+
 
 dotenv.config();
 const port = parseInt(process.env.PORT, 10) || 8081;
@@ -95,11 +97,8 @@ app.prepare().then(async () => {
 /* test request front ------------------------------*/
   router.get("/tokenapi", async (ctx) => {
     
-    console.log("esto es una prueba server");
     const token = await getTokenAccesAPI();
-    console.log("tokeeeeen", token);
-
-    
+   
     ctx.res.statusCode = 200;
     ctx.body = token;
 

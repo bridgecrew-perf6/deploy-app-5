@@ -17,7 +17,7 @@ const InputCustom = (
           typeInput="text", 
           nameInput, 
           handle, 
-          valueInput, 
+          valueInput='', 
           hideValue = false, 
           classCustom = 'input',
           idInput = 'default',
@@ -41,7 +41,7 @@ const InputCustom = (
             id={idInput}
             wInput={wInput}
             placeholder={placeh}
-            {... (status && {'checked': true})}
+            {... (status && {'checked':  true})}
           /> 
       </>
     )

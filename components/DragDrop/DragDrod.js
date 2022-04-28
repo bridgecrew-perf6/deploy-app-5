@@ -9,9 +9,10 @@ import Message from '../Message/Message';
 
 const DragDrod = () => {
 
-  const { listQuestions, deteleteQuestion_Fn, listQuestionsCache} = contextDiagnostic();
+  const { listQuestions, deteleteQuestion_Fn, updatListQuestionDraging_Fn} = contextDiagnostic();
 
-  const [deleting, setDeleting] = useState({status:false, id:0})
+  const [showconfirm, setShowconfirm] = useState({status:false, id:0})
+
 
   const reorderQuestions = (list, startIndex, endIndex) => {
     const result =[...list];
@@ -20,25 +21,30 @@ const DragDrod = () => {
     return result;
   }
 
+  console.log("list drag", listQuestions);
 
-  /* Deleted Question  */
+  /* Deleted Question server  */
   const queryClient = useQueryClient();
 
   const {mutate, isError, isLoading, isSuccess} = 
     useMutation(deteleteQuestion_Fn,{
       onSuccess: (list) => {
+        setShowconfirm({status:false, id:0});
         queryClient.invalidateQueries(["getlistquestion"])
+      },
+      onError: (rs) => {
+        setShowconfirm({status:false, id:0});
       }
     });
 
   const deleteValidate = (id_question) => {  
-    setDeleting({status:true, id:id_question});
+    setShowconfirm({status:true, id:id_question});
   }
 
   const deletedConfirmQuestion = () => {
-    mutate(deleting.id);
-    setDeleting(false);
+    mutate(showconfirm.id);
   }
+  /* Deleted Question server  */
 
   return (
   <>
@@ -51,7 +57,8 @@ const DragDrod = () => {
           return;
         }
       
-        setList(prev => reorderQuestions(prev, source.index, destination.index))
+        updatListQuestionDraging_Fn(reorderQuestions(listQuestions, source.index, destination.index))
+        
       }}>
 
         <Droppable 
@@ -81,6 +88,7 @@ const DragDrod = () => {
                           <OptionDelete 
                             actionDelete={() => deleteValidate(element.id)}
                             loadingState={isLoading}
+                            resetState={showconfirm}
                           >
                         
                             <QuestionItem 
@@ -110,12 +118,12 @@ const DragDrod = () => {
     </DragDropContext>
 
       {/* Message interactions */}
-      { deleting.status && 
+      {showconfirm.status && 
         <MessageConfirm  
           mesagge="¿You're sure?" 
           actionTitle="Sure" 
           actionChange={deletedConfirmQuestion} 
-          changeStateDelete={setDeleting} 
+          changeStateDelete={setShowconfirm} 
         />
       }
 
