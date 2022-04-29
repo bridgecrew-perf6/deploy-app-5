@@ -114,7 +114,10 @@ const ResultDetails = () => {
       </Card.Section>
 
       <Card.Section>
-        <FormSection content={content} handleChangeText={handleChangeText} />
+        <FormSection 
+          content={content} 
+          handleChangeText={handleChangeText} 
+        />
       </Card.Section>
 
       {contentType && (
