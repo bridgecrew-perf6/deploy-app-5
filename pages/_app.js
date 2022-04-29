@@ -8,18 +8,17 @@ import { Redirect } from "@shopify/app-bridge/actions";
 import "@shopify/polaris/dist/styles.css";
 import translations from "@shopify/polaris/locales/en.json";
 import DiagnosticProvider from "../states/diagnostic/DiagnosticProvider";
-import Layout from '../components/Layout';
-import {QueryClient, QueryClientProvider} from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools'
+import Layout from "../components/Layout";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
-const queryClient = new QueryClient({ 
+const queryClient = new QueryClient({
   defaultOptions: {
-    queries : {
+    queries: {
       refetchOnWindowFocus: false,
-      cacheTime: false
-    }
-  }
-  
+      cacheTime: false,
+    },
+  },
 });
 
 function userLoggedInFetch(app) {
@@ -62,7 +61,7 @@ function MyProvider(props) {
         <DiagnosticProvider>
           <Layout>
             <Component {...props} />
-          <ReactQueryDevtools/>
+            <ReactQueryDevtools />
           </Layout>
         </DiagnosticProvider>
       </QueryClientProvider>
@@ -73,12 +72,13 @@ function MyProvider(props) {
 class MyApp extends App {
   render() {
     const { Component, pageProps, host } = this.props;
+
     return (
       <AppProvider i18n={translations}>
         <Provider
           config={{
             apiKey: API_KEY,
-            host: host,
+            host: Buffer.from(HOST).toString("base64"),
             forceRedirect: true,
           }}
         >

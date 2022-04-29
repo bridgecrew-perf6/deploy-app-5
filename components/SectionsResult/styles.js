@@ -62,8 +62,21 @@ export const EmptyStyle = styled.div(({ height }) => {
   `;
 });
 
-export const blockStyle = styled.div(() => {
+export const BlockStyle = styled.span(() => {
   return css`
     border: 1px solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 150px;
+    min-height: 250px;
+    padding: 30px 15px;
+
+    img {
+      margin: 0;
+    }
+    strong {
+      margin: 10px 0;
+    }
   `;
 });

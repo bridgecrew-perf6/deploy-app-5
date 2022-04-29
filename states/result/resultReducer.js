@@ -100,12 +100,10 @@ const resultReducer = (state, action) => {
     };
   };
 
-  const chageStateOptionSection = ({
-    name,
-    value,
-    id_option,
-    idCurrentSection,
-  }) => {
+  const chageStateOptionSection = (payload) => {
+    const { name, value, id_option, idCurrentSection } = payload;
+    const option = state.typeSectionSelected;
+
     return {
       ...state,
       sectionsList: state.sectionsList.map((e) =>
@@ -114,7 +112,7 @@ const resultReducer = (state, action) => {
               ...e,
               content: {
                 ...e.content,
-                images: e.content.images.map((op) =>
+                [option]: e.content[option].map((op) =>
                   op.id === parseInt(id_option) ? { ...op, [name]: value } : op
                 ),
               },

@@ -110,8 +110,7 @@ const ResultDetails = () => {
           optionsQuestion={optionsSection}
           selectSelected={typeSectionSelected}
           handleSelectChange={handleSelectChange}
-        />{" "}
-        {/* select option type section */}
+        />
       </Card.Section>
 
       <Card.Section>

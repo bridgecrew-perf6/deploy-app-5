@@ -17,7 +17,6 @@ const OptionSection = ({ content, handleChangeText }) => {
             >
               <OptionImage
                 element={element}
-                /* handleTagEditable={handleTagEditable} */
                 handleChangeText={handleChangeText}
               />
             </OptionDelete>
