@@ -42,16 +42,15 @@ const resultReducer = (state, action) => {
     const idCurrent = state.idCurrentSection;
     const objectInitial = getObjectSection(typeSection);
  
-    const objUpdate = state.sectionsList.map(e => 
-          e.id === idCurrent 
-            ? 
-            {...e, 
-              type: typeSection, 
-              content: objectInitial 
-            } 
-            : 
-            e
-          )
+    const objUpdate = state.sectionsList.map(e =>
+      e.id === idCurrent
+        ? {
+            ...e, 
+            type: typeSection, 
+            content: objectInitial 
+          }
+        :e
+    )
 
     return {
       ...state,
@@ -71,17 +70,16 @@ const resultReducer = (state, action) => {
   const changeStateSectionForm = ({name, value, id_section}) => { 
     return {
       ...state,
-      sectionsList: state.sectionsList.map(e => 
-            e.id === id_section 
-            ? 
-            {...e, 
-              content : 
-                {...e.content, 
-                  [name]: value
-                } 
+      sectionsList: state.sectionsList.map(e =>
+        e.id === id_section
+          ? {
+              ...e, 
+              content :{
+                ...e.content, 
+                [name]: value
+              } 
             } 
-            : 
-            e
+          :e
           )    
   }
 }
@@ -93,25 +91,25 @@ const resultReducer = (state, action) => {
 
     return{
       ...state,
-      sectionsList: state.sectionsList.map(e => 
-            e.id === idCurrentSection 
-            ? 
-            {...e, 
-              content : 
-                {...e.content, 
-                  [option]:
-                    [...e.content[option], 
-                      {
-                        id: parseInt(nextId()), 
-                        label: 'Text', 
-                        listItem:'Item1, Item2, Item3', 
-                        [keyChoice]: valueChoice
-                      }
-                    ]} 
+      sectionsList: state.sectionsList.map(e =>
+        e.id === idCurrentSection
+          ? {
+              ...e, 
+              content: {
+                ...e.content, 
+                [option]: [
+                  ...e.content[option], 
+                  {
+                    id: parseInt(nextId()), 
+                    label: 'Text', 
+                    listItem:'Item1, Item2, Item3', 
+                    [keyChoice]: valueChoice
+                  }
+                ]
+              } 
             } 
-            : 
-            e
-          )   
+          : e
+      )   
     }
   }
 
@@ -126,31 +124,30 @@ const resultReducer = (state, action) => {
 
     return {
       ...state,
-      sectionsList: state.sectionsList.map(e => 
-            e.id === idCurrentSection 
-            ? 
-            {...e, 
-              content : 
-                {...e.content, 
-                  [option]: e.content[option].map(op => 
-                    op.id === parseInt(id_option) 
-                    ? 
-                    {...op, 
-                      [name]: value} 
-                    : 
-                    op
+      sectionsList: state.sectionsList.map(e =>
+        e.id === idCurrentSection
+          ? {
+              ...e, 
+              content : {
+                ...e.content, 
+                [option]: e.content[option].map(op =>
+                  op.id === parseInt(id_option)
+                    ? {
+                        ...op, 
+                        [name]: value
+                      } 
+                    : op
                   )
-                } 
+              } 
             } 
-            : 
-            e
-          ) 
+          : e
+      ) 
     }
   }
 
   const loadStateListSection = ({items, totalItems}) => {
     const itemsObj = items.map(e => ({...e, content: JSON.parse(e.content)}))
-    console.log("reisar:", itemsObj);
+
     return {
       ...state,
       sectionsList: itemsObj,
