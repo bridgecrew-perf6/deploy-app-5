@@ -1,6 +1,8 @@
 import React from "react";
 import Img from "../Img/Img";
-import { EmptyStyle, SectionStyles, BlockStyle } from "./styles";
+import { ListSvg } from "../Svgs/SvgFiles";
+import UnorderedList from "../UnorderedList/UnorderedList";
+import { EmptyStyle, SectionStyles, BlockStyle, ImageStyle } from "./styles";
 
 const SectionBasic = ({ data }) => {
   const { type, id } = data;
@@ -8,7 +10,7 @@ const SectionBasic = ({ data }) => {
 
   console.log(data);
   return (
-    <SectionStyles key={id}>
+    <SectionStyles key={id} blocks={blocks}>
       <h2>{title}</h2>
 
       <h3>{subtitle}</h3>
@@ -18,10 +20,10 @@ const SectionBasic = ({ data }) => {
       {type === "images" && (
         <div>
           {images.map((img) => (
-            <span>
+            <ImageStyle>
               <Img urlImg={img.image} wImg="130px" hImg="130px" />
               {img.label}
-            </span>
+            </ImageStyle>
           ))}
         </div>
       )}
@@ -30,9 +32,11 @@ const SectionBasic = ({ data }) => {
         <div>
           {blocks.map((block) => (
             <BlockStyle>
-              <Img urlImg={block.image} wImg="80px" hImg="80px" />
+              <span>
+              <Img urlImg={block.image} wImg="90%" hImg="70px" />
               <strong>{block.label}</strong>
-              <span>{block.listItem}</span>
+              </span>
+              <UnorderedList data={block.listItem} icon={<ListSvg/>}/>
             </BlockStyle>
           ))}
         </div>

@@ -2,7 +2,7 @@ import { SYMBOL_PREVIEW_DATA } from "next/dist/server/api-utils";
 import styled, { css } from "styled-components";
 import theme from "../../styles/theme";
 
-export const SectionStyles = styled.div(() => {
+export const SectionStyles = styled.div(({blocks}) => {
   return css`
     display: flex;
     flex-direction: column;
@@ -32,21 +32,23 @@ export const SectionStyles = styled.div(() => {
       padding: 0 40px 0 40px;
     }
 
-    div {
+   > div {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 4rem;
+      gap: ${blocks ? '1rem' : '4rem'};
       margin: 10px 0;
-
-      span {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
+      width: 100%;
     }
   `;
 });
+
+export const ImageStyle = styled.span`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+`;
 
 export const EmptyStyle = styled.div(({ height }) => {
   return css`
@@ -62,15 +64,30 @@ export const EmptyStyle = styled.div(({ height }) => {
   `;
 });
 
-export const BlockStyle = styled.span(() => {
+export const BlockStyle = styled.div(() => {
   return css`
-    border: 1px solid;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 150px;
+    align-items: flex-start;
+    width: 23%;
     min-height: 250px;
-    padding: 30px 15px;
+    border-radius: 10px;
+
+    > span {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 15px 0;
+  
+    }
+
+    &:nth-child(odd) {
+      background-color: ${theme.colors.btnHover};
+    }
+    &:nth-child(even) { 
+      background-color: ${theme.colors.backgGrey}; 
+    }
 
     img {
       margin: 0;
@@ -80,3 +97,5 @@ export const BlockStyle = styled.span(() => {
     }
   `;
 });
+
+

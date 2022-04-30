@@ -1,7 +1,7 @@
 import React from 'react'
 import { Textarea } from './styles'
 
-const InputTextarea = ({dataId, nameInput, handle, valueInput, labelText}) => {
+const InputTextarea = ({dataId, nameInput, handle, valueInput, labelText, wTxtarea}) => {
     return (
       <>
       <p>{labelText}</p>
@@ -12,6 +12,7 @@ const InputTextarea = ({dataId, nameInput, handle, valueInput, labelText}) => {
         name={nameInput}
         onChange={handle}
         value={valueInput}
+        wTxtarea={wTxtarea}
       > </Textarea>
       </>
     )

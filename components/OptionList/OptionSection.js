@@ -41,6 +41,7 @@ const OptionSection = ({ content, handleChangeText }) => {
               nameInput="listItem"
               handle={handleChangeText}
               valueInput={element.listItem}
+              wTxtarea="80%"
             />
           </Card.Subsection>
         ))}
