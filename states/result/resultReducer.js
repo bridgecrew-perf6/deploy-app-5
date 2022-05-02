@@ -27,7 +27,14 @@ const resultReducer = (state, action) => {
     return {
       ...state,
       createSection: isTrue,
-      sectionsList : [...state.sectionsList, {id:idCurrent, type:state.typeSectionSelected, content:objecContent}]
+      sectionsList : [
+          ...state.sectionsList, 
+          {
+            id:idCurrent, 
+            type:state.typeSectionSelected, 
+            content:objecContent
+          }
+        ]
     }
   }
 
@@ -35,7 +42,15 @@ const resultReducer = (state, action) => {
     const idCurrent = state.idCurrentSection;
     const objectInitial = getObjectSection(typeSection);
  
-    const objUpdate = state.sectionsList.map(e => e.id===idCurrent ? {...e, type: typeSection, content: objectInitial } : e)
+    const objUpdate = state.sectionsList.map(e =>
+      e.id === idCurrent
+        ? {
+            ...e, 
+            type: typeSection, 
+            content: objectInitial 
+          }
+        :e
+    )
 
     return {
       ...state,
@@ -55,30 +70,84 @@ const resultReducer = (state, action) => {
   const changeStateSectionForm = ({name, value, id_section}) => { 
     return {
       ...state,
-      sectionsList: state.sectionsList.map(e => e.id === id_section ? {...e, content : {...e.content, [name]: value} } : e)    
+      sectionsList: state.sectionsList.map(e =>
+        e.id === id_section
+          ? {
+              ...e, 
+              content :{
+                ...e.content, 
+                [name]: value
+              } 
+            } 
+          :e
+          )    
   }
 }
 
   const addOptionSection = (idCurrentSection) => {
 
     const {keyChoice, valueChoice} = getKey_Value_ChoiceSelected('image');
+    const option = state.typeSectionSelected;
 
     return{
       ...state,
-      sectionsList: state.sectionsList.map(e => e.id === idCurrentSection ? {...e, content : {...e.content, images:[...e.content.images, {id: parseInt(nextId()), label: 'Text', [keyChoice]: valueChoice}]} } : e)   
+      sectionsList: state.sectionsList.map(e =>
+        e.id === idCurrentSection
+          ? {
+              ...e, 
+              content: {
+                ...e.content, 
+                [option]: [
+                  ...e.content[option], 
+                  {
+                    id: parseInt(nextId()), 
+                    label: 'Text', 
+                    listItem:'Item1, Item2, Item3', 
+                    [keyChoice]: valueChoice
+                  }
+                ]
+              } 
+            } 
+          : e
+      )   
     }
   }
 
-  const chageStateOptionSection = ({name, value, id_option, idCurrentSection}) => {
+  const chageStateOptionSection = (payload) => {
+    const {
+      name, 
+      value, 
+      id_option, 
+      idCurrentSection
+    } = payload;
+    const option = state.typeSectionSelected;
+
     return {
       ...state,
-      sectionsList: state.sectionsList.map(e => e.id === idCurrentSection ? {...e, content : {...e.content, images: e.content.images.map(op => op.id === parseInt(id_option) ? {...op, [name]: value} : op)} } : e) 
+      sectionsList: state.sectionsList.map(e =>
+        e.id === idCurrentSection
+          ? {
+              ...e, 
+              content : {
+                ...e.content, 
+                [option]: e.content[option].map(op =>
+                  op.id === parseInt(id_option)
+                    ? {
+                        ...op, 
+                        [name]: value
+                      } 
+                    : op
+                  )
+              } 
+            } 
+          : e
+      ) 
     }
   }
 
   const loadStateListSection = ({items, totalItems}) => {
     const itemsObj = items.map(e => ({...e, content: JSON.parse(e.content)}))
-    console.log("reisar:", itemsObj);
+
     return {
       ...state,
       sectionsList: itemsObj,

@@ -41,12 +41,13 @@ const QuestionPreview = () => {
                   <span key={element.id} className="option">
                     { typeSelected === 'image' || typeSelected=== 'color'
                       ? 
-                      typeSelected === 'image' 
+                        typeSelected === 'image' 
                           ? <>
-                            <Img 
-                              urlImg={element[keyChoiceTypeSelected]} wImg='50px'
-                              hImg='50px'
-                            /> <p>{element.label}</p>
+                              <Img 
+                                urlImg={element[keyChoiceTypeSelected]} wImg='50px'
+                                hImg='50px'
+                              /> 
+                              <p>{element.label}</p>
                             </>
                           : <>
                             <ColorBg bgColor={element[keyChoiceTypeSelected]}/>
