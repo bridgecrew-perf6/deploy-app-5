@@ -72,13 +72,14 @@ function MyProvider(props) {
 class MyApp extends App {
   render() {
     const { Component, pageProps, host } = this.props;
-
+    const hostAlternative = host ? host : Buffer.from(HOST).toString("base64");
+    
     return (
       <AppProvider i18n={translations}>
         <Provider
           config={{
             apiKey: API_KEY,
-            host: Buffer.from(HOST).toString("base64"),
+            host: hostAlternative,
             forceRedirect: true,
           }}
         >

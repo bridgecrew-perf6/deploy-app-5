@@ -21,10 +21,10 @@ const InputCustom = ({
   placeh,
   wInput,
   hInput,
-}) => {
+}) => { 
   return (
     <>
-      <p>{labelText}</p>
+      {labelText && <p>{labelText}</p>}
       <InputStyles
         data-id={dataId}
         type={typeInput}

@@ -21,7 +21,6 @@ const DragDrod = () => {
     return result;
   }
 
-  console.log("list drag", listQuestions);
 
   /* Deleted Question server  */
   const queryClient = useQueryClient();

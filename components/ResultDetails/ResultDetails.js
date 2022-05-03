@@ -24,7 +24,7 @@ const ResultDetails = () => {
     saveSection_Fn,
   } = contextResult();
 
-  console.log(sectionsList);
+
   /* get sections current */
   const sectionCurrent = sectionsList.filter(
     (e) => e.id === idCurrentSection
@@ -32,7 +32,6 @@ const ResultDetails = () => {
 
   const { content } = sectionCurrent;
 
-  console.log({ sectionCurrent, content });
   /* options select */
   const { optionsSection } = selectProps();
 
@@ -67,7 +66,6 @@ const ResultDetails = () => {
     }
 
     let id_option = e.target.dataset.id;
-    console.log({ name, value, id_option, idCurrentSection });
 
     changeStateOption_Fn(name, value, id_option, idCurrentSection);
   };
@@ -90,7 +88,6 @@ const ResultDetails = () => {
     mutate(sectionCurrent);
   };
   /* Send register question update */
-  console.log({ isError, isLoading, isSuccess });
 
   return (
     <Card>

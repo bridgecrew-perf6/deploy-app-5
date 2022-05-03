@@ -188,8 +188,9 @@ const DiagnosticProvider = ({ children }) => {
     if(id_question_preview === 0) return;
     
      const questionPreviewSelected = state.listQuestionsCache.filter((e) => e.id === id_question_preview );
-     console.log(questionPreviewSelected);
+
     let questionOptionsUdtateServe;
+    
      if(questionPreviewSelected.length === 0){
        questionOptionsUdtateServe = await getOneQuestionOptions(id_question_preview);
         dispatcherUpdateQuestionSelected(questionOptionsUdtateServe);

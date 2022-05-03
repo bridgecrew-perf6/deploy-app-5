@@ -8,7 +8,6 @@ const SectionBasic = ({ data }) => {
   const { type, id } = data;
   const { title, subtitle, parragrah, images, blocks } = data.content;
 
-  console.log(data);
   return (
     <SectionStyles key={id} blocks={blocks}>
       <h2>{title}</h2>

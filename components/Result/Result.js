@@ -19,7 +19,6 @@ const Result = () => {
 
 /* get server list sections */
 
-console.log("sections:",{isError, isLoading});
 
   return (
     <>

@@ -8,7 +8,6 @@ import { Div } from "./styles";
 const ResultPreview = ({ isLoading }) => {
   const { sectionsList } = contextResult();
 
-  console.log("validate", sectionsList);
 
   if (isLoading) return <Skeleton lineText={20} />;
 
