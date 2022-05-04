@@ -9,12 +9,12 @@ import  Button  from '../Button/Button';
 const IntroductionPreview = () => {
 
   const {
-      introductionObj : { 
-                      heading, 
-                      subheading, 
-                      buttonText 
-                    } 
-      } = contextDiagnostic();
+    introductionObj : {
+      heading, 
+      subheading, 
+      buttonText 
+    } 
+  } = contextDiagnostic();
   
     return (
         <>

@@ -110,8 +110,6 @@ app.prepare().then(async () => {
 /* test request front --------------------------*/
 
 
-
-
   router.get("(/_next/static/.*)", handleRequest); // Static content is clear
   router.get("/_next/webpack-hmr", handleRequest); // Webpack content is clear
   router.get("(.*)", async (ctx) => {

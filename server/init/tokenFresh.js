@@ -13,7 +13,6 @@ export const getTokenAccesAPI = async () => {
       "content" : shopEncrypt 
     };
 
-
     try {
       const response = await serverAxios({
         method: "POST",
@@ -26,8 +25,6 @@ export const getTokenAccesAPI = async () => {
       });
   
       const token = response.data.token; 
-
-      console.log("antes", token);
 
       return token;
     } catch (error) {

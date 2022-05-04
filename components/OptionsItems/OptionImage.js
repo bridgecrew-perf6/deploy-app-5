@@ -4,7 +4,7 @@ import ItemImage from "../Items/ItemImage";
 import { UploadSvg } from "../Svgs/SvgFiles";
 
 const OptionImage = ({ element, handleChangeText }) => {
-  console.log("lement", element);
+
   return (
     <ItemImage
       urlImg={element.image}

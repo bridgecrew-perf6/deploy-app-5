@@ -1,7 +1,5 @@
 import { Card } from "@shopify/polaris";
 
-import { contextDiagnostic } from "../../states/diagnostic/DiagnosticProvider";
-
 import SelectList from "../SelectList/SelectList";
 import InputCustom from "../Input/InputCustom";
 import Action from "../ActionText/Action";
@@ -14,10 +12,13 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import Message from "../Message/Message";
 import Skeleton from "../Skeleton/Skeleton";
 import OptionQuestion from "../OptionList/OptionQuestion";
+
+import { contextDiagnostic } from "../../states/diagnostic/DiagnosticProvider";
+
 const QuestionDetails = () => {
   /* questionDetails */
   const {
-    actionCreateQuestion_Fn,
+    actionChangeList_Fn,
     handleChangeState_Fn,
     question,
     selectSelected,
@@ -26,7 +27,9 @@ const QuestionDetails = () => {
     saveQuestion_Fn,
     idEditingPreview,
     editingQuestion,
+    stateViewPreview
   } = contextDiagnostic();
+
 
   const { optionsQuestion } = selectProps();
   const optionMultiple = /choice|image|color/.test(selectSelected);
@@ -37,7 +40,7 @@ const QuestionDetails = () => {
   };
 
   const actionChangeList = () => {
-    actionCreateQuestion_Fn(false);
+    actionChangeList_Fn(false);
   };
 
   const actionAddOption = () => {
@@ -51,7 +54,7 @@ const QuestionDetails = () => {
 
   const handleCheckStatus = (e) => {
     const { name, checked } = e.target;
-    console.log({ name, checked });
+
 
     handleChangeState_Fn(name, checked, "question");
   };
@@ -64,7 +67,7 @@ const QuestionDetails = () => {
     {
       onSuccess: (list) => {
         queryClient.invalidateQueries(["getlistquestion"]),
-          queryClient.invalidateQueries(["getquestionoptions"]);
+        actionChangeList();
       },
     }
   );

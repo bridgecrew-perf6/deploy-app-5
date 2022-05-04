@@ -9,7 +9,11 @@ import Message from '../Message/Message';
 
 const DragDrod = () => {
 
-  const { listQuestions, deteleteQuestion_Fn, updatListQuestionDraging_Fn} = contextDiagnostic();
+  const { 
+    listQuestions, 
+    deteleteQuestion_Fn, 
+    updatListQuestionDraging_Fn
+  } = contextDiagnostic();
 
   const [showconfirm, setShowconfirm] = useState({status:false, id:0})
 
@@ -21,7 +25,6 @@ const DragDrod = () => {
     return result;
   }
 
-  console.log("list drag", listQuestions);
 
   /* Deleted Question server  */
   const queryClient = useQueryClient();

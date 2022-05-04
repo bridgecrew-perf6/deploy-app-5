@@ -8,11 +8,19 @@ import { ColorBg, Container, Ptext, Question } from './styles';
 
 const QuestionPreview = () => {
 
-  const {question, keyChoiceTypeSelected, getQuestionOptions_Fn, idEditingPreview} = contextDiagnostic();
+  const {
+    question, 
+    keyChoiceTypeSelected, 
+    getQuestionOptions_Fn, 
+    idEditingPreview,
+    listQuestions,
+    createQuestion
+  } = contextDiagnostic();
 
   const typeSelected = question.type; 
 
-  const validatQuestion = Object.keys(question).length === 0 ;
+  const existQuestions = Object.keys(question).length === 0 ;
+  const listCount = Object.keys(listQuestions).length === 0 ;
 
 
   /* get question selected server */
@@ -21,7 +29,7 @@ const QuestionPreview = () => {
     isFetching
     } = useQuery(['getquestionoptions', idEditingPreview], () => getQuestionOptions_Fn(idEditingPreview) );
 
-    if( isLoading || isFetching){
+    if( isLoading || isFetching ){
       return(
         <Skeleton lineText={11}/>
       )
@@ -30,21 +38,22 @@ const QuestionPreview = () => {
 
 
   return ( 
-   validatQuestion 
+    existQuestions 
     ? <StateEmpty/> 
-    :   (<Container >
-          <Question option={typeSelected}>
-            <h1>{question.title}</h1>
+    : (<Container >
+        <Question option={typeSelected}>
+          <h1>{question.title}</h1>
             <div>
             { question.choices.map((element, index) => {
-                return (
-                  <span key={element.id} className="option">
+              return (
+                <span key={element.id} className="option">
                     { typeSelected === 'image' || typeSelected=== 'color'
                       ? 
                         typeSelected === 'image' 
                           ? <>
                               <Img 
-                                urlImg={element[keyChoiceTypeSelected]} wImg='50px'
+                                urlImg={element[keyChoiceTypeSelected]} 
+                                wImg='50px'
                                 hImg='50px'
                               /> 
                               <p>{element.label}</p>

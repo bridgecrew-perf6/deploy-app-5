@@ -13,8 +13,6 @@ export const contextDiagnostic = () => {
 
 const DiagnosticProvider = ({ children }) => {
 
-  
-
   const initialState = {
 
     quizId : 3,
@@ -27,7 +25,6 @@ const DiagnosticProvider = ({ children }) => {
       className: "introduction"  
     },
   
-
     /* Selected tab */
     selectedTab: 0,
     /* add question */
@@ -55,7 +52,6 @@ const DiagnosticProvider = ({ children }) => {
 
     question: {},
     
-
     listQuestions:[],
     listQuestionsCache:[],
     idEditingPreview: 0
@@ -84,6 +80,13 @@ const DiagnosticProvider = ({ children }) => {
 
     dispatch({
       type: 'CHANGE_STATUS_CREATE_QUESTION',
+      payload: status
+    })
+  }
+
+  const actionChangeList_Fn = (status) => {
+    dispatch({
+      type: 'CHANGE_LIST_QUESTION',
       payload: status
     })
   }
@@ -136,7 +139,6 @@ const DiagnosticProvider = ({ children }) => {
   }
 
 
-
 /* request API */
 /* Introduction services */
   const saveIntroduction_Fn = async () => {
@@ -176,7 +178,8 @@ const DiagnosticProvider = ({ children }) => {
     return rs;
   }
 
-  const stateEditingOrPreview = (id_question) => {
+  const stateViewPreview_Fn = (id_question) => {
+
     dispatch({
       type: 'CHANGE_STATE_ID_QUESTION_EDIT_PREVIEW',
       payload: id_question
@@ -188,8 +191,9 @@ const DiagnosticProvider = ({ children }) => {
     if(id_question_preview === 0) return;
     
      const questionPreviewSelected = state.listQuestionsCache.filter((e) => e.id === id_question_preview );
-     console.log(questionPreviewSelected);
+
     let questionOptionsUdtateServe;
+    
      if(questionPreviewSelected.length === 0){
        questionOptionsUdtateServe = await getOneQuestionOptions(id_question_preview);
         dispatcherUpdateQuestionSelected(questionOptionsUdtateServe);
@@ -272,6 +276,7 @@ const DiagnosticProvider = ({ children }) => {
         handleChangeState_Fn,
         chageSelectedTab_Fn,
         actionCreateQuestion_Fn,
+        actionChangeList_Fn,
         changeTypeQuestion_Fn,
         addOptionQuestion_Fn,
         handleChangeStateSecondKey_Fn,
@@ -283,7 +288,7 @@ const DiagnosticProvider = ({ children }) => {
         saveQuestion_Fn,
         getListQuestion_Fn,
         getQuestionOptions_Fn,
-        stateEditingOrPreview,
+        stateViewPreview_Fn,
         deteleteQuestion_Fn,
         changeStateEditing_Fn,
         updatListQuestionDraging_Fn,

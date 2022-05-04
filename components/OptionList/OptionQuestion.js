@@ -14,10 +14,8 @@ import OptionColor from "../OptionsItems/OptionColor";
 const OptionQuestion = () => {
   const {
     question: { choices, type },
-    question,
     selectSelected,
     handleChangeStateSecondKey_Fn,
-    changeStateLabelEditable_Fn,
     deleteStateOption_Fn,
   } = contextDiagnostic();
 
@@ -33,23 +31,19 @@ const OptionQuestion = () => {
     }
 
     let id = e.target.dataset.id;
-    /* params : (nameInput, valueInput */
     handleChangeStateSecondKey_Fn(name, value, id);
-  };
-
-  const handleTagEditable = (e) => {
-    const { name, value } = e.target;
-
-    let id = e.target.dataset.id;
-
-    changeStateLabelEditable_Fn(name, value, id);
   };
 
   /* Deleted Options question server */
 
   const queryClient = useQueryClient();
 
-  const { mutate, isError, isLoading, isSuccess } = useMutation(
+  const { 
+    mutate, 
+    isError, 
+    isLoading, 
+    isSuccess 
+  } = useMutation(
     deleteStateOption_Fn,
     {
       onSuccess: (list) => {
@@ -58,18 +52,10 @@ const OptionQuestion = () => {
       },
       onError: (rs) => {
         setShowconfirm({ status: false, id: 0 });
-      },
+      }
     }
   );
 
-  const deleteValidate = (id_option) => {
-    setShowconfirm({ status: true, id: id_option });
-  };
-
-  const deletedConfirmQuestion = () => {
-    mutate(showconfirm.id);
-    //setShowconfirm({status:false, id:0});
-  };
 
   /* Deleted Options question server */
 
@@ -95,7 +81,9 @@ const OptionQuestion = () => {
         choices.map((element) => (
           <div key={element.id}>
             <OptionDelete
-              actionDelete={() => deleteValidate(element.id)}
+              actionDelete={
+                () => setShowconfirm({ status: true, id: element.id })
+              }
               loadingState={isLoading}
               resetState={showconfirm}
             >
@@ -115,7 +103,9 @@ const OptionQuestion = () => {
         choices.map((element) => (
           <div key={element.id}>
             <OptionDelete
-              actionDelete={() => deleteValidate(element.id)}
+              actionDelete={
+                () => setShowconfirm({ status: true, id: element.id })
+              }
               loadingState={isLoading}
               resetState={showconfirm}
             >
@@ -131,7 +121,9 @@ const OptionQuestion = () => {
         choices.map((element) => (
           <div key={element.id}>
             <OptionDelete
-              actionDelete={() => deleteValidate(element.id)}
+              actionDelete={
+                () => setShowconfirm({ status: true, id: element.id })
+              }
               loadingState={isLoading}
               resetState={showconfirm}
             >
@@ -160,7 +152,7 @@ const OptionQuestion = () => {
         <MessageConfirm
           mesagge="¿You're sure?"
           actionTitle="Sure"
-          actionChange={deletedConfirmQuestion}
+          actionChange={() => mutate(showconfirm.id)}
           changeStateDelete={setShowconfirm}
         />
       )}
