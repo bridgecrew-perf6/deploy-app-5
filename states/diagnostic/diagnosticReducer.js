@@ -217,7 +217,7 @@ const diagnosticReducer = (state , action) => {
       ...state,
       idEditingPreview: payload,
       createQuestion: true,
-      editingQuestion: true,
+      editingQuestion: true
     }
   }
 
