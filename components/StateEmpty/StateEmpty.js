@@ -1,10 +1,10 @@
 import { EmptyState } from '@shopify/polaris'
 import React from 'react'
-import { contextDiagnostic, createQuestion } from '../../states/diagnostic/DiagnosticProvider'
+import { contextDiagnostic } from '../../states/diagnostic/DiagnosticProvider'
 
 const StateEmpty = () => {
 
-  const {actionCreateQuestion_Fn} = contextDiagnostic();
+  const {actionCreateQuestion_Fn, createQuestion} = contextDiagnostic();
   return (
    
         <EmptyState

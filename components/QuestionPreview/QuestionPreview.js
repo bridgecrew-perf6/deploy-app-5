@@ -13,8 +13,7 @@ const QuestionPreview = () => {
     keyChoiceTypeSelected, 
     getQuestionOptions_Fn, 
     idEditingPreview,
-    listQuestions,
-    createQuestion
+    listQuestions
   } = contextDiagnostic();
 
   const typeSelected = question.type; 
