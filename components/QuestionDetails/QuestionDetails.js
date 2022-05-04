@@ -18,7 +18,7 @@ import { contextDiagnostic } from "../../states/diagnostic/DiagnosticProvider";
 const QuestionDetails = () => {
   /* questionDetails */
   const {
-    actionCreateQuestion_Fn,
+    actionChangeList_Fn,
     handleChangeState_Fn,
     question,
     selectSelected,
@@ -26,8 +26,8 @@ const QuestionDetails = () => {
     changeTypeQuestion_Fn,
     saveQuestion_Fn,
     idEditingPreview,
-    editingQuestion
-
+    editingQuestion,
+    stateViewPreview
   } = contextDiagnostic();
 
 
@@ -40,7 +40,7 @@ const QuestionDetails = () => {
   };
 
   const actionChangeList = () => {
-    actionCreateQuestion_Fn(false);
+    actionChangeList_Fn(false);
   };
 
   const actionAddOption = () => {
@@ -66,7 +66,8 @@ const QuestionDetails = () => {
     saveQuestion_Fn,
     {
       onSuccess: (list) => {
-        queryClient.invalidateQueries(["getlistquestion"])
+        queryClient.invalidateQueries(["getlistquestion"]),
+        actionChangeList();
       },
     }
   );

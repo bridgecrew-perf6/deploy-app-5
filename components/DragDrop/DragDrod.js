@@ -9,7 +9,11 @@ import Message from '../Message/Message';
 
 const DragDrod = () => {
 
-  const { listQuestions, deteleteQuestion_Fn, updatListQuestionDraging_Fn} = contextDiagnostic();
+  const { 
+    listQuestions, 
+    deteleteQuestion_Fn, 
+    updatListQuestionDraging_Fn
+  } = contextDiagnostic();
 
   const [showconfirm, setShowconfirm] = useState({status:false, id:0})
 

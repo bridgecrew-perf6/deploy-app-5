@@ -20,4 +20,8 @@ export const WindowStyle = styled.div`
     }
   }
 
+  > div {
+    padding: 0 6rem;
+  }
+
 `;

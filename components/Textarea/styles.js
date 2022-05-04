@@ -11,6 +11,7 @@ export const Textarea = styled.textarea(({wTxtarea}) => {
     border-color: ${theme.colors.inputBorder};
     padding: 5px 12px;
     border-radius: 5px;
+    margin: 0.4rem 0;
 
 
     :focus {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useQuery } from 'react-query';
 import { contextDiagnostic } from '../../states/diagnostic/DiagnosticProvider';
 import { ConfigSvg, MultipleSvg, TextSvg } from '../Svgs/SvgFiles'
@@ -6,25 +6,38 @@ import { Div } from './styles'
 
 const QuestionItem = ({children, type, id_question}) => {
 
+  useEffect(() => {
+    markQuestionInit();
+  }, []);
+
   let text_or_choice = /choice|image|color/.test(type);
 
-  const {  stateEditingOrPreview, changeStateEditing_Fn } = contextDiagnostic();
+  const {  stateViewPreview_Fn, changeStateEditing_Fn, question } = contextDiagnostic();
 
+  console.log("question", question);
   const actionSelectedView = (e) => {
+    
+    let idQuestion;
+    
+    resetQuestionMark();
 
+      if(e.target.classList.contains('text')){
+        const element = e.target.parentElement.parentElement;
+        element.classList.add('active');
+        idQuestion = element.dataset.id;
+      }else {
+        e.target.classList.add('active');
+        idQuestion = e.target.dataset.id;
+      }
+  
+      stateViewPreview_Fn(idQuestion)
+
+  }
+
+  const resetQuestionMark = () => {
     document.querySelectorAll('.active').forEach((e) => {
       e.classList.remove('active');
     });
-
-      if(e.target.classList.contains('text')){
-        e.target.parentElement.parentElement.classList.add('active');
-        
-      }else {
-        e.target.classList.add('active');  
-      }
-  
-      stateEditingOrPreview(id_question)
-
   }
 
   const actionEditQuestion = (e) => {
@@ -32,10 +45,17 @@ const QuestionItem = ({children, type, id_question}) => {
     changeStateEditing_Fn(id_question); 
   }
 
+  const markQuestionInit = () => {
+    const listElementFirst = document.querySelectorAll('.list-item')[0];
+    listElementFirst.classList.add('active');
+    stateViewPreview_Fn(listElementFirst.dataset.id);
+  }
+
+  
 
 
   return (
-    <Div onClick={actionSelectedView}>
+    <Div className='list-item' data-id={id_question} onClick={actionSelectedView}>
      <div >
       { 
         text_or_choice 

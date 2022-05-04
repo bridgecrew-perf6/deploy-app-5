@@ -22,7 +22,7 @@ const GlobalStyle = createGlobalStyle`
     border: 1px solid ${theme.colors.greyLight}
   }
   .content_tab--preview{
-    width: 60%; 
+    width: 60%;
   } 
   .content_tab--customize{
     width: 38%;

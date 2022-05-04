@@ -50,27 +50,28 @@ const IntroductionDetails = () => {
             </Card.Section>
 
             <Card.Section>
-              <p>Heading</p>
-              <InputCustom 
+              <InputCustom
+                labelText="Heading" 
                 nameInput="heading" 
                 handle={handleChangeText} 
                 valueInput={heading}
               />
                 
-              <p>Subheading</p>
-              <InputTextarea 
+              <InputTextarea
+                labelText="Subheading"  
                 nameInput="subheading"
                 handle={handleChangeText}
-                valueInput={subheading}/>
+                valueInput={subheading}
+              />
               
-              <p>Button text</p>
-              <InputCustom 
+              <InputCustom
+                labelText="Button text" 
                 nameInput="buttonText" 
                 handle={handleChangeText}
                 valueInput={buttonText}/>
                 
-              <p>Class</p>
-              <InputCustom 
+              <InputCustom
+                labelText="Class" 
                 nameInput="className" 
                 handle={handleChangeText}
                 valueInput={className}/>
@@ -81,7 +82,7 @@ const IntroductionDetails = () => {
                 mBtn='10px 0'
                 eventAction={actionSaveIntroduction}
                 loadingState={isLoading}
-                />
+              />
                
                 {/* Message interactions */}
                 {isSuccess && <Message mesagge="Success save"/>}

@@ -7,25 +7,46 @@ const diagnosticReducer = (state , action) => {
   setPrefix("");
 
   const STATES_CONDITION = {
-    'HANDLE_TEXT_CHANGE'            : () => handleTextchange(action.payload),
-    'CHANGE_SELECTED_TAB'           : () => handleSelectTab(action.payload),
-    'CHANGE_STATUS_CREATE_QUESTION' : () => changeStatusCreateList(action.payload),
-    'CHANGE_TYPE_QUESTION_SELECTED' : () => changeTypeQuestionSelected(action.payload),
-    'ADD_OPTION_QUESTION'           : () => addOptionQuestion(),
-    'RESTAR_STATE_TYPE_QUESTION'    : () => restartTypeQuestion(),
-    'CHANGE_OPTION_QUESTION_LIST'   : () => changeStateChoiceQuestion(action.payload),
-    'CHANGE_STATE_LABEL_EDITABLE'   : () => changeStateLabelEditable(action.payload),
-    'DELETE_STATE_OPTION_QUESTION'  : () => deleteChoiceQuestion(action.payload),
-    'GET_INTRODUCCION_STATE'        : () => getIntroductionState(action.payload),
-    'RESTAT_LIST_CACHE'      : () => restartStateCacheInvalidate(),
-    'GET_QUESTION_LIST_ALL_STATE'   : () => getQuestionOptionListState(action.payload),
-    'UPDATE_SATATE_QUESTION_PREVIEW': () => updateStateQuestionPreview(action.payload),
-    'UPDATE_SATATE_QUESTION_LIST_CACHE': () => updateStateListCache(action.payload),
-    'CHANGE_STATE_ID_QUESTION_EDIT_PREVIEW': () => changeIdStateEditingPreview(action.payload),
-    'DELETE_STATE_CACHE_QUESTION'       : () => deteleListCacheQuestionState(action.payload),
-    'CHANGE_STATE_EDITING'            : () => changeStateEditing(action.payload),
-    'UPDATING_LIST_DRAGING'       : () => updatingListQuestionDraging(action.payload)
+    'HANDLE_TEXT_CHANGE' : 
+      () => handleTextchange(action.payload),
+    'CHANGE_SELECTED_TAB': 
+      () => handleSelectTab(action.payload),
+    'CHANGE_STATUS_CREATE_QUESTION' : 
+      () => changeStatusCreateList(action.payload),
+    'CHANGE_TYPE_QUESTION_SELECTED' : 
+      () => changeTypeQuestionSelected(action.payload),
+    'ADD_OPTION_QUESTION' : 
+      () => addOptionQuestion(),
+    'RESTAR_STATE_TYPE_QUESTION' : 
+      () => restartTypeQuestion(),
+    'CHANGE_OPTION_QUESTION_LIST' : 
+      () => changeStateChoiceQuestion(action.payload),
+    'CHANGE_STATE_LABEL_EDITABLE' : 
+      () => changeStateLabelEditable(action.payload),
+    'DELETE_STATE_OPTION_QUESTION' : 
+      () => deleteChoiceQuestion(action.payload),
+    'GET_INTRODUCCION_STATE' : 
+      () => getIntroductionState(action.payload),
+    'RESTAT_LIST_CACHE' : 
+      () => restartStateCacheInvalidate(),
+    'GET_QUESTION_LIST_ALL_STATE' : 
+      () => getQuestionOptionListState(action.payload),
+    'UPDATE_SATATE_QUESTION_PREVIEW' : 
+      () => updateStateQuestionPreview(action.payload),
+    'UPDATE_SATATE_QUESTION_LIST_CACHE' : 
+      () => updateStateListCache(action.payload),
+    'CHANGE_STATE_ID_QUESTION_EDIT_PREVIEW' : 
+      () => changeIdStateEditingPreview(action.payload),
+    'DELETE_STATE_CACHE_QUESTION' : 
+      () => deteleListCacheQuestionState(action.payload),
+    'CHANGE_STATE_EDITING' : 
+      () => changeStateEditing(action.payload),
+    'UPDATING_LIST_DRAGING' : 
+      () => updatingListQuestionDraging(action.payload),
+    'CHANGE_LIST_QUESTION' : 
+      () => changeListQuestions(action.payload)
   }
+  
   const STATE_DEFAULT = state;
   
   const handleTextchange = (payload) => {
@@ -49,6 +70,7 @@ const diagnosticReducer = (state , action) => {
   }
 
   const changeStatusCreateList = (payload) => {
+    console.log("pasa en el reducer");
     const {keyChoice} = getKey_Value_ChoiceSelected(state.questionInitials.type);
 
     return {
@@ -59,6 +81,14 @@ const diagnosticReducer = (state , action) => {
       keyChoiceTypeSelected: keyChoice,
       idEditingPreview: 0,
       editingQuestion: false
+    }
+  }
+
+  const changeListQuestions = (payload) => {
+    return {
+      ...state,
+      createQuestion: payload,
+      question: {}
     }
   }
 

@@ -10,12 +10,12 @@ export const Div = styled.div`
   max-width: 100%;
   min-height: 339px;
   justify-content: center;
-  padding: 0 60px;
 
   h1 {
     ${theme.textBoldTtitle};
     font-size: 20px;
     margin-bottom: 4px;
+    text-align: center;
   }
 
   p {

@@ -13,8 +13,9 @@ const CardPreview = ({title, children}) => {
           <span>
             <BtnWinSvg/>
           </span>
-
+          <div>
             {children}
+          </div>
 
         </WindowStyle>  
       </Card.Section > 

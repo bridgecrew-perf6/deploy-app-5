@@ -21,53 +21,57 @@ import Questions from '../components/Questions/Questions';
 import Result from '../components/Result/Result';
 import ResultProvider from '../states/result/ResultProvider';
 
-
+/**
+ * title
+ * 
+ * description
+ * 
+ * parm
+ * @returns 
+ */
 const Diagnostic = () => {
 
   const { 
-      selectedTab,
-      chageSelectedTab_Fn,
-      getIntroduction_Fn ,
-      getListQuestion_Fn,
-      saveOrderListQuestion_Fn
-    } = contextDiagnostic();
+    selectedTab,
+    chageSelectedTab_Fn,
+    getIntroduction_Fn ,
+    getListQuestion_Fn,
+    saveOrderListQuestion_Fn
+  } = contextDiagnostic();
 
   const {tabsQuestion} = propsTabs();
 
   /* chage selected select */
-  const handleTabChange = useCallback((selectedTabIndex) => chageSelectedTab_Fn(selectedTabIndex),[],);
-
+  const handleTabChange = useCallback(
+    (selectedTabIndex) => chageSelectedTab_Fn(selectedTabIndex),
+    []
+  );
     
   /* Geters api querys update state local */
   const {
-      isLoading, 
-      isFetching, 
-      isError
-      } = useQuery(['getintroduction'], getIntroduction_Fn);
+    isLoading, 
+    isFetching, 
+    isError
+  } = useQuery(['getintroduction'], getIntroduction_Fn);
 
   const {
-      isError: errorQuestion,
-      isLoading: loadQuestion
-      } = useQuery(['getlistquestion'], getListQuestion_Fn);
+    isError: errorQuestion,
+    isLoading: loadQuestion
+    } = useQuery(['getlistquestion'], getListQuestion_Fn);
 
 
   /* Updating order question list */
 
   const { 
-      mutate, 
-      isLoading: loadMutate, 
-      isError: errorMutate, 
-      isSuccess: succesMutate} = useMutation(saveOrderListQuestion_Fn)
+    mutate, 
+    isLoading: loadMutate, 
+    isError: errorMutate, 
+    isSuccess: succesMutate
+  } = useMutation(saveOrderListQuestion_Fn)
 
-  const actionGeneralDiagnostic = () => {
-    mutate();
-  }
 
-    if(isLoading || isFetching){
-      return (
-          <Skeleton lineText={20}/>
-        )
-    }  
+  if(isLoading || isFetching) return <Skeleton lineText={20}/>
+
   return (
     <>
       <div className='container'>
@@ -78,7 +82,7 @@ const Diagnostic = () => {
               content: loadMutate ? <LoadingSpinner/> : 'Save' , 
               disabled: false,
               onAction: () => {
-                actionGeneralDiagnostic();
+                mutate();
               }
           }}>
 
@@ -105,10 +109,18 @@ const Diagnostic = () => {
 
 
             {/* Message interactions */}
-              {isError && <Message mesagge="Server Error" error={true}/>}
-              {errorQuestion && <Message mesagge="Question load error" error={true} />}
-              {errorMutate && <Message mesagge="Error saver order" error={true}/>}
-              {succesMutate && <Message mesagge="Save order success" />}
+              {isError && 
+                <Message mesagge="Server Error" error={true}/>
+              }
+              {errorQuestion && 
+                <Message mesagge="Question load error" error={true} />
+              }
+              {errorMutate && 
+                <Message mesagge="Error saver order" error={true}/>
+              }
+              {succesMutate && 
+                <Message mesagge="Save order success" />
+              }
             {/* Message interactions */}
 
         </Page>

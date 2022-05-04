@@ -13,7 +13,7 @@ const Questions = ({loadQuestion}) => {
 
   return (
     <>
-      <div className='content_tab--preview'>   
+        <div className='content_tab--preview'>   
           <CardPreview >                                
               <QuestionPreview/>
           </CardPreview>

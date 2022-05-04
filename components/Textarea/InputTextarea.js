@@ -13,7 +13,7 @@ const InputTextarea = ({dataId, nameInput, handle, valueInput, labelText, wTxtar
         onChange={handle}
         value={valueInput}
         wTxtarea={wTxtarea}
-      > </Textarea>
+      ></Textarea>
       </>
     )
 }
