@@ -15,12 +15,6 @@ const data = () => {
       content: '2. Questions',
       title: 'List of questions',
       panelID: 'accepts-marketing-content-1',
-    },
-    {
-      id: 'tab_result',
-      content: '3. Result',
-      title: 'List of sections',
-      panelID: 'repeat-customers-content-1',
     }
   ];
 
