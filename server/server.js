@@ -51,8 +51,6 @@ app.prepare().then(async () => {
     ctx.res.statusCode = 200;
   };
 
-  router.get("(/_next/static/.*)", handleRequest); // Static content is clear
-  router.get("/_next/webpack-hmr", handleRequest); // Webpack content is clear
   router.get("(.*)", async (ctx) => {
     const shop = ctx.query.shop;
 
@@ -64,8 +62,6 @@ app.prepare().then(async () => {
       await handleRequest(ctx);
     }
   });
-
- 
 
   server.use(router.allowedMethods());
   server.use(router.routes());
