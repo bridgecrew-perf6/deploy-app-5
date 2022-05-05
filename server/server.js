@@ -6,9 +6,6 @@ import Shopify, { ApiVersion } from "@shopify/shopify-api";
 import Koa from "koa";
 import next from "next";
 import Router from "koa-router";
-import {installExecute} from './init/install';
-import {getTokenAccesAPI} from './init/tokenFresh';
-
 
 dotenv.config();
 const port = parseInt(process.env.PORT, 10) || 8081;
@@ -16,7 +13,6 @@ const dev = process.env.NODE_ENV !== "production";
 const app = next({
   dev,
 });
-const handle = app.getRequestHandler();
 
 Shopify.Context.initialize({
   API_KEY: process.env.SHOPIFY_API_KEY,
@@ -41,28 +37,10 @@ app.prepare().then(async () => {
     createShopifyAuth({
       async afterAuth(ctx) {
         // Access token and shop available in ctx.state.shopify
-        const { shop, accessToken, scope } = ctx.state.shopify;
+        const { shop, scope } = ctx.state.shopify;
         const host = ctx.query.host;
         ACTIVE_SHOPIFY_SHOPS[shop] = scope;
 
-        const response = await Shopify.Webhooks.Registry.register({
-          shop,
-          accessToken,
-          path: "/webhooks",
-          topic: "APP_UNINSTALLED",
-          webhookHandler: async (topic, shop, body) =>
-            delete ACTIVE_SHOPIFY_SHOPS[shop],
-        });
-
-        if (!response.success) {
-          console.log(
-            `Failed to register APP_UNINSTALLED webhook: ${response.result}`
-          );
-        }
-
-        installExecute(shop);
-
-        
         // Redirect to app with shop parameter upon auth
         ctx.redirect(`/?shop=${shop}&host=${host}`);
       },
@@ -70,45 +48,10 @@ app.prepare().then(async () => {
   );
 
   const handleRequest = async (ctx) => {
-    await handle(ctx.req, ctx.res);
+    await app.getRequestHandler(ctx.req, ctx.res);
     ctx.respond = false;
     ctx.res.statusCode = 200;
   };
-
-  router.post("/webhooks", async (ctx) => {
-    try {
-      await Shopify.Webhooks.Registry.process(ctx.req, ctx.res);
-      console.log("ahora pasa aqui.....");
-      console.log(`Webhook processed, returned status code 200`);
-    } catch (error) {
-      console.log(`Failed to process webhook: ${error}`);
-    }
-  });
-
-  router.post(
-    "/graphql",
-    verifyRequest({ returnHeader: true }),
-    async (ctx, next) => {
-      await Shopify.Utils.graphqlProxy(ctx.req, ctx.res);
-    }
-  );
-
-
-/* test request front ------------------------------*/
-  router.get("/tokenapi", async (ctx) => {
-    
-    const token = await getTokenAccesAPI();
-   
-    ctx.res.statusCode = 200;
-    ctx.body = token;
-
-  })
-
-  router.get("/geturl", async (ctx) => {
-     ctx.body = process.env.APP_BACKEND_URL;
-  })
-/* test request front --------------------------*/
-
 
   router.get("(/_next/static/.*)", handleRequest); // Static content is clear
   router.get("/_next/webpack-hmr", handleRequest); // Webpack content is clear
