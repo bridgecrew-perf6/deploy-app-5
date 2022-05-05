@@ -9,10 +9,8 @@ import Router from "koa-router";
 
 dotenv.config();
 const port = parseInt(process.env.PORT, 10) || 8081;
-const dev = process.env.NODE_ENV !== "production";
-const app = next({
-  dev,
-});
+//const dev = process.env.NODE_ENV !== "production";
+const app = next();
 
 Shopify.Context.initialize({
   API_KEY: process.env.SHOPIFY_API_KEY,
