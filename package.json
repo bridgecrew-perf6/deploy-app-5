@@ -48,7 +48,7 @@
     "react-query": "^3.34.16",
     "styled-components": "^5.3.3",
     "uid": "^2.0.0",
-    "webpack": "^4.44.1"
+    "webpack": "^5.72.0"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.12.10",
