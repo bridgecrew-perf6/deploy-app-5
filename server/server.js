@@ -61,7 +61,7 @@ app.prepare().then(async () => {
     // This shop hasn't been seen yet, go through OAuth to create a session
     if (ACTIVE_SHOPIFY_SHOPS[shop] === undefined) {
       console.log("noactive");
-      ctx.redirect(`/auth?shop=${shop}`);
+      //ctx.redirect(`/auth?shop=${shop}`);
     } else {
       await handleRequest(ctx);
     }
